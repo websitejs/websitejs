@@ -1,2 +1,2 @@
 # websitejs
-WebsiteJS
+Modular Frontend Architecture
