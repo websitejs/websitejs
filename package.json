@@ -1,0 +1,32 @@
+{
+  "name": "websitejs",
+  "version": "0.0.1",
+  "description": "Modular Frontend Architecture",
+  "main": "dist/websitejs.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/websitejs/websitejs.git"
+  },
+  "keywords": [
+    "frontend",
+    "modular",
+    "architecture",
+    "websitejs"
+  ],
+  "author": "Rocco Janse, roccojanse@outlook.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/websitejs/websitejs/issues"
+  },
+  "homepage": "https://github.com/websitejs/websitejs#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.2",
+    "jquery": "^3.1.1",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1"
+  }
+}
