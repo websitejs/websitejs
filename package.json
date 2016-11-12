@@ -26,15 +26,21 @@
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
+    "gulp-cached": "^1.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-css-globbing": "^0.1.9",
     "gulp-cssnano": "^2.1.2",
+    "gulp-jsdoc3": "^1.0.1",
     "gulp-jshint": "^2.0.2",
+    "gulp-remember": "^0.3.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
-    "gulp-sass-glob": "^1.0.6",
     "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
     "jquery": "^3.1.1",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
-    "sassdoc": "^2.1.20"
+    "sassdoc": "^2.1.20",
+    "stream-browserify": "^2.0.1"
   }
 }

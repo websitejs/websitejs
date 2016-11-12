@@ -1,1 +1,4 @@
-@import "components/**/*.scss";
+@import "./scss/variables";
+
+@import "./elements/**/*.scss";
+@import "./components/**/*.scss";

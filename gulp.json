@@ -9,6 +9,21 @@
             "src": "/",
             "dest": "/css",
             "docs": "/docs/styles"
+        },
+
+        "scripts": {
+            "fileName": "scripts.js",
+            "src": "/js",
+            "dest": "/js",
+            "docs": "/docs/scripts"
+        },
+
+        "elements": {
+            "src": "/elements"
+        },
+
+        "components": {
+            "src": "/components"
         }
     }
 }
