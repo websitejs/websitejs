@@ -1,5 +1,7 @@
 {
   "globalDependencies": {
-    "node": "registry:dt/node#6.0.0+20161110151007"
+    "gulp-sass": "registry:dt/gulp-sass#0.0.0+20160316155526",
+    "node": "registry:dt/node#6.0.0+20161110151007",
+    "nunjucks": "registry:dt/nunjucks#0.0.0+20160802155009"
   }
 }

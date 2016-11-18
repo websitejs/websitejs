@@ -1,9 +1,21 @@
+/// <reference path="../../typings/index.d.ts" />
+
 'use strict';
 
 var config = require('../../gulp.json'),
-    gulp = require('gulp');
+    gulp = require('gulp'),
+    gulpUtil = require('gulp-util'),
+    del = require('del'),
+    rename = require('gulp-rename'),
+    cache = require('gulp-cached'),
+    remember = require('gulp-remember'),
+    sourcemaps = require('gulp-sourcemaps'),
+    jshint = require('gulp-jshint'),    
+    concat = require('gulp-concat'),       
+    uglify = require('gulp-uglify'),      
+    jsdoc = require('gulp-jsdoc3');
 
-module.exports = function(plugins) {
+module.exports = function() {
     
     // paths
     var fileName = config.paths.scripts.fileName,
@@ -20,24 +32,24 @@ module.exports = function(plugins) {
     gulp.add('scripts:build', function(done) {
 
         // cleanup
-        plugins.del.sync([dest + '*.js']);
+        del.sync([dest + '*.js']);
 
         // build
         gulp.src(srcGlob)
-            .pipe(plugins.sourcemaps.init())
-            .pipe(plugins.cache(cacheName)) // only process changed files
-            .pipe(plugins.jshint())
-            .pipe(plugins.jshint.reporter('jshint-stylish'))
-            .pipe(plugins.remember(cacheName)) // add back all files to the stream
-            .pipe(plugins.concat(fileName)
-            .on('error', plugins.gulpUtil.log))
-            .pipe(plugins.uglify({ 
+            .pipe(sourcemaps.init())
+            .pipe(cache(cacheName)) // only process changed files
+            .pipe(jshint())
+            .pipe(jshint.reporter('jshint-stylish'))
+            .pipe(remember(cacheName)) // add back all files to the stream
+            .pipe(concat(fileName)
+            .on('error', gulpUtil.log))
+            .pipe(uglify({ 
                 mangle: false 
-            }).on('error', plugins.gulpUtil.log))
-            .pipe(plugins.rename({ 
+            }).on('error', gulpUtil.log))
+            .pipe(rename({ 
                 suffix: '.min' 
             }))
-            .pipe(plugins.sourcemaps.write('.'))
+            .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(dest));
 
         done();
@@ -47,8 +59,8 @@ module.exports = function(plugins) {
         var watcher = gulp.watch(srcGlob, ['scripts:build']);
         watcher.on('change', function(e) {
             if (e.type === 'deleted') {
-                delete plugins.cache.caches[cacheName][e.path];
-                plugins.remember.forget(cacheName, e.path);
+                delete cache.caches[cacheName][e.path];
+                remember.forget(cacheName, e.path);
             }
         });
     });
@@ -85,12 +97,12 @@ module.exports = function(plugins) {
         gulp.src(srcGlob, {
             read: false
         })
-        .pipe(plugins.jsdoc(cfg, done));
+        .pipe(jsdoc(cfg, done));
     });
 
     gulp.add('scripts:reset', function(done) {
-        delete plugins.cache.caches[cacheName];
-        plugins.remember.forgetAll(cacheName);
+        delete cache.caches[cacheName];
+        remember.forgetAll(cacheName);
         done();
     });
 };

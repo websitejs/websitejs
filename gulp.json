@@ -24,6 +24,11 @@
 
         "components": {
             "src": "/components"
+        },
+
+        "styleguide": {
+            "src": "/styleguide",
+            "dest": "/styleguide"
         }
     }
 }

@@ -2,13 +2,13 @@
     'use strict';
 
     /**
-     * Class for Header component
+     * Class for Footer component
      * @author Rocco Janse <roccojanse@outlook.com>
      *
      * @param {HTMLElement} element The element that will be upgraded.
-     * @class Header
+     * @class Footer
      */
-    var Header = function Header(element) {
+    var Footer = function Footer(element) {
         
         this.element_ = element;
 
@@ -16,5 +16,5 @@
         this.init();
     };
 
-    window['Header'] = Header;
+    window['Footer'] = Footer;
 })();

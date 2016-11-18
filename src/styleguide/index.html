@@ -1,0 +1,39 @@
+{% extends "styleguide/includes/layout.html" %}
+
+        {% block content %}
+        <h1>Website styleguide</h2>
+
+        <h4>Technical Documentation</h4>
+        <ul>
+            <li><a href="../docs/scripts/index.html">javascript</a></li>
+            <li><a href="../docs/styles/index.html">sass/styling</a></li>
+        </ul>
+
+        {% if pages %}
+        <h4>Pages</h4>
+        <ul>
+            {% for page in pages %}
+            <li><a href="pages/{{ page }}/{{ page}}.html">{{ page }}/{{ page }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if components %}
+        <h4>Components</h4>
+        <ul>
+            {% for component in components %}
+            <li><a href="components/{{ component }}/{{ component }}.html">{{ component }}/{{ component }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if elements %}
+        <h4>Elements</h4>
+        <ul>
+            {% for element in elements %}
+            <li><a href="elements/{{ element }}/{{ element }}.html">{{ element }}/{{ element }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        {% endblock %}

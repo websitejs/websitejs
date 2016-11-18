@@ -1,9 +1,20 @@
+/// <reference path="../../typings/index.d.ts" />
+
 'use strict';
 
 var config = require('../../gulp.json'),
-    gulp = require('gulp');
+    gulp = require('gulp'),
+    del = require('del'),
+    rename = require('gulp-rename'),
+    cache = require('gulp-cached'),
+    remember = require('gulp-remember'),
+    sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
+    autoprefixer = require('gulp-autoprefixer'),
+    cssGlob = require('gulp-css-globbing'),
+    sassdoc = require('sassdoc');
 
-module.exports = function(plugins) {
+module.exports = function() {
     
     // paths
     var srcGlob = config.paths.src + config.paths.scss.src + '/styles.scss',
@@ -14,17 +25,16 @@ module.exports = function(plugins) {
     gulp.add('sass:build', function(done) {
 
         // cleanup
-        plugins.del.sync([dest + '*.css']);
+        del.sync([dest + '*.css']);
 
         // build
         gulp.src(srcGlob)
-            .pipe(plugins.cache(cacheName)) // only process changed files
-            .pipe(plugins.sourcemaps.init())
-            //.pipe(plugins.sassGlob())
-            .pipe(plugins.cssGlob({
+            .pipe(cache(cacheName)) // only process changed files
+            .pipe(sourcemaps.init())
+            .pipe(cssGlob({
                 extensions: ['.scss']
             }))
-            .pipe(plugins.sass({
+            .pipe(sass({
                 outputStyle: 'compressed',
                 defaultEncoding: 'utf-8',
                 unixNewlines: false,
@@ -32,16 +42,16 @@ module.exports = function(plugins) {
                 stopOnError: false,
                 cacheLocation: config.paths.src + '.sass-cache/',
                 precision: 4
-            }).on('error', plugins.sass.logError))
-            .pipe(plugins.autoprefixer({
+            }).on('error', sass.logError))
+            .pipe(autoprefixer({
                 browsers: ['> 5%', 'IE 11', 'last 3 version'], 
                 cascade: false
             }))
-            .pipe(plugins.remember(cacheName)) // add back all files to the stream
-            .pipe(plugins.rename({ 
+            .pipe(remember(cacheName)) // add back all files to the stream
+            .pipe(rename({ 
                 suffix: '.min' 
             }))
-            .pipe(plugins.sourcemaps.write('.'))
+            .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(dest));
 
         done();
@@ -51,15 +61,15 @@ module.exports = function(plugins) {
         var watcher = gulp.watch(srcGlob, ['sass:build']);
         watcher.on('change', function(e) {
             if (e.type === 'deleted') {
-                delete plugins.cache.caches[cacheName][e.path];
-                plugins.remember.forget(cacheName, e.path);
+                delete cache.caches[cacheName][e.path];
+                remember.forget(cacheName, e.path);
             }
         });
     });
 
     gulp.add('sass:docs', function(done) {
         gulp.src(srcGlob)
-            .pipe(plugins.sassdoc({
+            .pipe(sassdoc({
                 package: './package.json',
                 dest: docs
             }))
@@ -68,8 +78,8 @@ module.exports = function(plugins) {
     });
 
     gulp.add('sass:reset', function(done) {
-        delete plugins.cache.caches[cacheName];
-        plugins.remember.forgetAll(cacheName);
+        delete cache.caches[cacheName];
+        remember.forgetAll(cacheName);
         done();
     });
 };
