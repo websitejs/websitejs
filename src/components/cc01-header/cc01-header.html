@@ -1,11 +1,10 @@
 {% if extends %}{% extends "styleguide/includes/layout.html" %}{% endif %}
 
         {% block content %}
-        {% if type %}<h4>{{ type }}</h4>{% endif %}
-        {% if name %}<h1>{{ name }}</h1>{% endif %}
+        {% include "styleguide/includes/moduleinfo.html" %}
 
         <header class="header">
-        header
+        header for testing!
         </header>
 
         {% endblock %}

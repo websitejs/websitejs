@@ -1,17 +1,18 @@
 {% extends "styleguide/includes/layout.html" %}
 
         {% block content %}
-        <h1>Website styleguide</h2>
+        <h1 class="styleguide__heading styleguide__heading--title">{{ project.name }} styleguide</h1>
+        <h3 class="styleguide__heading styleguide__heading--subtitle">version {{ project.version }}</h3>
 
-        <h4>Technical Documentation</h4>
-        <ul>
+        <h4 class="styleguide__heading styleguide__heading--section">Technical Documentation</h4>
+        <ul class="list list--unstyled styleguide__listing">
             <li><a href="../docs/scripts/index.html">javascript</a></li>
             <li><a href="../docs/styles/index.html">sass/styling</a></li>
         </ul>
 
         {% if pages %}
-        <h4>Pages</h4>
-        <ul>
+        <h4 class="styleguide__heading styleguide__heading--section">Pages</h4>
+        <ul class="list list--unstyled styleguide__listing">
             {% for page in pages %}
             <li><a href="pages/{{ page }}/{{ page}}.html">{{ page }}/{{ page }}</a></li>
             {% endfor %}
@@ -19,8 +20,8 @@
         {% endif %}
 
         {% if components %}
-        <h4>Components</h4>
-        <ul>
+        <h4 class="styleguide__heading styleguide__heading--section">Components</h4>
+        <ul class="list list--unstyled styleguide__listing">
             {% for component in components %}
             <li><a href="components/{{ component }}/{{ component }}.html">{{ component }}/{{ component }}</a></li>
             {% endfor %}
@@ -28,8 +29,8 @@
         {% endif %}
 
         {% if elements %}
-        <h4>Elements</h4>
-        <ul>
+        <h4 class="styleguide__heading styleguide__heading--section">Elements</h4>
+        <ul class="list list--unstyled styleguide__listing">
             {% for element in elements %}
             <li><a href="elements/{{ element }}/{{ element }}.html">{{ element }}/{{ element }}</a></li>
             {% endfor %}

@@ -1,1 +1,7 @@
-testing
+{% if extends %}{% extends "styleguide/includes/layout.html" %}{% endif %}
+
+        {% block content %}
+        {% include "styleguide/includes/moduleinfo.html" %}
+
+        <button type="button" name="test">test button</button>
+        {% endblock %}

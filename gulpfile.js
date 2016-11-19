@@ -3,16 +3,17 @@
 
 'use strict';
 
-var config = require('./gulp.json'),
+var config = require('./config.json'),
     fs = require('fs'),
-    gulp = require('gulp');
+    gulp = require('gulp'),
+    browserSync = require('browser-sync').create();
 
 /**
  * gets all tasks
  * @private
  */
 var getAllTasks = function() {
-    var path = config.paths.src + config.paths.tasks;
+    var path = config.paths.tasks;
     var files = fs.readdirSync(path);
     files.forEach(function(file, i) {
         require(path + '/' + file)();
@@ -38,6 +39,7 @@ getAllTasks();
 // main tasks
 gulp.task('docs', ['sass:docs', 'scripts:docs']);
 gulp.task('watch', ['sass:watch', 'scripts:watch', 'styleguide:watch']);
+gulp.task('serve', ['server:start' , 'watch']);
 gulp.task('all', ['sass:build', 'sass:docs', 'scripts:build', 'scripts:docs', 'styleguide:build']);
 gulp.task('prod', ['sass:build', 'scripts:build']);
 gulp.task('default', ['sass:build', 'scripts:build', 'styleguide:build']);

@@ -1,9 +1,11 @@
 {
+    "name": "WebsiteJS Demo Website",
+    
     "paths": {
         "src": "./src",
         "dest": "./dist",
 
-        "tasks": "/gulp-tasks",
+        "tasks": "./gulp-tasks",
 
         "scss": {
             "src": "/",
@@ -12,7 +14,7 @@
         },
 
         "scripts": {
-            "fileName": "scripts.js",
+            "fileName": "scripts",
             "src": "/js",
             "dest": "/js",
             "docs": "/docs/scripts"

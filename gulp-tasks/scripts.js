@@ -1,8 +1,8 @@
-/// <reference path="../../typings/index.d.ts" />
+/// <reference path="../typings/index.d.ts" />
 
 'use strict';
 
-var config = require('../../gulp.json'),
+var config = require('../config.json'),
     gulp = require('gulp'),
     gulpUtil = require('gulp-util'),
     del = require('del'),
@@ -23,7 +23,7 @@ module.exports = function() {
             config.paths.src + config.paths.elements.src + '/**/*.js',
             config.paths.src + config.paths.components.src + '/**/*.js',
             config.paths.src + config.paths.scripts.src + '/**/*.js',
-            config.paths.src + '/' + fileName
+            config.paths.src + '/' + fileName + '.js'
         ],
         dest = config.paths.dest + config.paths.scripts.dest,
         docs = config.paths.dest + config.paths.scripts.docs,
@@ -41,7 +41,7 @@ module.exports = function() {
             .pipe(jshint())
             .pipe(jshint.reporter('jshint-stylish'))
             .pipe(remember(cacheName)) // add back all files to the stream
-            .pipe(concat(fileName)
+            .pipe(concat(fileName + '.js')
             .on('error', gulpUtil.log))
             .pipe(uglify({ 
                 mangle: false 
@@ -56,7 +56,8 @@ module.exports = function() {
     });
 
     gulp.add('scripts:watch', function() {
-        var watcher = gulp.watch(srcGlob, ['scripts:build']);
+
+        var watcher = gulp.watch(srcGlob, ['scripts:build', 'server:reload']);
         watcher.on('change', function(e) {
             if (e.type === 'deleted') {
                 delete cache.caches[cacheName][e.path];

@@ -1,8 +1,9 @@
-/// <reference path="../../typings/index.d.ts" />
+/// <reference path="../typings/index.d.ts" />
 
 'use strict';
 
-var config = require('../../gulp.json'),
+var config = require('../config.json'),
+    pkg = require('../package.json'),
     gulp = require('gulp'),
     gulpUtil = require('gulp-util'),
     fs = require('fs'),
@@ -39,10 +40,44 @@ module.exports = function() {
      * @private
      */
     function getDataForFile(file) {
+        var type = path.relative('.', file.relative).split('\\')[0],
+            name = path.basename(file.relative, '.html');
+
         return {
-            name: path.basename(file.relative, '.html'),
-            type: path.relative('.',file.relative).split('\\')[0],
+            paths: {
+                css: config.paths.scss.dest,
+                js: config.paths.scripts.dest,
+                jsFilename: config.paths.scripts.fileName
+            },
+            meta: {
+                title: config.name + " - " + type + " - " + name
+            },
+            name: name,
+            type: type,
             extends: true
+        };
+    }
+
+    /**
+     * returns data object with info for pages
+     * @param {object} file File to process
+     * @returns {object} File data object
+     * @private
+     */
+    function getDataForPage(file) {
+        var name = path.basename(file.relative, '.html');
+
+        return {
+            paths: {
+                css: config.paths.scss.dest,
+                js: config.paths.scripts.dest,
+                jsFilename: config.paths.scripts.fileName
+            },
+            meta: {
+                title: config.name + " - " + name
+            },
+            //name: name,
+            extends: false
         };
     }
 
@@ -54,6 +89,18 @@ module.exports = function() {
      */
     function getDataForIndex(file) {
         return {
+            paths: {
+                css: config.paths.scss.dest,
+                js: config.paths.scripts.dest,
+                jsFilename: config.paths.scripts.fileName
+            },
+            meta: {
+                title: config.name
+            },
+            project: {
+                name: config.name,
+                version: pkg.version
+            },
             components: fs.readdirSync(config.paths.src + config.paths.components.src),
             elements: fs.readdirSync(config.paths.src + config.paths.elements.src),
             pages: fs.readdirSync(config.paths.src + config.paths.styleguide.src + '/pages')
@@ -79,6 +126,7 @@ module.exports = function() {
         // build styleguide pages
         gulp.src(styleguideSrcGlob)
             .pipe(cache(cacheName)) // only process changed files
+            .pipe(data(getDataForPage))
             .pipe(nunjucksRender({
                 path: [config.paths.src]
             })
@@ -101,9 +149,9 @@ module.exports = function() {
     });
 
     gulp.add('styleguide:watch', function() {
-        var watcher = gulp.watch(srcGlob, ['styleguide:build']),
-            sgWatcher = gulp.watch(styleguideSrcGlob, ['styleguide:build']),
-            indexWatcher = gulp.watch(styleguideIndexGlob, ['styleguide:build']);
+        var watcher = gulp.watch(srcGlob, ['styleguide:build', 'server:reload']),
+            sgWatcher = gulp.watch(styleguideSrcGlob, ['styleguide:build', 'server:reload']),
+            indexWatcher = gulp.watch(styleguideIndexGlob, ['styleguide:build', 'server:reload']);
 
         watcher.on('change', function(e) {
             if (e.type === 'deleted') {

@@ -1,13 +1,11 @@
-/// <reference path="../../typings/index.d.ts" />
+/// <reference path="../typings/index.d.ts" />
 
 'use strict';
 
-var config = require('../../gulp.json'),
+var config = require('../config.json'),
     gulp = require('gulp'),
     del = require('del'),
     rename = require('gulp-rename'),
-    cache = require('gulp-cached'),
-    remember = require('gulp-remember'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
@@ -19,8 +17,7 @@ module.exports = function() {
     // paths
     var srcGlob = config.paths.src + config.paths.scss.src + '/styles.scss',
         dest = config.paths.dest + config.paths.scss.dest,
-        docs = config.paths.dest + config.paths.scss.docs,
-        cacheName = 'sassFiles';
+        docs = config.paths.dest + config.paths.scss.docs;
 
     gulp.add('sass:build', function(done) {
 
@@ -29,7 +26,6 @@ module.exports = function() {
 
         // build
         gulp.src(srcGlob)
-            .pipe(cache(cacheName)) // only process changed files
             .pipe(sourcemaps.init())
             .pipe(cssGlob({
                 extensions: ['.scss']
@@ -47,7 +43,6 @@ module.exports = function() {
                 browsers: ['> 5%', 'IE 11', 'last 3 version'], 
                 cascade: false
             }))
-            .pipe(remember(cacheName)) // add back all files to the stream
             .pipe(rename({ 
                 suffix: '.min' 
             }))
@@ -58,13 +53,7 @@ module.exports = function() {
     });
 
     gulp.add('sass:watch', function() {
-        var watcher = gulp.watch(srcGlob, ['sass:build']);
-        watcher.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheName][e.path];
-                remember.forget(cacheName, e.path);
-            }
-        });
+        gulp.watch(config.paths.src + '/**/*.scss', ['sass:build', 'server:reload']);
     });
 
     gulp.add('sass:docs', function(done) {
@@ -74,12 +63,6 @@ module.exports = function() {
                 dest: docs
             }))
             .resume();
-        done();
-    });
-
-    gulp.add('sass:reset', function(done) {
-        delete cache.caches[cacheName];
-        remember.forgetAll(cacheName);
         done();
     });
 };

@@ -1,4 +1,9 @@
+// vars
 @import "./scss/variables";
 
+// elements/components (auto added)
 @import "./elements/**/*.scss";
 @import "./components/**/*.scss";
+
+// styleguide
+@import "./scss/styleguide";
