@@ -36,7 +36,7 @@ var getTask = function(task, path) {
 getAllTasks();
 
 gulp.add('config:watch', function() {
-    gulp.watch(['config.json', 'gulpfile.js'], ['default', 'server:reload']);
+    gulp.watch(['config.json', 'package.json', 'gulpfile.js'], ['default', 'server:reload']);
 });
 
 // main tasks
