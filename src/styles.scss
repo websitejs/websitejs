@@ -1,9 +1,12 @@
 // vars
 @import "./scss/variables";
 
+// bootstrap
+@import "./node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
 // elements/components (auto added)
 @import "./elements/**/*.scss";
 @import "./components/**/*.scss";
 
 // styleguide
-@import "./scss/styleguide";
+@import "./styleguide/**/*.scss";

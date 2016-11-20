@@ -5,8 +5,7 @@
 
 var config = require('./config.json'),
     fs = require('fs'),
-    gulp = require('gulp'),
-    browserSync = require('browser-sync').create();
+    gulp = require('gulp');
 
 /**
  * gets all tasks

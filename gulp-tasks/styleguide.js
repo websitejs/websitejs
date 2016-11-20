@@ -4,6 +4,8 @@
 
 var config = require('../config.json'),
     pkg = require('../package.json'),
+    bs = require('bootstrap-sass/package.json'),
+    jq = require('jquery/package.json'),
     gulp = require('gulp'),
     gulpUtil = require('gulp-util'),
     fs = require('fs'),
@@ -99,7 +101,9 @@ module.exports = function() {
             },
             project: {
                 name: config.name,
-                version: pkg.version
+                version: pkg.version,
+                bsversion: bs.version,
+                jqversion: jq.version
             },
             components: fs.readdirSync(config.paths.src + config.paths.components.src),
             elements: fs.readdirSync(config.paths.src + config.paths.elements.src),
@@ -150,8 +154,7 @@ module.exports = function() {
 
     gulp.add('styleguide:watch', function() {
         var watcher = gulp.watch(srcGlob, ['styleguide:build', 'server:reload']),
-            sgWatcher = gulp.watch(styleguideSrcGlob, ['styleguide:build', 'server:reload']),
-            indexWatcher = gulp.watch(styleguideIndexGlob, ['styleguide:build', 'server:reload']);
+            sgWatcher = gulp.watch(config.paths.src + config.paths.styleguide.src + '/**/*.html', ['styleguide:build', 'server:reload']);
 
         watcher.on('change', function(e) {
             if (e.type === 'deleted') {
@@ -160,12 +163,6 @@ module.exports = function() {
             }
         });
         sgWatcher.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheName][e.path];
-                remember.forget(cacheName, e.path);
-            }
-        });
-        indexWatcher.on('change', function(e) {
             if (e.type === 'deleted') {
                 delete cache.caches[cacheName][e.path];
                 remember.forget(cacheName, e.path);

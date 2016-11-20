@@ -17,6 +17,7 @@
             font-size: 24px;
         }
         &--section {
+            margin-bottom: 10px;
             font-size: 18px;
         }
         &--subtitle,
@@ -27,5 +28,9 @@
         &--modulename {
             margin-bottom: 30px;
         }
+    }
+
+    &__listing {
+        margin-bottom: 30px;
     }
 }

@@ -28,6 +28,11 @@
             "src": "/components"
         },
 
+        "libraries": {
+            "jquery": ["./node_modules/jquery/dist/jquery.min.js"],
+            "bootstrap": ["./node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"]
+        },
+
         "styleguide": {
             "src": "/styleguide",
             "dest": "/styleguide"

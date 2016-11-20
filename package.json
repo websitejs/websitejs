@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/websitejs/websitejs#readme",
   "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
     "browser-sync": "^2.18.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
