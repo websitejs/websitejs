@@ -35,9 +35,13 @@ var getTask = function(task, path) {
 // load tasks
 getAllTasks();
 
+gulp.add('config:watch', function() {
+    gulp.watch(['config.json', 'gulpfile.js'], ['default', 'server:reload']);
+});
+
 // main tasks
 gulp.task('docs', ['sass:docs', 'scripts:docs']);
-gulp.task('watch', ['sass:watch', 'scripts:watch', 'styleguide:watch']);
+gulp.task('watch', ['config:watch', 'sass:watch', 'scripts:watch', 'styleguide:watch']);
 gulp.task('serve', ['server:start' , 'watch']);
 gulp.task('all', ['sass:build', 'sass:docs', 'scripts:build', 'scripts:docs', 'styleguide:build']);
 gulp.task('prod', ['sass:build', 'scripts:build']);
