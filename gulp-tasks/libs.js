@@ -27,7 +27,7 @@ module.exports = function() {
         // cleanup
         del.sync([
             config.paths.dest + config.paths.scripts.dest + '/vendor/**/*.js',
-            config.paths.dest + config.paths.styles.dest + '/vendor/**/*.css'
+            config.paths.dest + config.paths.scss.dest + '/vendor/**/*.css'
         ]);
 
         // build
