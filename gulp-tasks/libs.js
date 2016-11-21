@@ -40,7 +40,7 @@ module.exports = function() {
                         dest = config.paths.dest + config.paths.scripts.dest + '/vendor';
                         break;
                     case '.css':
-                        dest = config.paths.dest + config.paths.styles.dest + '/vendor';
+                        dest = config.paths.dest + config.paths.scss.dest + '/vendor';
                         break;
                     default:
                         dest = config.paths.dest;
