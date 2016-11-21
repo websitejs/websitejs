@@ -1,4 +1,4 @@
-(function () {
+(function ($, viewport) {
     'use strict';
 
     /**
@@ -17,4 +17,5 @@
     };
 
     window['Header'] = Header;
-})();
+    
+})(jQuery, ResponsiveBootstrapToolkit);

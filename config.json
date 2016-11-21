@@ -29,8 +29,13 @@
         },
 
         "libraries": {
-            "jquery": ["./node_modules/jquery/dist/jquery.min.js"],
-            "bootstrap": ["./node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js"]
+            "jquery": [
+                "./node_modules/jquery/dist/jquery.min.js"
+            ],
+            "bootstrap": [
+                "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js",
+                "./node_modules/responsive-toolkit/dist/bootstrap-toolkit.min.js"
+            ]
         },
 
         "styleguide": {

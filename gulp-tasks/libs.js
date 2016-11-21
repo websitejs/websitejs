@@ -4,57 +4,65 @@
 
 var config = require('../config.json'),
     gulp = require('gulp'),
+    gulpUtil = require('gulp-util'),
     del = require('del'),
-    path = require('path'),
-    cache = require('gulp-cached'),
-    remember = require('gulp-remember');
+    rename = require('gulp-rename'),
+    filter = require('gulp-filter'),
+    uglify = require('gulp-uglify'),
+    cssnano = require('gulp-cssnano'),
+    concat = require('gulp-concat'),
+    strip = require('gulp-strip-comments');
 
 module.exports = function() {
     
-    // paths
-    var srcGlob = [],
-        dest = '',
-        cacheName = 'libFiles';
-
     gulp.add('libs:build', function(done) {
 
-        for (var lib in config.paths.libraries) {
-            config.paths.libraries[lib].forEach(function(path, i) {
-                srcGlob.push(path);
-            });
-        }
-        
         // cleanup
         del.sync([
             config.paths.dest + config.paths.scripts.dest + '/vendor/**/*.js',
             config.paths.dest + config.paths.scss.dest + '/vendor/**/*.css'
         ]);
 
-        // build
-        gulp.src(srcGlob)
-            .pipe(cache(cacheName)) // only process changed files
-            .pipe(remember(cacheName)) // add back all files to the stream
-            .pipe(gulp.dest(function(file) {
-                switch(path.extname(file.relative)) {
-                    case '.js':
-                        dest = config.paths.dest + config.paths.scripts.dest + '/vendor';
-                        break;
-                    case '.css':
-                        dest = config.paths.dest + config.paths.scss.dest + '/vendor';
-                        break;
-                    default:
-                        dest = config.paths.dest;
-                        break;
-                }
-                return dest;
-            }));
+        for (var lib in config.paths.libraries) {
 
-        done();
-    });
+            // filters
+            var filterScripts = filter(['**/*.js', '**/*.min.js']),
+                filterScriptsMin = filter(['**/*.js', '!**/*.min.js'], { restore: true }),
+                filterStyles = filter(['*.css', '*.min.css']),
+                filterStylesMin = filter(['*.css', '!*.min.css'], { restore: true });
 
-    gulp.add('libs:reset', function(done) {
-        delete cache.caches[cacheName];
-        remember.forgetAll(cacheName);
+            // build
+            gulp.src(config.paths.libraries[lib])
+                .pipe(filterScripts)
+                .pipe(filterScriptsMin)
+                .pipe(uglify({ 
+                    mangle: false 
+                }).on('error', gulpUtil.log))
+                .pipe(filterScriptsMin.restore)
+                .pipe(concat(lib + '.js')
+                .on('error', gulpUtil.log))
+                .pipe(strip())
+                .pipe(rename({ 
+                    suffix: '.min' 
+                }))
+                .pipe(gulp.dest(config.paths.dest + config.paths.scripts.dest + '/vendor'));
+
+            gulp.src(config.paths.libraries[lib])  
+                .pipe(filterStyles)
+                .pipe(filterStylesMin)
+                .pipe(cssnano({
+                    zindex: false
+                })
+                .on('error', gulpUtil.log))
+                .pipe(filterStylesMin.restore)
+                .pipe(concat(lib + '.css')
+                .on('error', gulpUtil.log))
+                .pipe(rename({ 
+                    suffix: '.min' 
+                }))
+                .pipe(gulp.dest(config.paths.dest + config.paths.scss.dest + '/vendor'));
+        }
+
         done();
     });
 };
