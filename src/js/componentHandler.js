@@ -9,11 +9,11 @@
      * @class ComponentHandler
      */
     var ComponentHandler = function() {
-
+        
         var _this = this;
         
         /** 
-         * @type {array} 
+         * @type {array}
          * @private 
          */
         var registeredItems = [];
@@ -27,6 +27,7 @@
         /**
          * Registers components.
          * @param {Object} item Object with component data to register.
+         * @memberof ComponentHandler
          * @public
          */
         this.register = function(item) {
@@ -60,6 +61,7 @@
         /**
          * Finds registered item by javascript class name.
          * @param {string} jsClass JAvascript class name to find in registered items.
+         * @memberof ComponentHandler
          * @returns {object|boolean} Found item or false.
          */
         this.findRegisteredItem = function(jsClass) {
@@ -74,6 +76,7 @@
         /**
          * Gets list of already upgraded classes from DOM element.
          * @param {jQueryElement} $element jQuery element to fetch data from.
+         * @memberof ComponentHandler
          * @returns {array} Array of found upgraded classes.
          */
         this.getUpgradedListOfElement = function($element) {
@@ -89,6 +92,7 @@
          * Returns true if given element is already upgraded by given javascript class.
          * @param {jQueryElement} $element jQuery element to check for javascript classes
          * @param {string} jsClass Javascript class to check.
+         * @memberof ComponentHandler
          * @returns {boolean} True if element is already upgraded.
          */
         this.isElementUpgraded = function($element, jsClass) {
@@ -98,6 +102,7 @@
 
         /**
          * Get all registered items and upgrades the DOM elements.
+         * @memberof ComponentHandler
          * @public
          */
         this.upgradeAllRegistered = function() {
@@ -110,6 +115,7 @@
          * Upgrades DOM elements by javascript classname and optional css class name.
          * @param {string} jsClass Javascript class name.
          * @param {string} [cssClass] Optional css class name for elements.
+         * @memberof ComponentHandler
          * @public
          */
         this.upgradeDOM = function(jsClass, cssClass) {
@@ -130,6 +136,7 @@
          * Instanciate javascript class and upgrades DOM element.
          * @param {jQueryElement} $element jQuery element to upgrade.
          * @param {string} [jsClass] Otional javascript class name to upgrade to.
+         * @memberof ComponentHandler
          * @public
          */
         this.upgradeElement = function($element, jsClass) {
@@ -173,6 +180,7 @@
          * Registers callbacks to upgrades performed on given javascript class name.
          * @param {string} jsClass Javascript class to hook into for upgrades.
          * @param {function} callback Callback function returns one parameter: jQuery element which got upgraded.
+         * @memberof ComponentHandler
          * @public
          */
         this.registerUpgradedCallback = function(jsClass, callback) {
@@ -185,6 +193,7 @@
         /**
          * Fetches current registered items.
          * @returns {array} Array of currently registered items.
+         * @memberof ComponentHandler
          * @public
          */
         this.getRegisteredItems = function() {
