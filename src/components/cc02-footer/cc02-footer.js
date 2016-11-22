@@ -12,6 +12,14 @@
         
         var $element = element;
 
+        /**
+         * Initializes component
+         * @public
+         */
+        this.init = function() {
+            console.log('Inited Footer.');
+        };
+
         // Initialize instance.
         this.init();
     };
@@ -24,7 +32,5 @@
         classAsString: 'Footer',
         cssClass: 'js-footer'
     });
-
-    console.log('footer', componentHandler.getItems());
 
 })(jQuery, ResponsiveBootstrapToolkit);

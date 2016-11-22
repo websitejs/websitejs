@@ -12,6 +12,10 @@
         
         var $element = element;
 
+        this.init = function() {
+            console.log('Inited Header.');
+        };
+
         // Initialize instance.
         this.init();
     };
@@ -25,6 +29,4 @@
         cssClass: 'js-header'
     });
 
-    console.log('header', componentHandler);
-    
 })(jQuery, ResponsiveBootstrapToolkit);

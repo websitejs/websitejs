@@ -129,24 +129,22 @@ module.exports = function() {
 
         // build styleguide pages
         gulp.src(styleguideSrcGlob)
-            .pipe(cache(cacheName)) // only process changed files
+            //.pipe(cache(cacheName)) // only process changed files
             .pipe(data(getDataForPage))
             .pipe(nunjucksRender({
                 path: [config.paths.src]
             })
             .on('error', gulpUtil.log))
-            .pipe(remember(cacheName)) // add back all files to the stream
+            //.pipe(remember(cacheName)) // add back all files to the stream
             .pipe(gulp.dest(dest));
 
         // build styleguide index
         gulp.src(styleguideIndexGlob)
-            .pipe(cache(cacheName)) // only process changed files
             .pipe(data(getDataForIndex))
             .pipe(nunjucksRender({
                 path: [config.paths.src]
             })
             .on('error', gulpUtil.log))
-            .pipe(remember(cacheName)) // add back all files to the stream
             .pipe(gulp.dest(dest));
 
         done();

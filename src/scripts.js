@@ -6,7 +6,7 @@ $(document).ready(function() {
     // instantiate classes (upgrade components)
 
     // upgrade DOM with registerd elements/components
-    componentHandler.upgradeAllRegisterd();
+    componentHandler.upgradeAllRegistered();
 
     console.log('ready.');
 });
