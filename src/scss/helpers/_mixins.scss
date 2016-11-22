@@ -1,0 +1,260 @@
+///
+/// unitless line height based font-size 
+/// @param {string} $height Height in pixels
+/// @param {string} $font-size Font size in pixels
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin line-height($height, $font-size) {
+    line-height: (strip-units($height)/strip-units($font-size));
+}
+
+///
+/// vertically alignes elements 
+/// @param {string} $position Optional relative [default] or absolute
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin align-vertical($position: relative) {
+    position: $position;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+///
+/// horizontally alignes elements 
+/// @param {string} $position Optional relative [default] or absolute
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin align-horizontal($position: relative) {
+    position: $position;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+///
+/// alignes elements vertically and horizontally
+/// @param {string} $position Optional relative [default] or absolute
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin align-center($position: relative) {
+    position: $position;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+///
+/// removes top/bottom margin of elements in a container
+/// @param {string} $selector Optional element selector to remove margins from
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin content-margins($selector: '> *') {
+	@if $selector {
+		#{unquote($selector)} {
+			&:first-child { margin-top: 0; }
+			&:last-child { margin-bottom: 0; }
+		}
+	} @else {
+		&:first-child { margin-top: 0; }
+		&:last-child { margin-bottom: 0; }
+	}
+}
+
+///
+/// set elements ratio
+/// @param {string} $ratio Ie. 4/3 or 16/9
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin ratio-box($ratio: 1/1) {
+    position: relative;
+    overflow: hidden;
+
+    // The container's height, as a percentage of the
+    // container's width, is set by assigning
+    // padding-top to a pseudo-element.
+    &:before {
+        content: "";
+        display: block;
+        height: 0;
+        padding-top: (1 / $ratio) * 100%;
+    }
+}
+
+/// ratio-box @extend
+%ratio-box {
+    @include ratio-box;
+}
+
+///
+/// style <input/> placeholder
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin input-placeholder {
+	&.placeholder { @content; }
+	&:-moz-placeholder { @content; }
+	&::-moz-placeholder { @content; }
+	&:-ms-input-placeholder { @content; }
+	&::-webkit-input-placeholder { @content; }
+}
+
+///
+/// disable browser selection of elements
+/// usefull for menu's, navigations etc
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin unselectable {
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+///
+/// cross browser opacity
+/// @param {float} $opacity Opacity float (ie. 0.5)
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin opacity($opacity) {
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+    opacity: $opacity;
+}
+
+///
+/// Hide from both screenreaders and browsers
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin hidden {
+	display: none;
+	visibility: hidden;
+}
+
+///
+/// Set element visible
+/// @param {string} $state Display state. Defaults to 'block'
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin visible($state: 'block') {
+	display: unquote($state);
+	visibility: visible;
+}
+
+///
+/// Hide visually and from screenreaders, but maintain layout
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin invisible {
+	visibility: hidden;
+}
+
+///
+/// anti alias fonts
+/// @param {string} $value none, antialiased (default), subpixel-antialiased
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin font-smoothing($value: antialiased) {
+  @if $value == antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+///
+/// Hide only visually, but have it available for screenreaders
+/// @param {boolean} $focusable Should the element be focusable
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin screenreader($focusable: false) {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+
+	@if $focusable {
+		@include screenreader-focusable;
+	}
+}
+
+///
+/// Resets component after hidden for screenreaders
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin screenreader-reset {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	width: auto;
+}
+
+///
+/// Allow the element to be focusable when navigated to via the keyboard
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin screenreader-focusable {
+	&:active,
+	&:focus {
+		clip: auto;
+		height: auto;
+		margin: 0;
+		overflow: visible;
+		position: static;
+		width: auto;
+	}
+}
+
+///
+///	CSS Triangle
+///	used for creating CSS only triangles
+/// @author Rocco Janse, rocco.janse@valtech.nl
+/// @param {string} $color Color hexvalue, string
+/// @param {string} $direction Up, down, left or right
+/// @param {string} $size Default: 6px
+/// @param {string} $position Default: absolute
+/// @param {boolean} $round True or false (default)
+///	@example
+///	.element {
+///		&:before {
+///			@include css-triangle(blue, down);
+///		}
+///	}
+///
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false){
+    content: '';
+	display: block;
+	position: $position;
+	width: 0;
+	height: 0;
+
+	@if $round {
+		border-radius: 3px;
+	}
+
+	@if $direction == down {
+		border-left: $size solid transparent;
+		border-right: $size solid transparent;
+		border-top: $size solid $color;
+		margin-top: 0 - round( $size / 2.5 );
+	} @else if $direction == up {
+		border-left: $size solid transparent;
+		border-right: $size solid transparent;
+		border-bottom: $size solid $color;
+		margin-bottom: 0 - round( $size / 2.5 );
+	} @else if $direction == right {
+		border-top: $size solid transparent;
+		border-bottom: $size solid transparent;
+		border-left: $size solid $color;
+		margin-right: -$size;
+	} @else if  $direction == left {
+		border-top: $size solid transparent;
+		border-bottom: $size solid transparent;
+		border-right: $size solid $color;
+		margin-left: -$size;
+	}
+}

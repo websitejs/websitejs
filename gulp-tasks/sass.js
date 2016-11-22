@@ -58,7 +58,7 @@ module.exports = function() {
     });
 
     gulp.add('sass:docs', function(done) {
-        gulp.src(srcGlob)
+        gulp.src(config.paths.src + '/**/*.scss')
             .pipe(sassdoc({
                 package: './package.json',
                 dest: docs

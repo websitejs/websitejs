@@ -1,6 +1,9 @@
 // vars
 @import "./scss/variables";
 
+@import "./scss/helpers/functions";
+@import "./scss/helpers/mixins";
+
 // bootstrap
 @import "./node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
