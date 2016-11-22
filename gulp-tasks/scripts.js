@@ -20,6 +20,7 @@ module.exports = function() {
     // paths
     var fileName = config.paths.scripts.fileName,
         srcGlob = [
+            config.paths.src + config.paths.scripts.src + '/componentHandler.js',
             config.paths.src + config.paths.elements.src + '/**/*.js',
             config.paths.src + config.paths.components.src + '/**/*.js',
             config.paths.src + config.paths.scripts.src + '/**/*.js',

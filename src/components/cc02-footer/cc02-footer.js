@@ -1,4 +1,4 @@
-(function ($, viewport) {
+(function($, viewport) {
     'use strict';
 
     /**
@@ -8,14 +8,23 @@
      * @param {HTMLElement} element The element that will be upgraded.
      * @class Footer
      */
-    var Footer = function Footer(element) {
+    var Footer = function(element) {
         
-        this.element_ = element;
+        var $element = element;
 
         // Initialize instance.
         this.init();
     };
 
     window['Footer'] = Footer;
+
+    // The component registers itself to the componentHandler in the global scope.
+    componentHandler.register({
+        constructor: Footer,
+        classAsString: 'Footer',
+        cssClass: 'js-footer'
+    });
+
+    console.log('footer', componentHandler.getItems());
 
 })(jQuery, ResponsiveBootstrapToolkit);

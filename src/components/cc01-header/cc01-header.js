@@ -1,4 +1,4 @@
-(function ($, viewport) {
+(function($, viewport) {
     'use strict';
 
     /**
@@ -8,14 +8,23 @@
      * @param {HTMLElement} element The element that will be upgraded.
      * @class Header
      */
-    var Header = function Header(element) {
+    var Header = function(element) {
         
-        this.element_ = element;
+        var $element = element;
 
         // Initialize instance.
         this.init();
     };
 
     window['Header'] = Header;
+
+    // The component registers itself to the componentHandler in the global scope.
+    componentHandler.register({
+        constructor: Header,
+        classAsString: 'Header',
+        cssClass: 'js-header'
+    });
+
+    console.log('header', componentHandler);
     
 })(jQuery, ResponsiveBootstrapToolkit);

@@ -15,6 +15,7 @@
   "sub": true,
   "globals": {
     "componentHandler": true,
-    "ResponsiveBootstrapToolkit": true
+    "ResponsiveBootstrapToolkit": true,
+    "viewport": true
   }
 }
