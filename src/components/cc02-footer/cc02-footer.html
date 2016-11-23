@@ -2,6 +2,8 @@
 
         {% block content %}
         {% include "styleguide/includes/moduleinfo.html" %}
+        {% if name %}{% set name = "" %}{% endif %}
+        {% if type %}{% set type = "" %}{% endif %}
 
         <footer class="footer js-footer">
         footer

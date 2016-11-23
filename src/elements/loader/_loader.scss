@@ -1,0 +1,24 @@
+$base-line-height: 24px;
+$color: $brand-primary;
+$off-color: rgba($color, 0.2);
+$spin-duration: 1s;
+
+.loader {
+    margin-top: 0 - ($base-line-height / 2);
+    border-radius: 50%;
+    width: $base-line-height;
+    height: $base-line-height;
+    border: .25rem solid $off-color;
+    border-top-color: $color;
+    animation: spin $spin-duration infinite ease-in-out;
+    @include align-center(absolute);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

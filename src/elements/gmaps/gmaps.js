@@ -2,14 +2,14 @@
     'use strict';
 
     /**
-     * Footer functionality.
-     * @class Footer
+     * Loads and displays a Google Map.
+     * @class Maps
      * @param {jQueryElement} $element jQuery Element to upgrade with this class.
      * @author Rocco Janse, rocco.janse@valtech.nl
      
      */
-    var Footer = function($element) {
-        /** @lends Footer# */
+    var Maps = function($element) {
+        /** @lends Maps# */
 
         /**
          * @type {jQueryElement}
@@ -21,25 +21,25 @@
         return this;
     };
 
-    $.extend(Footer.prototype, /** @lends Footer# */ {
+    $.extend(Maps.prototype, /** @lends Maps# */ {
 
         /**
          * Initializes component.
          * @public
          */
         init: function() {
-            console.log('Inited Footer.');
+            console.log('Inited Google Maps.');
         }
 
     });
 
-    window['Footer'] = Footer;
+    window['Maps'] = Maps;
 
     // The component registers itself to the componentHandler in the global scope.
     componentHandler.register({
-        constructor: Footer,
-        classAsString: 'Footer',
-        cssClass: 'js-footer'
+        constructor: Maps,
+        classAsString: 'Maps',
+        cssClass: 'js-maps'
     });
 
 })(jQuery, ResponsiveBootstrapToolkit);

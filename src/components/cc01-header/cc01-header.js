@@ -2,23 +2,36 @@
     'use strict';
 
     /**
-     * Class for Header component
-     * @author Rocco Janse <roccojanse@outlook.com>
-     *
-     * @param {HTMLElement} element The element that will be upgraded.
+     * Header functionality.
      * @class Header
+     * @param {jQueryElement} $element jQuery Element to upgrade with this class.
+     * @author Rocco Janse, rocco.janse@valtech.nl
+     
      */
-    var Header = function(element) {
-        
-        var $element = element;
+    var Header = function($element) {
+        /** @lends Header# */
 
-        this.init = function() {
-            console.log('Inited Header.');
-        };
+        /**
+         * @type {jQueryElement}
+         */
+        this.$element = $element;
 
-        // Initialize instance.
         this.init();
+        
+        return this;
     };
+
+    $.extend(Header.prototype, /** @lends Header# */ {
+
+        /**
+         * Initializes component.
+         * @public
+         */
+        init: function() {
+            console.log('Inited Header.');
+        }
+
+    });
 
     window['Header'] = Header;
 

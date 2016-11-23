@@ -118,13 +118,13 @@ module.exports = function() {
 
         // get current components and elements
         gulp.src(srcGlob)
-            .pipe(cache(cacheName)) // only process changed files
+            //.pipe(cache(cacheName)) // only process changed files
             .pipe(data(getDataForFile))
             .pipe(nunjucksRender({
                 path: [config.paths.src]
             })
             .on('error', gulpUtil.log))
-            .pipe(remember(cacheName)) // add back all files to the stream
+            //.pipe(remember(cacheName)) // add back all files to the stream
             .pipe(gulp.dest(dest));
 
         // build styleguide pages

@@ -9,30 +9,31 @@
      * @class ComponentHandler
      */
     var ComponentHandler = function() {
-        
-        var _this = this;
+        /** @ lends ComponentHandler# */
         
         /** 
          * @type {array}
-         * @private 
          */
-        var registeredItems = [];
+        this.registeredItems = [];
         
         /** 
          * @type {array} 
-         * @private 
          */
-        var createdItems = [];
+        this.createdItems = [];
+
+        return this;
+    };
+
+    $.extend(ComponentHandler.prototype, /** @lends ComponentHandler# */ {
 
         /**
          * Registers components.
          * @param {Object} item Object with component data to register.
-         * @memberof ComponentHandler
          * @public
          */
-        this.register = function(item) {
+        register: function(item) {
             
-            $.each(registeredItems, function(i, component) {
+            $.each(this.registeredItems, function(i, component) {
 
                 // check for css classname already in use
                 if (component.cssClass === item.cssClass) {
@@ -54,71 +55,66 @@
             };
 
             // register component
-            registeredItems.push(newItem);
+            this.registeredItems.push(newItem);
 
-        };
+        },
 
         /**
          * Finds registered item by javascript class name.
          * @param {string} jsClass JAvascript class name to find in registered items.
-         * @memberof ComponentHandler
          * @returns {object|boolean} Found item or false.
          */
-        this.findRegisteredItem = function(jsClass) {
-            for (var i = 0; i < registeredItems.length; i++) {
-                if (registeredItems[i].className === jsClass) {
-                    return registeredItems[i];
+        findRegisteredItem: function(jsClass) {
+            for (var i = 0; i < this.registeredItems.length; i++) {
+                if (this.registeredItems[i].className === jsClass) {
+                    return this.registeredItems[i];
                 }
             }
             return false;
-        };
+        },
 
         /**
          * Gets list of already upgraded classes from DOM element.
          * @param {jQueryElement} $element jQuery element to fetch data from.
-         * @memberof ComponentHandler
          * @returns {array} Array of found upgraded classes.
          */
-        this.getUpgradedListOfElement = function($element) {
+        getUpgradedListOfElement: function($element) {
             var upgradedData = $element.attr('data-upgraded');
             if (typeof upgradedData === 'undefined') {
                 return [];
             } else {
                 return upgradedData.split(',');
             }
-        };
+        },
 
         /**
          * Returns true if given element is already upgraded by given javascript class.
          * @param {jQueryElement} $element jQuery element to check for javascript classes
          * @param {string} jsClass Javascript class to check.
-         * @memberof ComponentHandler
          * @returns {boolean} True if element is already upgraded.
          */
-        this.isElementUpgraded = function($element, jsClass) {
+        isElementUpgraded: function($element, jsClass) {
             var upgradedList = this.getUpgradedListOfElement($element);
             return upgradedList.indexOf(jsClass) !== -1;
-        };
+        },
 
         /**
          * Get all registered items and upgrades the DOM elements.
-         * @memberof ComponentHandler
          * @public
          */
-        this.upgradeAllRegistered = function() {
-            for (var i = 0; i < registeredItems.length; i++) {
-                this.upgradeDOM(registeredItems[i].className);
+        upgradeAllRegistered: function() {
+            for (var i = 0; i < this.registeredItems.length; i++) {
+                this.upgradeDOM(this.registeredItems[i].className);
             }
-        };
+        },
 
         /**
          * Upgrades DOM elements by javascript classname and optional css class name.
          * @param {string} jsClass Javascript class name.
          * @param {string} [cssClass] Optional css class name for elements.
-         * @memberof ComponentHandler
          * @public
          */
-        this.upgradeDOM = function(jsClass, cssClass) {
+        upgradeDOM: function(jsClass, cssClass) {
             var className = jsClass;
             if (typeof cssClass === 'undefined') {
                 var registeredItem = this.findRegisteredItem(className);
@@ -130,16 +126,15 @@
             for (var i = 0; i < $elements.length; i++) {
                 this.upgradeElement($($elements[i]), className);
             }
-        };
+        },
 
         /**
          * Instanciate javascript class and upgrades DOM element.
          * @param {jQueryElement} $element jQuery element to upgrade.
          * @param {string} [jsClass] Otional javascript class name to upgrade to.
-         * @memberof ComponentHandler
          * @public
          */
-        this.upgradeElement = function($element, jsClass) {
+        upgradeElement: function($element, jsClass) {
 
             // get list of already upgraded classnames of element
             var upgradedList = this.getUpgradedListOfElement($element),
@@ -148,13 +143,13 @@
             if (typeof jsClass === 'undefined') {
                 
                 var classList = $element[0].classList;
-                $.each(registeredItems, function(i, item) {
-                    if (classList.contains(item.cssClass) && classesToUpgrade.indexOf(item) === -1 && _this.isElementUpgraded($element, item.className) === false) {
+                $.each(this.registeredItems, function(i, item) {
+                    if (classList.contains(item.cssClass) && classesToUpgrade.indexOf(item) === -1 && this.isElementUpgraded($element, item.className) === false) {
                         classesToUpgrade.push(item);
                     }
                 });
 
-            } else if (_this.isElementUpgraded($element, jsClass) === false) {
+            } else if (this.isElementUpgraded($element, jsClass) === false) {
                 classesToUpgrade.push(this.findRegisteredItem(jsClass));
             }
             
@@ -167,40 +162,38 @@
                 var instance = new registeredClass.classConstructor($element);
                 //instance['itemProperty'] = registeredClass;
 
-                createdItems.push(instance);
+                this.createdItems.push(instance);
 
                 for (var j = 0; j < registeredClass.callbacks.length; j++) {
                     registeredClass.callbacks[j]($element);
                 }  
             }
 
-        };
+        },
 
         /**
          * Registers callbacks to upgrades performed on given javascript class name.
          * @param {string} jsClass Javascript class to hook into for upgrades.
          * @param {function} callback Callback function returns one parameter: jQuery element which got upgraded.
-         * @memberof ComponentHandler
          * @public
          */
-        this.registerUpgradedCallback = function(jsClass, callback) {
+        registerUpgradedCallback: function(jsClass, callback) {
             var registeredClass = this.findRegisteredClass(jsClass);
             if (registeredClass) {
                 registeredClass.callbacks.push(callback);
             }
-        };
+        },
 
         /**
          * Fetches current registered items.
          * @returns {array} Array of currently registered items.
-         * @memberof ComponentHandler
          * @public
          */
-        this.getRegisteredItems = function() {
-            return registeredItems;
-        };
+        getRegisteredItems: function() {
+            return this.registeredItems;
+        }
 
-    };
+    });
 
     window['componentHandler'] = new ComponentHandler();
 

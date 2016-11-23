@@ -38,10 +38,10 @@ module.exports = function() {
         // build
         gulp.src(srcGlob)
             .pipe(sourcemaps.init())
-            .pipe(cache(cacheName)) // only process changed files
+            //.pipe(cache(cacheName)) // only process changed files
             .pipe(jshint())
             .pipe(jshint.reporter('jshint-stylish'))
-            .pipe(remember(cacheName)) // add back all files to the stream
+            //.pipe(remember(cacheName)) // add back all files to the stream
             .pipe(concat(fileName + '.js')
             .on('error', gulpUtil.log))
             .pipe(uglify({ 
