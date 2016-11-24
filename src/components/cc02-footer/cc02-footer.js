@@ -36,10 +36,10 @@
     window['Footer'] = Footer;
 
     // The component registers itself to the componentHandler in the global scope.
-    componentHandler.register({
+    ComponentHandler.register({
         constructor: Footer,
         classAsString: 'Footer',
         cssClass: 'js-footer'
     });
 
-})(jQuery, ResponsiveBootstrapToolkit);
+})(jQuery, window.viewport);

@@ -9,22 +9,14 @@
      * @class ComponentHandler
      */
     var ComponentHandler = function() {
-        /** @ lends ComponentHandler# */
         
-        /** 
-         * @type {array}
-         */
         this.registeredItems = [];
-        
-        /** 
-         * @type {array} 
-         */
         this.createdItems = [];
 
         return this;
     };
 
-    $.extend(ComponentHandler.prototype, /** @lends ComponentHandler# */ {
+    $.extend(ComponentHandler.prototype, /** @lends ComponentHandler.prototype */ {
 
         /**
          * Registers components.
@@ -160,6 +152,7 @@
 
                 // create class instance
                 var instance = new registeredClass.classConstructor($element);
+                //instance.init();
                 //instance['itemProperty'] = registeredClass;
 
                 this.createdItems.push(instance);
@@ -195,6 +188,6 @@
 
     });
 
-    window['componentHandler'] = new ComponentHandler();
+    window['ComponentHandler'] = new ComponentHandler();
 
 })(jQuery);

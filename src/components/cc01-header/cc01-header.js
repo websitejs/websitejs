@@ -28,7 +28,7 @@
          * @public
          */
         init: function() {
-            console.log('Inited Header.');
+            console.log('Inited Header.', this);
         }
 
     });
@@ -36,10 +36,10 @@
     window['Header'] = Header;
 
     // The component registers itself to the componentHandler in the global scope.
-    componentHandler.register({
+    ComponentHandler.register({
         constructor: Header,
         classAsString: 'Header',
         cssClass: 'js-header'
     });
 
-})(jQuery, ResponsiveBootstrapToolkit);
+})(jQuery, window.viewport);

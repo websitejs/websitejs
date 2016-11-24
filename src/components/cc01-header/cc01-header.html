@@ -1,4 +1,5 @@
 {% if extends %}{% extends "styleguide/includes/layout.html" %}{% endif %}
+{% if extends %}{% set extends = "" %}{% endif %}
 
         {% block content %}
         {% include "styleguide/includes/moduleinfo.html" %}

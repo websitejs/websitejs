@@ -14,7 +14,8 @@
   "strict": true,
   "sub": true,
   "globals": {
-    "componentHandler": true,
+    "ComponentHandler": true,
+    "AsyncLoader": true,
     "ResponsiveBootstrapToolkit": true,
     "viewport": true
   }

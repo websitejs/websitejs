@@ -1,12 +1,12 @@
 $(document).ready(function() {
     'use strict';
 
-    // get registered classes
-    // get css classes
-    // instantiate classes (upgrade components)
+    if (typeof window.viewport === 'undefined') { 
+        window.viewport = ResponsiveBootstrapToolkit; 
+    }
 
     // upgrade DOM with registerd elements/components
-    componentHandler.upgradeAllRegistered();
+    ComponentHandler.upgradeAllRegistered();
 
     console.log('ready.');
 });
