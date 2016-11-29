@@ -118,24 +118,24 @@ module.exports = function() {
 
         // get current components and elements
         gulp.src(srcGlob)
-            //.pipe(cache(cacheName)) // only process changed files
+            .pipe(cache(cacheName))
             .pipe(data(getDataForFile))
             .pipe(nunjucksRender({
                 path: [config.paths.src]
             })
             .on('error', gulpUtil.log))
-            //.pipe(remember(cacheName)) // add back all files to the stream
+            .pipe(remember(cacheName))
             .pipe(gulp.dest(dest));
 
         // build styleguide pages
         gulp.src(styleguideSrcGlob)
-            //.pipe(cache(cacheName)) // only process changed files
+            .pipe(cache(cacheName))
             .pipe(data(getDataForPage))
             .pipe(nunjucksRender({
                 path: [config.paths.src]
             })
             .on('error', gulpUtil.log))
-            //.pipe(remember(cacheName)) // add back all files to the stream
+            .pipe(remember(cacheName))
             .pipe(gulp.dest(dest));
 
         // build styleguide index

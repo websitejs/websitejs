@@ -41,6 +41,13 @@
             ]
         },
 
+        "assets": {
+            "images": {
+                "src": "/assets/images",
+                "dest": "/assets/images"
+            }
+        },
+
         "styleguide": {
             "src": "/styleguide",
             "dest": "/styleguide"

@@ -1,6 +1,7 @@
 $(document).ready(function() {
     'use strict';
 
+    // init global vieport var
     if (typeof window.viewport === 'undefined') { 
         window.viewport = ResponsiveBootstrapToolkit; 
     }
