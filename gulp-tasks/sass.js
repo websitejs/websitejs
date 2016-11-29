@@ -10,6 +10,7 @@ var config = require('../config.json'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
     cssGlob = require('gulp-css-globbing'),
+    cssNano = require('gulp-cssnano'),
     sassdoc = require('sassdoc');
 
 module.exports = function() {
@@ -31,7 +32,7 @@ module.exports = function() {
                 extensions: ['.scss']
             }))
             .pipe(sass({
-                outputStyle: 'compressed',
+                outputStyle: 'expanded',
                 defaultEncoding: 'utf-8',
                 unixNewlines: false,
                 errLogToConsole: true,
@@ -44,6 +45,9 @@ module.exports = function() {
                 browsers: ['> 5%', 'IE 11', 'last 3 version'], 
                 cascade: false
             }))
+            .pipe(cssNano({
+                zindex: false
+            }).on('error', sass.logError))
             .pipe(rename({ 
                 suffix: '.min' 
             }))

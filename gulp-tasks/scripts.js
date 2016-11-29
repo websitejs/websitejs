@@ -41,11 +41,11 @@ module.exports = function() {
             .pipe(jshint())
             .pipe(jshint.reporter('jshint-stylish'))
             .pipe(remember(cacheName))
-            .pipe(concat(fileName + '.js')
-            .on('error', gulpUtil.log))
             .pipe(uglify({ 
                 mangle: false 
             }).on('error', gulpUtil.log))
+            .pipe(concat(fileName + '.js')
+            .on('error', gulpUtil.log))
             .pipe(rename({ 
                 suffix: '.min' 
             }))
