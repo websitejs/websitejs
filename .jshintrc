@@ -16,6 +16,7 @@
   "globals": {
     "ComponentHandler": true,
     "AsyncLoader": true,
+    "QueryStringHandler": true,
     "ResponsiveBootstrapToolkit": true,
     "viewport": true
   }

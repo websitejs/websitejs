@@ -5,6 +5,8 @@ $(document).ready(function() {
         window.viewport = ResponsiveBootstrapToolkit; 
     }
 
+    QueryStringHandler.getParams();
+
     // upgrade DOM with registerd elements/components
     ComponentHandler.upgradeAllRegistered();
 
