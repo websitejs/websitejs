@@ -41,8 +41,14 @@ gulp.add('config:watch', function() {
 
 // main tasks
 gulp.task('docs', ['sass:docs', 'scripts:docs']);
-gulp.task('watch', ['config:watch', 'sass:watch', 'scripts:watch', 'styleguide:watch']);
+gulp.task('libs', ['libs:build']);
+gulp.task('assets', ['assets:images:reset', 'assets:images']);
+gulp.task('sass', ['sass:build']);
+gulp.task('scripts', ['scripts:reset', 'scripts:build']);
+gulp.task('styleguide', ['styleguide:reset', 'styleguide:build']);
+
+gulp.task('watch', ['config:watch', 'sass:watch', 'scripts:watch', 'styleguide:watch', 'assets:images:watch']);
 gulp.task('serve', ['server:start' , 'watch']);
-gulp.task('all', ['libs:build', 'sass:build', 'sass:docs', 'scripts:build', 'scripts:docs', 'styleguide:build']);
-gulp.task('prod', ['libs:build', 'sass:build', 'scripts:build']);
-gulp.task('default', ['libs:build', 'sass:build', 'scripts:build', 'styleguide:build']);
+gulp.task('all', ['libs', 'sass', 'scripts', 'styleguide', 'assets', 'docs']);
+gulp.task('prod', ['libs', 'sass', 'scripts', 'assets']);
+gulp.task('default', ['libs', 'sass', 'scripts', 'styleguide', 'assets']);

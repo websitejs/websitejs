@@ -38,12 +38,12 @@
 
             // async load google maps if necessary
             AsyncLoader.loadScript(this.api.url + '?key=' + this.api.key, function() {
-                _this.setMap();
+                _this.initMap();
             });
 
         },
 
-        setMap: function() {
+        initMap: function() {
             this.map = new google.maps.Map(this.$element.find('.map')[0], {
                 zoom: 7,
                 center: { lat: 51.44344, lng: 5.46137 },
@@ -54,7 +54,7 @@
                 zoomControl: true
             });
         }
-
+        
     });
 
     window['Maps'] = Maps;

@@ -38,7 +38,7 @@ module.exports = function() {
                 stopOnError: false,
                 cacheLocation: config.paths.src + '.sass-cache/',
                 precision: 4,
-                compass: true
+                compass: false
             }).on('error', sass.logError))
             .pipe(autoprefixer({
                 browsers: ['> 5%', 'IE 11', 'last 3 version'], 
