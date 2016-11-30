@@ -1,6 +1,6 @@
 {
   "name": "websitejs",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Modular Frontend Architecture",
   "main": "dist/websitejs.min.js",
   "scripts": {
