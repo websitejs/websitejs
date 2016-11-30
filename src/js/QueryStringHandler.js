@@ -10,10 +10,10 @@
     var QueryStringHandler = function() {
 
         /**
-         * Updates current url wothout pagerefresh. Pushes current url to history,
+         * Updates current url without pagerefresh. Pushes current url to history,
          * so going back to previous url/state (ie. by browser's back button) is supported.
-         * @param {String} params Querystring parameters to updated url with.
-         * @param {String} [hash] Hash to append to url.
+         * @param {String} params Querystring parameters to update url with.
+         * @param {String} [hash] Optional hash to append to url.
          * @memberof QueryStringHandler
          * @public
          */
@@ -125,7 +125,7 @@
 
         /**
          * Fetches current hash of window.location.
-         * @param {Boolean} [stripHashtag] If true strips '#' from beginning of querystring.
+         * @param {Boolean} [stripHashtag] If true strips '#' from beginning of hash.
          * @returns {String} Hash.
          * @public
          */

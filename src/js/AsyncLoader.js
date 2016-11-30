@@ -54,8 +54,6 @@
             var _this = this,
                 element = this.findElement(elementType, fileUrlAttr, fileUrl);
 
-                console.log(element);
-
             // if element does not already exist, create new element
             if (!element) {
                 element = document.createElement(elementType);
@@ -72,8 +70,6 @@
                 element[fileUrlAttr] = fileUrl;
 
             } else {
-
-                console.log(this.createdElements.indexOf(fileUrl));
 
                 // element exists, but is file loaded?
                 if (this.createdElements.indexOf(fileUrl) === -1) {
