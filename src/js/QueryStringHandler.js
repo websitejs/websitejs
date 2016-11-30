@@ -9,6 +9,14 @@
      */
     var QueryStringHandler = function() {
 
+        /**
+         * Updates current url wothout pagerefresh. Pushes current url to history,
+         * so going back to previous url/state (ie. by browser's back button) is supported.
+         * @param {String} params Querystring parameters to updated url with.
+         * @param {String} [hash] Hash to append to url.
+         * @memberof QueryStringHandler
+         * @public
+         */
         this.updateUrl = function(params, hash) {
             var url = window.location.origin + window.location.pathname;
             if (params.length > 0) {
@@ -26,22 +34,19 @@
             history.pushState(stateObj, '', url);
         };
 
-        // /**
-        //  * Loads a script asychronously.
-        //  * @param {String} url Url to load.
-        //  * @param {Function} [callback] Optional callback function.
-        //  * @memberof AsyncLoader
-        //  * @public
-        //  */
-        // this.loadScript = function(url, callback) {
-        //     this.createElement('script', 'type', 'text/javascript', 'src', url, callback);
-        // };
-
         return this;
     };
 
     $.extend(QueryStringHandler.prototype, /** @lends QueryStringHandler.prototype */ {
 
+        /**
+         * Combines two querystrings. Ie. new querystring and current querystring.
+         * Updates and adds parameters.
+         * @param {String} newParams New querystring string.
+         * @param {String} [oldParams] Optional other quersystring. If omitted current querystring is used.
+         * @returns {String} New querystring.
+         * @public
+         */
         updateParams: function(newParams, oldParams) {
             var oParams = (typeof oldParams !== 'undefined') ? this.getParams(oldParams) : this.getParams();
             var nParams = this.getParams(newParams);
@@ -49,6 +54,12 @@
             return this.flattenParams(currentParams);
         },
 
+        /**
+         * Creates a querystring based on object properties and their corresponding values.
+         * @param {Object} paramsObj Object with parameters to be converted to querystring string.
+         * @returns {String} Querystring parameters and values.
+         * @public
+         */
         flattenParams: function(paramsObj) {
             var qsArray = [];
             for (var param in paramsObj) {
