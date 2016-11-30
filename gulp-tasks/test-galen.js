@@ -8,7 +8,7 @@ module.exports = function() {
 
     var galenProperties = {
         'galen.browserFactory.selenium.runInGrid': true,
-        'galen.browserFactory.selenium.grid.url': 'http://localhost:4444/styleguide'
+        'galen.browserFactory.selenium.grid.url': 'http://localhost.efocus.local:3000/styleguide'
     };
     
     // paths
