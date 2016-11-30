@@ -21,8 +21,6 @@
             var url = window.location.origin + window.location.pathname;
             if (params.length > 0) {
                 url += '?' + params;
-            } else {
-                url += window.location.search;
             }
             if (typeof hash !== 'undefined' && hash.length > 0) {
                 url += '#' + hash;
@@ -42,14 +40,23 @@
         /**
          * Combines two querystrings. Ie. new querystring and current querystring.
          * Updates and adds parameters.
-         * @param {String} newParams New querystring string.
-         * @param {String} [oldParams] Optional other quersystring. If omitted current querystring is used.
+         * @param {Object|String} newParams New object with parameters as properties or new querystring string.
+         * @param {Object|String} [oldParams] Optional other objects or quersystring string. If omitted current querystring is used.
          * @returns {String} New querystring.
          * @public
          */
         updateParams: function(newParams, oldParams) {
-            var oParams = (typeof oldParams !== 'undefined') ? this.getParams(oldParams) : this.getParams();
-            var nParams = this.getParams(newParams);
+            var oParams; 
+            if (typeof oldParams !== 'undefined') {
+                if (typeof oldParams === 'object') {
+                    oParams = oldParams;
+                } else {
+                    oParams = this.getParams(oldParams);
+                }
+            } else {
+                oParams = this.getParams();
+            }
+            var nParams = (typeof newParams === 'object') ? newParams : this.getParams(newParams);
             var currentParams = $.extend(true, {}, oParams, nParams);
             return this.flattenParams(currentParams);
         },
