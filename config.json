@@ -51,6 +51,11 @@
         "styleguide": {
             "src": "/styleguide",
             "dest": "/styleguide"
+        },
+
+        "galen": {
+            "src": "/styleguide/pages",
+            "report": "/tests/layout"
         }
     }
 }

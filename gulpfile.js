@@ -52,3 +52,5 @@ gulp.task('serve', ['server:start' , 'watch']);
 gulp.task('all', ['libs', 'sass', 'scripts', 'styleguide', 'assets', 'docs']);
 gulp.task('prod', ['libs', 'sass', 'scripts', 'assets']);
 gulp.task('default', ['libs', 'sass', 'scripts', 'styleguide', 'assets']);
+
+gulp.task('test', ['server:start', 'test:galen']);
