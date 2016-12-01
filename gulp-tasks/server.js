@@ -17,6 +17,7 @@ module.exports = function() {
                 baseDir: config.paths.dest
             },
             open: false,
+            notify: false,
             reloadDelay: 1000
         });
 
@@ -24,6 +25,11 @@ module.exports = function() {
 
     gulp.add('server:reload', function(done) {
         browserSync.reload();
+        done();
+    });
+
+    gulp.add('server:stop', function(done) {
+        browserSync.exit();
         done();
     });
 };
