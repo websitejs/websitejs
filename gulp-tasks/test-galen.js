@@ -3,7 +3,6 @@
 var config = require('../config.json'),
     gulp = require('gulp'),
     del = require('del'),
-    gulpUtil = require('gulp-util'),
     gulpGalen = require('gulp-galenframework');
 
 module.exports = function() {
@@ -26,7 +25,7 @@ module.exports = function() {
                     'browserstack.key': 'mMj3qR64dSyC5t244nuS'
                 },
                 'cwd': '.'
-            }, done))
+            }, done));
     });
 
 };
