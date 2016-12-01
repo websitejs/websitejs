@@ -5,7 +5,10 @@
 
 var config = require('./config.json'),
     fs = require('fs'),
-    gulp = require('gulp');
+    gulp = require('gulp'),
+    
+    os = require('os');
+
 
 /**
  * gets all tasks

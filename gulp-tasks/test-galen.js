@@ -17,10 +17,10 @@ module.exports = function() {
                 'parallel-tests': 3,
                 'properties': {
                     'galen.default.browser': 'chrome',
-                    'webdriver.chrome.driver': './node_modules/chromedriver/lib/chromedriver/chromedriver.exe',
-                    'webdriver.gecko.driver': './node_modules/geckodriver/geckodriver.exe',
-                    'webdriver.edge.driver': './node_modules/edgedriver/lib/edgedriver/MicrosoftWebDriver.exe',
-                    'webdriver.ie.driver': './node_modules/iedriver/lib/iedriver64/IEDriverServer.exe',
+                    'webdriver.chrome.driver': './webdrivers/chromedriver.exe',
+                    'webdriver.gecko.driver': './webdrivers/geckodriver.exe',
+                    'webdriver.edge.driver': './webdrivers/MicrosoftWebDriver.exe',
+                    'webdriver.ie.driver': './webdrivers/IEDriverServer.exe',
                     'browserstack.username': 'efocustester',
                     'browserstack.key': 'mMj3qR64dSyC5t244nuS'
                 },
