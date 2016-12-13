@@ -1,5 +1,3 @@
-/// <reference path="../typings/index.d.ts" />
-
 'use strict';
 
 var config = require('../config.json'),
@@ -7,7 +5,8 @@ var config = require('../config.json'),
     bs = require('bootstrap-sass/package.json'),
     jq = require('jquery/package.json'),
     gulp = require('gulp'),
-    gulpUtil = require('gulp-util'),
+    gutil = require('gulp-util'),
+    plumber = require('gulp-plumber'),
     fs = require('fs'),
     path = require('path'),
     del = require('del'),
@@ -118,33 +117,36 @@ module.exports = function() {
 
         // get current components and elements
         gulp.src(srcGlob)
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                this.emit('end');
+            }))
             .pipe(cache(cacheName))
             .pipe(data(getDataForFile))
-            .pipe(nunjucksRender({
-                path: [config.paths.src]
-            })
-            .on('error', gulpUtil.log))
+            .pipe(nunjucksRender({ path: [config.paths.src] }))
             .pipe(remember(cacheName))
             .pipe(gulp.dest(dest));
 
         // build styleguide pages
         gulp.src(styleguideSrcGlob)
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                this.emit('end');
+            }))
             .pipe(cache(cacheName))
             .pipe(data(getDataForPage))
-            .pipe(nunjucksRender({
-                path: [config.paths.src]
-            })
-            .on('error', gulpUtil.log))
+            .pipe(nunjucksRender({ path: [config.paths.src] }))
             .pipe(remember(cacheName))
             .pipe(gulp.dest(dest));
 
         // build styleguide index
         gulp.src(styleguideIndexGlob)
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                this.emit('end');
+            }))
             .pipe(data(getDataForIndex))
-            .pipe(nunjucksRender({
-                path: [config.paths.src]
-            })
-            .on('error', gulpUtil.log))
+            .pipe(nunjucksRender({ path: [config.paths.src] }))
             .pipe(gulp.dest(dest));
 
         done();

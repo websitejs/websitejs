@@ -1,9 +1,9 @@
-/// <reference path="../typings/index.d.ts" />
-
 'use strict';
 
 var config = require('../config.json'),
     gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    plumber = require('gulp-plumber'),
     del = require('del'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
@@ -23,14 +23,16 @@ module.exports = function() {
     gulp.add('sass:build', function(done) {
 
         // cleanup
-        del.sync([dest + '*.css']);
+        del.sync([dest + '*[.css,.css.map']);
 
         // build
         gulp.src(srcGlob)
-            .pipe(sourcemaps.init())
-            .pipe(cssGlob({
-                extensions: ['.scss']
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                this.emit('end');
             }))
+            .pipe(sourcemaps.init())
+            .pipe(cssGlob({ extensions: ['.scss'] }))
             .pipe(sass({
                 outputStyle: 'expanded',
                 defaultEncoding: 'utf-8',
@@ -40,21 +42,13 @@ module.exports = function() {
                 cacheLocation: config.paths.src + '.sass-cache/',
                 precision: 4,
                 compass: false
-            }).on('error', sass.logError))
-            .pipe(autoprefixer({
-                browsers: ['> 5%', 'IE 11', 'last 3 version'], 
-                cascade: false
             }))
-            .pipe(cssNano({
-                zindex: false
-            }).on('error', sass.logError))
-            .pipe(rename({ 
-                suffix: '.min' 
-            }))
+            .pipe(autoprefixer({ browsers: ['> 5%', 'IE 11', 'last 3 version'], cascade: false }))
+            .pipe(cssNano({ zindex: false }))
+            .pipe(rename({ suffix: '.min' }))
             .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest(dest));
-
-        done();
+            .pipe(gulp.dest(dest))
+            .on('end', done);
     });
 
     gulp.add('sass:watch', function() {

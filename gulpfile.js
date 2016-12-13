@@ -42,7 +42,7 @@ gulp.add('config:watch', function() {
 // main tasks
 gulp.task('docs', ['sass:docs', 'scripts:docs']);
 gulp.task('libs', ['libs:build']);
-gulp.task('assets', ['assets:images:reset', 'assets:images']);
+gulp.task('assets', ['assets:images']);
 gulp.task('sass', ['sass:build']);
 gulp.task('scripts', ['scripts:reset', 'scripts:build']);
 gulp.task('styleguide', ['styleguide:reset', 'styleguide:build']);

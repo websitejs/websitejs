@@ -1,10 +1,9 @@
-/// <reference path="../typings/index.d.ts" />
-
 'use strict';
 
 var config = require('../config.json'),
     gulp = require('gulp'),
-    gulpUtil = require('gulp-util'),
+    gutil = require('gulp-util'),
+    plumber = require('gulp-plumber'),
     del = require('del'),
     rename = require('gulp-rename'),
     filter = require('gulp-filter'),
@@ -33,36 +32,32 @@ module.exports = function() {
 
             // build
             gulp.src(config.paths.libraries[lib])
+                .pipe(plumber(function(error) {
+                    gutil.log(error.message);
+                    this.emit('end');
+                }))
                 .pipe(filterScripts)
                 .pipe(filterScriptsMin)
-                .pipe(uglify({ 
-                    mangle: false 
-                }).on('error', gulpUtil.log))
+                .pipe(uglify({ mangle: false }))
                 .pipe(filterScriptsMin.restore)
-                .pipe(concat(lib + '.js')
-                .on('error', gulpUtil.log))
+                .pipe(concat(lib + '.js'))
                 .pipe(strip())
-                .pipe(rename({ 
-                    suffix: '.min' 
-                }))
+                .pipe(rename({ suffix: '.min' }))
                 .pipe(gulp.dest(config.paths.dest + config.paths.scripts.dest + '/vendor'));
 
-            gulp.src(config.paths.libraries[lib])  
+            gulp.src(config.paths.libraries[lib])
+                .pipe(plumber(function(error) {
+                    gutil.log(error.message);
+                    this.emit('end');
+                }))  
                 .pipe(filterStyles)
                 .pipe(filterStylesMin)
-                .pipe(cssnano({
-                    zindex: false
-                })
-                .on('error', gulpUtil.log))
+                .pipe(cssnano({ zindex: false }))
                 .pipe(filterStylesMin.restore)
-                .pipe(concat(lib + '.css')
-                .on('error', gulpUtil.log))
-                .pipe(rename({ 
-                    suffix: '.min' 
-                }))
+                .pipe(concat(lib + '.css'))
+                .pipe(rename({ suffix: '.min' }))
                 .pipe(gulp.dest(config.paths.dest + config.paths.scss.dest + '/vendor'));
         }
-
         done();
     });
 };

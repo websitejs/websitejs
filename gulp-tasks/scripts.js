@@ -1,10 +1,9 @@
-/// <reference path="../typings/index.d.ts" />
-
 'use strict';
 
 var config = require('../config.json'),
     gulp = require('gulp'),
-    gulpUtil = require('gulp-util'),
+    gutil = require('gulp-util'),
+    plumber = require('gulp-plumber'),
     del = require('del'),
     rename = require('gulp-rename'),
     cache = require('gulp-cached'),
@@ -32,27 +31,26 @@ module.exports = function() {
     gulp.add('scripts:build', function(done) {
 
         // cleanup
-        del.sync([dest + '*.js']);
+        del.sync([dest + '*[.js,.js.map']);
 
         // build
         gulp.src(srcGlob)
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                this.emit('end');
+            }))
             .pipe(sourcemaps.init())
             .pipe(cache(cacheName))
             .pipe(jshint())
             .pipe(jshint.reporter('jshint-stylish'))
             .pipe(remember(cacheName))
-            .pipe(uglify({ 
-                mangle: false 
-            }).on('error', gulpUtil.log))
-            .pipe(concat(fileName + '.js')
-            .on('error', gulpUtil.log))
-            .pipe(rename({ 
-                suffix: '.min' 
-            }))
+            .pipe(uglify({ mangle: false }))
+            .pipe(concat(fileName + '.js'))
+            .pipe(rename({ suffix: '.min' }))
             .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest(dest));
+            .pipe(gulp.dest(dest))
+            .on('end', done);
 
-        done();
     });
 
     gulp.add('scripts:watch', function() {

@@ -1,5 +1,3 @@
-/// <reference path="../typings/index.d.ts" />
-
 'use strict';
 
 var config = require('../config.json'),
@@ -7,23 +5,39 @@ var config = require('../config.json'),
     browserSync = require('browser-sync').create();
 
 module.exports = function() {
-    
-    // paths
-    gulp.add('server:start', function(done) {
 
-        // start browsersync server
+    var destPath = config.paths.dest;
+
+    gulp.task('server:start', function(done) {
+
         browserSync.init({
             server: {
-                baseDir: config.paths.dest
+                baseDir: destPath
             },
+            ui: false,
             open: false,
+            notify: false,
             reloadDelay: 1000
         });
 
+        browserSync.emitter.on('init', function () {
+            done();
+        });
     });
 
-    gulp.add('server:reload', function(done) {
+    gulp.task('server:reload', function(done) {
         browserSync.reload();
+        browserSync.emitter.on('browser:reload', function() {
+            console.log('Server reloaded on ' + new Date().toLocaleString('nl-NL', 'Europe/Amsterdam'));
+        });
         done();
+    });
+
+    gulp.task('server:stop', function(done) {
+        browserSync.exit();
+        browserSync.emitter.on('service:exit', function () {
+            console.log('Server stopped.');
+            done();
+        });
     });
 };
