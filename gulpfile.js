@@ -5,7 +5,10 @@
 
 var config = require('./config.json'),
     fs = require('fs'),
-    gulp = require('gulp');
+    gulp = require('gulp'),
+    
+    os = require('os');
+
 
 /**
  * gets all tasks
@@ -49,8 +52,9 @@ gulp.task('styleguide', ['styleguide:reset', 'styleguide:build']);
 
 gulp.task('watch', ['config:watch', 'sass:watch', 'scripts:watch', 'styleguide:watch', 'assets:images:watch']);
 gulp.task('serve', ['server:start' , 'watch']);
+gulp.task('server', ['server:start']);
 gulp.task('all', ['libs', 'sass', 'scripts', 'styleguide', 'assets', 'docs']);
 gulp.task('prod', ['libs', 'sass', 'scripts', 'assets']);
 gulp.task('default', ['libs', 'sass', 'scripts', 'styleguide', 'assets']);
 
-gulp.task('test', ['server:start', 'test:galen']);
+gulp.task('test', ['test:galen']);

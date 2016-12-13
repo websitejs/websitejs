@@ -5,9 +5,9 @@
 
 @@ table browsers
     | browser  | deviceName     | tags       | size       | args                 |
-    | firefox  | Mobile         | mobile     | 360x600    | --dc.marionette true |
-    | firefox  | Tablet         | tablet     | 720x800    | --dc.marionette true |
-    | firefox  | Desktop        | desktop    | 1200x1080  | --dc.marionette true |
+    | firefox  | Mobile         | mobile     | 360x600    |                      |
+    | firefox  | Tablet         | tablet     | 720x800    |                      |
+    | firefox  | Desktop        | desktop    | 1200x1080  |                      |
     | chrome   | Mobile         | mobile     | 360x600    |                      |
     | chrome   | Tablet         | tablet     | 720x800    |                      |
     | chrome   | Desktop        | desktop    | 1200x1080  |                      |
@@ -31,7 +31,7 @@ Homepage on ${browser} ${deviceName} ${size} ${args}
          check ./src/components/cc02-footer/cc02-footer.gspec --include "${tags}"
 
 @@ parameterized using devices
-Homepage on ${deviceName}
-     selenium grid ${browserstack_url} --page ${base_url} ${gridArgs}
-         check ./src/components/cc01-header/cc01-header.gspec --include "${tags}"
-         check ./src/components/cc02-footer/cc02-footer.gspec --include "${tags}"
+#Homepage on ${deviceName}
+#     selenium grid ${browserstack_url} --page ${base_url} ${gridArgs}
+#         check ./src/components/cc01-header/cc01-header.gspec --include "${tags}"
+#         check ./src/components/cc02-footer/cc02-footer.gspec --include "${tags}"
