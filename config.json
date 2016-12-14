@@ -45,6 +45,12 @@
             "images": {
                 "src": "/assets/images",
                 "dest": "/assets/images"
+            },
+            "icons": {
+                "svg": {
+                    "src": "/assets/icons/svg",
+                    "dest": "/assets/icons/svg"
+                }
             }
         },
 

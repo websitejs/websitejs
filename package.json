@@ -49,6 +49,8 @@
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.2.0",
     "gulp-strip-comments": "^2.4.3",
+    "gulp-svgmin": "^1.2.3",
+    "gulp-svgstore": "^6.1.0",
     "gulp-uglify": "^2.0.0",
     "iedriver": "^3.0.0",
     "imagemin-pngquant": "^5.0.0",
