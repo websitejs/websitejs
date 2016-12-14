@@ -10,6 +10,18 @@ module.exports = function() {
 
     gulp.task('server:start', function(done) {
 
+        browserSync.emitter.on('init', function () {
+            console.log('Server started.');
+        });
+
+        browserSync.emitter.on('browser:reload', function() {
+            console.log('Server reloaded on ' + new Date().toLocaleString('nl-NL', 'Europe/Amsterdam'));
+        });
+
+        browserSync.emitter.on('service:exit', function() {
+            console.log('Server stopped.');
+        });
+
         browserSync.init({
             server: {
                 baseDir: destPath
@@ -20,24 +32,13 @@ module.exports = function() {
             reloadDelay: 1000
         });
 
-        browserSync.emitter.on('init', function () {
-            done();
-        });
     });
 
     gulp.task('server:reload', function(done) {
         browserSync.reload();
-        browserSync.emitter.on('browser:reload', function() {
-            console.log('Server reloaded on ' + new Date().toLocaleString('nl-NL', 'Europe/Amsterdam'));
-        });
-        done();
     });
 
     gulp.task('server:stop', function(done) {
         browserSync.exit();
-        browserSync.emitter.on('service:exit', function () {
-            console.log('Server stopped.');
-            done();
-        });
     });
 };
