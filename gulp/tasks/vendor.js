@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config.json'),
+var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -10,19 +10,23 @@ var config = require('../config.json'),
     uglify = require('gulp-uglify'),
     cssnano = require('gulp-cssnano'),
     concat = require('gulp-concat'),
-    strip = require('gulp-strip-comments');
+    stripJs = require('gulp-strip-comments'),
+    stripCss = require('gulp-strip-css-comments');
 
 module.exports = function() {
     
-    gulp.add('libs:build', function(done) {
+    gulp.task('vendor:build', function(done) {
+
+    var srcPath = config.srcPath,  
+        destPath = config.destPath;
 
         // cleanup
         del.sync([
-            config.paths.dest + config.paths.scripts.dest + '/vendor/**/*.js',
-            config.paths.dest + config.paths.scss.dest + '/vendor/**/*.css'
+            destPath + '/js/vendor/**/*.js',
+            destPath + '/css/vendor/**/*.css'
         ]);
 
-        for (var lib in config.paths.libraries) {
+        for (var lib in config.vendor) {
 
             // filters
             var filterScripts = filter(['**/*.js', '**/*.min.js']),
@@ -31,7 +35,7 @@ module.exports = function() {
                 filterStylesMin = filter(['*.css', '!*.min.css'], { restore: true });
 
             // build
-            gulp.src(config.paths.libraries[lib])
+            gulp.src(config.vendor[lib])
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
                     this.emit('end');
@@ -41,22 +45,25 @@ module.exports = function() {
                 .pipe(uglify({ mangle: false }))
                 .pipe(filterScriptsMin.restore)
                 .pipe(concat(lib + '.js'))
-                .pipe(strip())
-                .pipe(rename({ suffix: '.min' }))
-                .pipe(gulp.dest(config.paths.dest + config.paths.scripts.dest + '/vendor'));
+                .pipe(stripJs())
+                .pipe(rename({ 
+                    suffix: '.min' 
+                }))
+                .pipe(gulp.dest(destPath + '/js/vendor'));
 
-            gulp.src(config.paths.libraries[lib])
+            gulp.src(config.vendor[lib]) 
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
                     this.emit('end');
-                }))  
+                })) 
                 .pipe(filterStyles)
                 .pipe(filterStylesMin)
                 .pipe(cssnano({ zindex: false }))
                 .pipe(filterStylesMin.restore)
                 .pipe(concat(lib + '.css'))
+                .pipe(stripCss({ preserve: false }))
                 .pipe(rename({ suffix: '.min' }))
-                .pipe(gulp.dest(config.paths.dest + config.paths.scss.dest + '/vendor'));
+                .pipe(gulp.dest(destPath + '/css/vendor'));
         }
         done();
     });

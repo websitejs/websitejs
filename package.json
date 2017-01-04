@@ -24,8 +24,8 @@
   "homepage": "https://github.com/websitejs/websitejs#readme",
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",
-    "browser-sync": "^2.18.1",
-    "chromedriver": "^2.25.1",
+    "browser-sync": "^2.18.5",
+    "chromedriver": "^2.26.1",
     "del": "^2.2.2",
     "edgedriver": "^2.1.142791",
     "geckodriver": "^1.2.0",
@@ -49,6 +49,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.2.0",
     "gulp-strip-comments": "^2.4.3",
+    "gulp-strip-css-comments": "^1.2.0",
     "gulp-svgmin": "^1.2.3",
     "gulp-svgstore": "^6.1.0",
     "gulp-uglify": "^2.0.0",

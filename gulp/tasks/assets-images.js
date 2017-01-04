@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config.json'),
+var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -8,11 +8,11 @@ var config = require('../config.json'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant');
 
-    // paths
-    var srcGlob = [
-            config.paths.src + config.paths.assets.images.src + '/**/*.*'
-        ],
-        dest = config.paths.dest + config.paths.assets.images.dest;
+// paths
+var srcGlob = [
+        config.srcPath + '/assets/images/**/*.*'
+    ],
+    dest = config.destPath + '/assets/images';
 
 module.exports = function() {
     

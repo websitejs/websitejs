@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config.json'),
+var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -11,16 +11,17 @@ var config = require('../config.json'),
     autoprefixer = require('gulp-autoprefixer'),
     cssGlob = require('gulp-css-globbing'),
     cssNano = require('gulp-cssnano'),
+    strip = require('gulp-strip-css-comments'),
     sassdoc = require('sassdoc');
 
 module.exports = function() {
     
     // paths
-    var srcGlob = config.paths.src + config.paths.scss.src + '/styles.scss',
-        dest = config.paths.dest + config.paths.scss.dest,
-        docs = config.paths.dest + config.paths.scss.docs;
+    var srcGlob = config.srcPath + '/styles.scss',
+        dest = config.destPath + '/css',
+        docs = config.destPath + '/docs/styles';
 
-    gulp.add('sass:build', function(done) {
+    gulp.add('styles:build', function(done) {
 
         // cleanup
         del.sync([dest + '*[.css,.css.map']);
@@ -32,31 +33,32 @@ module.exports = function() {
                 this.emit('end');
             }))
             .pipe(sourcemaps.init())
-            .pipe(cssGlob({ extensions: ['.scss'] }))
+            .pipe(cssGlob({ extensions: ['.scss'], ignoreFolders: ['.', './scss'] }))
             .pipe(sass({
                 outputStyle: 'expanded',
                 defaultEncoding: 'utf-8',
                 unixNewlines: false,
                 errLogToConsole: true,
                 stopOnError: false,
-                cacheLocation: config.paths.src + '.sass-cache/',
+                cacheLocation: config.srcPath + '.sass-cache/',
                 precision: 4,
                 compass: false
             }))
             .pipe(autoprefixer({ browsers: ['> 5%', 'IE 11', 'last 3 version'], cascade: false }))
             .pipe(cssNano({ zindex: false }))
+            .pipe(strip({ preserve: false }))
             .pipe(rename({ suffix: '.min' }))
             .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(dest))
             .on('end', done);
     });
 
-    gulp.add('sass:watch', function() {
-        gulp.watch(config.paths.src + '/**/*.scss', ['sass:build', 'server:reload']);
+    gulp.add('styles:watch', function() {
+        gulp.watch(config.srcPath + '/**/*.scss', ['styles:build', 'server:reload']);
     });
 
-    gulp.add('sass:docs', function(done) {
-        gulp.src(config.paths.src + '/**/*.scss')
+    gulp.add('styles:docs', function(done) {
+        gulp.src(config.srcPath + '/**/*.scss')
             .pipe(sassdoc({
                 package: './package.json',
                 dest: docs

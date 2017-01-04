@@ -1,12 +1,10 @@
 'use strict';
 
-var config = require('../config.json'),
+var config = require('../config'),
     gulp = require('gulp'),
     browserSync = require('browser-sync').create();
 
 module.exports = function() {
-
-    var destPath = config.paths.dest;
 
     gulp.task('server:start', function(done) {
 
@@ -24,7 +22,7 @@ module.exports = function() {
 
         browserSync.init({
             server: {
-                baseDir: destPath
+                baseDir: config.destPath
             },
             ui: false,
             open: false,

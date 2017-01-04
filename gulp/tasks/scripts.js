@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config.json'),
+var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -11,21 +11,22 @@ var config = require('../config.json'),
     sourcemaps = require('gulp-sourcemaps'),
     jshint = require('gulp-jshint'),    
     concat = require('gulp-concat'),       
-    uglify = require('gulp-uglify'),      
+    uglify = require('gulp-uglify'), 
+    stripJs = require('gulp-strip-comments'), 
     jsdoc = require('gulp-jsdoc3');
 
 module.exports = function() {
     
     // paths
-    var fileName = config.paths.scripts.fileName,
+    var fileName = 'scripts',
         srcGlob = [
-            config.paths.src + config.paths.scripts.src + '/**/*.js',
-            config.paths.src + config.paths.elements.src + '/**/*.js',
-            config.paths.src + config.paths.components.src + '/**/*.js',
-            config.paths.src + '/' + fileName + '.js'
+            config.srcPath + '/js/**/*.js',
+            config.srcPath + '/elements/**/*.js',
+            config.srcPath + '/components/**/*.js',
+            config.srcPath + '/' + fileName + '.js'
         ],
-        dest = config.paths.dest + config.paths.scripts.dest,
-        docs = config.paths.dest + config.paths.scripts.docs,
+        dest = config.destPath + '/js',
+        docs = config.destPath + '/docs/script',
         cacheName = 'scriptFiles';
 
     gulp.add('scripts:build', function(done) {
@@ -47,6 +48,7 @@ module.exports = function() {
             .pipe(uglify({ mangle: false }))
             .pipe(concat(fileName + '.js'))
             .pipe(rename({ suffix: '.min' }))
+            .pipe(stripJs())
             .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(dest))
             .on('end', done);
@@ -80,7 +82,7 @@ module.exports = function() {
                 "cleverLinks": false,
                 "monospaceLinks": false,
                 "default": {
-                "outputSourceFiles": true
+                    "outputSourceFiles": true
                 },
                 "path": "ink-docstrap",
                 "theme": "cerulean",

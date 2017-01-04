@@ -1,7 +1,7 @@
 'use strict';
 
-var config = require('../config.json'),
-    pkg = require('../package.json'),
+var config = require('../config'),
+    pkg = require('../../package.json'),
     bs = require('bootstrap-sass/package.json'),
     jq = require('jquery/package.json'),
     gulp = require('gulp'),
@@ -19,19 +19,19 @@ module.exports = function() {
     
     // paths
     var srcGlob = [
-            config.paths.src + '/**/*.html',
-            '!' + config.paths.src + config.paths.styleguide.src + '/**/*.*'
+            config.srcPath + '/**/*.html',
+            '!' + config.srcPath + '/styleguide/**/*.*'
         ],
         styleguideSrcGlob = [
-            config.paths.src + config.paths.styleguide.src + '/**/*.html',
-            '!' + config.paths.src + config.paths.styleguide.src + '/includes/*.*',
-            '!' + config.paths.src + config.paths.styleguide.src + '/layout.html',
-            '!' + config.paths.src + config.paths.styleguide.src + '/index.html'
+            config.srcPath + '/styleguide/**/*.html',
+            '!' + config.srcPath + '/styleguide/includes/*.*',
+            '!' + config.srcPath + '/styleguide/layout.html',
+            '!' + config.srcPath + '/styleguide/index.html'
         ],
         styleguideIndexGlob = [
-            config.paths.src + config.paths.styleguide.src + '/index.html'
+            config.srcPath + '/styleguide/index.html'
         ],
-        dest = config.paths.dest + config.paths.styleguide.dest,
+        dest = config.destPath + '/styleguide',
         cacheName = 'styleguideFiles';
 
     /**
@@ -46,9 +46,9 @@ module.exports = function() {
 
         return {
             paths: {
-                css: config.paths.scss.dest,
-                js: config.paths.scripts.dest,
-                jsFilename: config.paths.scripts.fileName
+                css: '/css',
+                js: '/js',
+                jsFilename: 'scripts'
             },
             meta: {
                 title: config.name + " - " + type + " - " + name
@@ -70,9 +70,9 @@ module.exports = function() {
 
         return {
             paths: {
-                css: config.paths.scss.dest,
-                js: config.paths.scripts.dest,
-                jsFilename: config.paths.scripts.fileName
+                css: '/css',
+                js: '/js',
+                jsFilename: 'scripts'
             },
             meta: {
                 title: config.name + " - " + name
@@ -91,9 +91,9 @@ module.exports = function() {
     function getDataForIndex(file) {
         return {
             paths: {
-                css: config.paths.scss.dest,
-                js: config.paths.scripts.dest,
-                jsFilename: config.paths.scripts.fileName
+                css: '/css',
+                js: '/js',
+                jsFilename: 'scripts'
             },
             meta: {
                 title: config.name
@@ -104,9 +104,9 @@ module.exports = function() {
                 bsversion: bs.version,
                 jqversion: jq.version
             },
-            components: fs.readdirSync(config.paths.src + config.paths.components.src),
-            elements: fs.readdirSync(config.paths.src + config.paths.elements.src),
-            pages: fs.readdirSync(config.paths.src + config.paths.styleguide.src + '/pages')
+            components: fs.readdirSync(config.srcPath + '/components'),
+            elements: fs.readdirSync(config.srcPath + '/elements'),
+            pages: fs.readdirSync(config.srcPath + '/styleguide/pages')
         };
     }
 
@@ -123,7 +123,7 @@ module.exports = function() {
             }))
             .pipe(cache(cacheName))
             .pipe(data(getDataForFile))
-            .pipe(nunjucksRender({ path: [config.paths.src] }))
+            .pipe(nunjucksRender({ path: [config.srcPath] }))
             .pipe(remember(cacheName))
             .pipe(gulp.dest(dest));
 
@@ -135,7 +135,7 @@ module.exports = function() {
             }))
             .pipe(cache(cacheName))
             .pipe(data(getDataForPage))
-            .pipe(nunjucksRender({ path: [config.paths.src] }))
+            .pipe(nunjucksRender({ path: [config.srcPath] }))
             .pipe(remember(cacheName))
             .pipe(gulp.dest(dest));
 
@@ -146,7 +146,7 @@ module.exports = function() {
                 this.emit('end');
             }))
             .pipe(data(getDataForIndex))
-            .pipe(nunjucksRender({ path: [config.paths.src] }))
+            .pipe(nunjucksRender({ path: [config.srcPath] }))
             .pipe(gulp.dest(dest));
 
         done();
@@ -154,7 +154,7 @@ module.exports = function() {
 
     gulp.add('styleguide:watch', function() {
         var watcher = gulp.watch(srcGlob, ['styleguide:build', 'server:reload']),
-            sgWatcher = gulp.watch(config.paths.src + config.paths.styleguide.src + '/**/*.html', ['styleguide:build', 'server:reload']);
+            sgWatcher = gulp.watch(config.srcPath + 'styleguide/**/*.html', ['styleguide:build', 'server:reload']);
 
         watcher.on('change', function(e) {
             if (e.type === 'deleted') {
