@@ -71,7 +71,7 @@
             var qsArray = [];
             for (var param in paramsObj) {
                 var value;
-                if (paramsObj[param].length > 0) {
+                if (paramsObj[param].length > 0 || $.isNumeric(paramsObj[param]) === true) {
                     if (Array.isArray(paramsObj[param])) {
                         value = paramsObj[param].join(',');
                     } else {
