@@ -1,0 +1,10 @@
+
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# set indent and tab space for specific extensions
+[*.{html, js, ts, css, less, scss}]
+indent_style = space
+indent_size = 4
