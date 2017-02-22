@@ -2,13 +2,18 @@
 
 module.exports =  {
 
-    name: 'WebsiteJS',
+    name: 'DAF2.0',
 
     gulpTaskPath: './gulp/tasks',
 
     srcPath: 'src',
     destPath: 'dist',
     docsPath: 'docs',
+
+    tplCssPath: '/css',
+    tplJsPath: '/js',
+
+    jsFilename: 'scripts',
 
     vendor: {
         'jquery': [

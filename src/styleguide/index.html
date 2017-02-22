@@ -1,45 +1,52 @@
 {% extends "styleguide/includes/layout.html" %}
 
         {% block content %}
-        <h1 class="styleguide__heading styleguide__heading--title">{{ project.name }} styleguide</h1>
-        <h3 class="styleguide__heading styleguide__heading--subtitle">site v{{ project.version }} | jquery v{{ project.jqversion }} | bootstrap v{{ project.bsversion }}</h3>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
 
-        <h4 class="styleguide__heading styleguide__heading--section">Technical Documentation</h4>
-        <ul class="list list--unstyled styleguide__listing">
-            <li><a href="../docs/scripts/index.html">javascript</a></li>
-            <li><a href="../docs/styles/index.html">sass/styling</a></li>
-        </ul>
+                    <h1 class="styleguide__heading styleguide__heading--title">{{ project.name }} styleguide</h1>
+                    <h3 class="styleguide__heading styleguide__heading--subtitle">site v{{ project.version }} | jquery v{{ project.jqversion }} | bootstrap v{{ project.bsversion }}</h3>
 
-        <h4 class="styleguide__heading styleguide__heading--section">Tests</h4>
-        <ul class="list list--unstyled styleguide__listing">
-            <li><a href="../../tests/layout/report.html">layout (galen)</a></li>
-        </ul>
+                    <h4 class="styleguide__heading styleguide__heading--section">Technical Documentation</h4>
+                    <ul class="list list-unstyled styleguide__listing">
+                        <li><a href="../docs/scripts/index.html">javascript</a></li>
+                        <li><a href="../docs/styles/index.html">sass/styling</a></li>
+                    </ul>
 
-        {% if pages %}
-        <h4 class="styleguide__heading styleguide__heading--section">Pages</h4>
-        <ul class="list list--unstyled styleguide__listing">
-            {% for page in pages %}
-            <li><a href="pages/{{ page }}/{{ page}}.html">{{ page }}/{{ page }}</a></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+                    <h4 class="styleguide__heading styleguide__heading--section">Tests</h4>
+                    <ul class="list list-unstyled styleguide__listing">
+                        <li><a href="../../tests/layout/report.html">layout (galen)</a></li>
+                    </ul>
 
-        {% if components %}
-        <h4 class="styleguide__heading styleguide__heading--section">Components</h4>
-        <ul class="list list--unstyled styleguide__listing">
-            {% for component in components %}
-            <li><a href="components/{{ component }}/{{ component }}.html">{{ component }}/{{ component }}</a></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+                    {% if pages %}
+                    <h4 class="styleguide__heading styleguide__heading--section">Pages</h4>
+                    <ul class="list list-unstyled styleguide__listing">
+                        {% for page in pages %}
+                        <li><a href="pages/{{ page }}/{{ page}}.html">{{ page }}/{{ page }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
 
-        {% if elements %}
-        <h4 class="styleguide__heading styleguide__heading--section">Elements</h4>
-        <ul class="list list--unstyled styleguide__listing">
-            {% for element in elements %}
-            <li><a href="elements/{{ element }}/{{ element }}.html">{{ element }}/{{ element }}</a></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        
+                    {% if components %}
+                    <h4 class="styleguide__heading styleguide__heading--section">Components</h4>
+                    <ul class="list list-unstyled styleguide__listing">
+                        {% for component in components %}
+                        <li><a href="components/{{ component }}/{{ component }}.html">{{ component }}/{{ component }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {% if elements %}
+                    <h4 class="styleguide__heading styleguide__heading--section">Elements</h4>
+                    <ul class="list list-unstyled styleguide__listing">
+                        {% for element in elements %}
+                        <li><a href="elements/{{ element }}/{{ element }}.html">{{ element }}/{{ element }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
         {% endblock %}

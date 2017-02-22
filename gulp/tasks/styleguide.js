@@ -13,26 +13,30 @@ var config = require('../config'),
     cache = require('gulp-cached'),
     remember = require('gulp-remember'),
     nunjucksRender = require('gulp-nunjucks-render'),
-    data = require('gulp-data');
+    data = require('gulp-data'),
+
+    dataPaths = {
+        css: config.tplCssPath,
+        js: config.tplJsPath,
+        jsFilename: config.jsFilename
+    },
+    dataProject = {
+        name: config.name,
+        version: pkg.version,
+        bsversion: bs.version,
+        jqversion: jq.version
+    },
+
+    srcSgElements = [config.srcPath + '/elements/**/*.html'],
+    srcSgComponents = [config.srcPath + '/components/**/*.html'],
+    srcSgPages = [config.srcPath + '/styleguide/pages/**/*.html'],
+    srcSgIndex = [config.srcPath + '/styleguide/index.html'],
+    dest = config.destPath + '/styleguide',
+    cacheNameElements = 'sgElements',
+    cacheNameComponents = 'sgComponents',
+    cacheNamePages = 'sgPages';
 
 module.exports = function() {
-    
-    // paths
-    var srcGlob = [
-            config.srcPath + '/**/*.html',
-            '!' + config.srcPath + '/styleguide/**/*.*'
-        ],
-        styleguideSrcGlob = [
-            config.srcPath + '/styleguide/**/*.html',
-            '!' + config.srcPath + '/styleguide/includes/*.*',
-            '!' + config.srcPath + '/styleguide/layout.html',
-            '!' + config.srcPath + '/styleguide/index.html'
-        ],
-        styleguideIndexGlob = [
-            config.srcPath + '/styleguide/index.html'
-        ],
-        dest = config.destPath + '/styleguide',
-        cacheName = 'styleguideFiles';
 
     /**
      * returns data object with file info for elements/components
@@ -43,21 +47,14 @@ module.exports = function() {
     function getDataForFile(file) {
         var type = path.relative('.', file.relative).split('\\')[0],
             name = path.basename(file.relative, '.html');
-
         return {
-            paths: {
-                css: '/css',
-                js: '/js',
-                jsFilename: 'scripts'
-            },
-            meta: {
-                title: config.name + " - " + type + " - " + name
-            },
+            meta: { title: config.name + " - " + type + " - " + name },
+            paths: dataPaths,
             name: name,
             type: type,
             extends: true
         };
-    }
+    };
 
     /**
      * returns data object with info for pages
@@ -67,112 +64,151 @@ module.exports = function() {
      */
     function getDataForPage(file) {
         var name = path.basename(file.relative, '.html');
-
         return {
-            paths: {
-                css: '/css',
-                js: '/js',
-                jsFilename: 'scripts'
-            },
-            meta: {
-                title: config.name + " - " + name
-            },
-            //name: name,
+            meta: { title: config.name + " - " + name },
+            paths: dataPaths,
             extends: false
         };
-    }
+    };
 
     /**
-     * returns data object for styleguide index
-     * @param {object} file File to process
-     * @returns {object} File data object
-     * @private
+     * builds styleguide elements
      */
-    function getDataForIndex(file) {
-        return {
-            paths: {
-                css: '/css',
-                js: '/js',
-                jsFilename: 'scripts'
-            },
-            meta: {
-                title: config.name
-            },
-            project: {
-                name: config.name,
-                version: pkg.version,
-                bsversion: bs.version,
-                jqversion: jq.version
-            },
-            components: fs.readdirSync(config.srcPath + '/components'),
-            elements: fs.readdirSync(config.srcPath + '/elements'),
-            pages: fs.readdirSync(config.srcPath + '/styleguide/pages')
-        };
-    }
-
-    gulp.add('styleguide:build', function(done) {
-
-        // cleanup
-        del.sync([dest]);
-
-        // get current components and elements
-        gulp.src(srcGlob)
+    gulp.add('styleguide:elements', function(done) {
+        gulp.src(srcSgElements)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            .pipe(cache(cacheName))
+            .pipe(cache(cacheNameElements))
             .pipe(data(getDataForFile))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(remember(cacheName))
-            .pipe(gulp.dest(dest));
-
-        // build styleguide pages
-        gulp.src(styleguideSrcGlob)
-            .pipe(plumber(function(error) {
-                gutil.log(error.message);
-                this.emit('end');
-            }))
-            .pipe(cache(cacheName))
-            .pipe(data(getDataForPage))
-            .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(remember(cacheName))
-            .pipe(gulp.dest(dest));
-
-        // build styleguide index
-        gulp.src(styleguideIndexGlob)
-            .pipe(plumber(function(error) {
-                gutil.log(error.message);
-                this.emit('end');
-            }))
-            .pipe(data(getDataForIndex))
-            .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(gulp.dest(dest));
-
+            .pipe(remember(cacheNameElements))
+            .pipe(gulp.dest(dest + '/elements'));
         done();
     });
 
-    gulp.add('styleguide:watch', function() {
-        var watcher = gulp.watch(srcGlob, ['styleguide:build', 'server:reload']),
-            sgWatcher = gulp.watch(config.srcPath + 'styleguide/**/*.html', ['styleguide:build', 'server:reload']);
+    /**
+     * builds styleguide components
+     */
+    gulp.add('styleguide:components', function(done) {
+        gulp.src(srcSgComponents)
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                this.emit('end');
+            }))
+            .pipe(cache(cacheNameComponents))
+            .pipe(data(getDataForFile))
+            .pipe(nunjucksRender({ path: [config.srcPath] }))
+            .pipe(remember(cacheNameComponents))
+            .pipe(gulp.dest(dest + '/components'));
+        done();
+    });
 
-        watcher.on('change', function(e) {
+    /**
+     * builds styleguide pages
+     */
+    gulp.add('styleguide:pages', function(done) {
+        gulp.src(srcSgPages)
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                this.emit('end');
+            }))
+            .pipe(cache(cacheNamePages))
+            .pipe(data(getDataForFile))
+            .pipe(nunjucksRender({ path: [config.srcPath] }))
+            .pipe(remember(cacheNamePages))
+            .pipe(gulp.dest(dest + '/pages'));
+        done();
+    });
+
+    /**
+     * builds styleguide index
+     */
+    gulp.add('styleguide:index', function(done) {
+        gulp.src(srcSgIndex)
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                this.emit('end');
+            }))
+            .pipe(data({
+                meta: { title: config.name },
+                paths: dataPaths,
+                project: dataProject,
+                components: fs.readdirSync(config.srcPath + '/components'),
+                elements: fs.readdirSync(config.srcPath + '/elements'),
+                pages: fs.readdirSync(config.srcPath + '/styleguide/pages')
+            }))
+            .pipe(nunjucksRender({ path: [config.srcPath] }))
+            .pipe(gulp.dest(dest));
+        done();
+    });
+
+    /**
+     * builds all styleguide subtasks
+     */
+    gulp.add('styleguide:build', [
+        'styleguide:clean',
+        'styleguide:elements',
+        'styleguide:components',
+        'styleguide:pages',
+        'styleguide:index'
+    ]);
+
+    /**
+     * cleanup styleguide build
+     */
+    gulp.add('styleguide:clean', function(done) {
+        // cleanup
+        del.sync([dest]);
+        done();
+    });
+
+    /**
+     * watch all styleguide changes
+     */
+    gulp.add('styleguide:watch', function(done) {
+        // watch styleguide index changes
+        var wSgIndex = gulp.watch(srcSgIndex, ['styleguide:index', 'server:reload']);
+
+        // watch styleguide element chages
+        var wSgElements = gulp.watch(srcSgElements, ['styleguide:elements', 'server:reload']);
+        wSgElements.on('change', function(e) {
             if (e.type === 'deleted') {
-                delete cache.caches[cacheName][e.path];
-                remember.forget(cacheName, e.path);
+                delete cache.caches[cacheNameElements][e.path];
+                remember.forget(cacheNameElements, e.path);
             }
         });
-        sgWatcher.on('change', function(e) {
+
+        // watch styleguide component changes
+        var wSgComponents = gulp.watch(srcSgComponents, ['styleguide:components', 'server:reload']);
+        wSgComponents.on('change', function(e) {
             if (e.type === 'deleted') {
-                delete cache.caches[cacheName][e.path];
-                remember.forget(cacheName, e.path);
+                delete cache.caches[cacheNameComponents][e.path];
+                remember.forget(cacheNameComponents, e.path);
+            }
+        });
+
+        // watch styleguide pages changes
+        var wSgPages = gulp.watch(srcSgPages, ['styleguide:pages', 'server:reload']);
+        wSgPages.on('change', function(e) {
+            if (e.type === 'deleted') {
+                delete cache.caches[cacheNamePages][e.path];
+                remember.forget(cacheNamePages, e.path);
             }
         });
     });
 
+    /**
+     * reset styleguide cache
+     */
     gulp.add('styleguide:reset', function(done) {
-        delete cache.caches[cacheName];
-        remember.forgetAll(cacheName);
+        delete cache.caches[cacheNameElements];
+        delete cache.caches[cacheNameComponents];
+        delete cache.caches[cacheNamePages];
+        remember.forgetAll(cacheNameElements);
+        remember.forgetAll(cacheNameComponents);
+        remember.forgetAll(cacheNamePages);
         done();
     });
 };
