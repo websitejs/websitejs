@@ -1,6 +1,6 @@
 # websitejs
 Modular Frontend Architecture
- 
+
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/websitejs/websitejs/master/LICENSE)
 
 ## Setup
@@ -34,6 +34,13 @@ gulp server
 To start a local server and simultaniously 'watch' your files, run
 ```sh
 gulp serve
+```
+
+## Versioning
+The newversion argument should be a valid semver string, a valid second argument to [semver.inc](https://github.com/npm/node-semver#functions).
+To update the version of the code, use
+```sh
+npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
 ```
 
 ## Testing (Pre Alpha!)
