@@ -15,7 +15,7 @@ var config = require('../config'),
     sassdoc = require('sassdoc');
 
 module.exports = function() {
-    
+
     // paths
     var srcGlob = config.srcPath + '/styles.scss',
         dest = config.destPath + '/css',
@@ -49,8 +49,9 @@ module.exports = function() {
             .pipe(strip({ preserve: false }))
             .pipe(rename({ suffix: '.min' }))
             .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest(dest))
-            .on('end', done);
+            .pipe(gulp.dest(dest));
+
+        done();
     });
 
     gulp.add('styles:watch', function() {

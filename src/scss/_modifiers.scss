@@ -4,5 +4,9 @@
     }
     &--bold {
         font-weight: 700;
+
+        &-condensed {
+            font-family: $font-family-condensed;
+        }
     }
 }
