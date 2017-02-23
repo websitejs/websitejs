@@ -5,7 +5,7 @@ Modular Frontend Architecture
 
 ## Setup
 Make sure you have installed NodeJS 7.5 or above [here](http://www.nodejs.org).
-This project uses Node Package Manager (npm) to manage depandencies and Gulp to compile the sourcecode.
+This project uses Node Package Manager (npm) to manage dependencies and Gulp to compile the sourcecode.
 *Make sure npm is version 3.10 or above.*
 
 ### Updating NPM
