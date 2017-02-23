@@ -66,8 +66,7 @@ module.exports = function() {
         var name = path.basename(file.relative, '.html');
         return {
             meta: { title: config.name + " - " + name },
-            paths: dataPaths,
-            extends: false
+            paths: dataPaths
         };
     };
 
@@ -115,7 +114,7 @@ module.exports = function() {
                 this.emit('end');
             }))
             .pipe(cache(cacheNamePages))
-            .pipe(data(getDataForFile))
+            .pipe(data(getDataForPage))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
             .pipe(remember(cacheNamePages))
             .pipe(gulp.dest(dest + '/pages'));
@@ -172,7 +171,7 @@ module.exports = function() {
         var wSgIndex = gulp.watch(srcSgIndex, ['styleguide:index', 'server:reload']);
 
         // watch styleguide element chages
-        var wSgElements = gulp.watch(srcSgElements, ['styleguide:elements', 'server:reload']);
+        var wSgElements = gulp.watch(srcSgElements, ['styleguide:elements', 'styleguide:components', 'server:reload']);
         wSgElements.on('change', function(e) {
             if (e.type === 'deleted') {
                 delete cache.caches[cacheNameElements][e.path];
@@ -181,7 +180,7 @@ module.exports = function() {
         });
 
         // watch styleguide component changes
-        var wSgComponents = gulp.watch(srcSgComponents, ['styleguide:components', 'server:reload']);
+        var wSgComponents = gulp.watch(srcSgComponents, ['styleguide:components', 'styleguide:pages', 'server:reload']);
         wSgComponents.on('change', function(e) {
             if (e.type === 'deleted') {
                 delete cache.caches[cacheNameComponents][e.path];
