@@ -49,9 +49,9 @@ You will also need to download the webdrivers suitable for your system and place
 * Internet Explorer: [IEDriverServer.exe](http://selenium-release.storage.googleapis.com/index.html)
 
 
-## Demo
+## Demo / Styleguide
 
-None yet.
+Visit /styleguide on your server.
 
 ## Credits
 
