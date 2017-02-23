@@ -1,9 +1,49 @@
 # websitejs
 Modular Frontend Architecture
- 
+
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/websitejs/websitejs/master/LICENSE)
 
-## Testing
+## Setup
+Make sure you have installed NodeJS 7.5 or above [here](http://www.nodejs.org).
+This project uses Node Package Manager (npm) to manage dependencies and Gulp to compile the sourcecode.
+*Make sure npm is version 3.10 or above.*
+
+### Updating NPM
+```sh
+npm install --global npm
+```
+
+### Install Gulp command
+*If you've previously installed gulp globally, run `npm rm --global gulp` before following these instructions.*
+```sh
+npm install --global gulp-cli
+```
+
+### First run
+Switch to the projectroot and run
+```sh
+npm install
+```
+
+## Local server
+To start the local server, run
+```sh
+gulp server
+```
+
+To start a local server and simultaniously 'watch' your files, run
+```sh
+gulp serve
+```
+
+## Versioning
+The newversion argument should be a valid semver string, a valid second argument to [semver.inc](https://github.com/npm/node-semver#functions).
+To update the version of the code, use
+```sh
+npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
+```
+
+## Testing (Pre Alpha!)
 
 You need the [Java JRE/JDK](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html#javasejdk) in order to run testing.
 
@@ -16,9 +56,9 @@ You will also need to download the webdrivers suitable for your system and place
 * Internet Explorer: [IEDriverServer.exe](http://selenium-release.storage.googleapis.com/index.html)
 
 
-## Demo
+## Demo / Styleguide
 
-None yet.
+Visit /styleguide on your server.
 
 ## Credits
 
