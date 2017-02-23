@@ -8,6 +8,10 @@
 // bootstrap
 @import "./node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// defaults
+@import "./scss/defaults";
+@import "./scss/modifiers";
+
 // elements/components (auto added)
 @import "./elements/**/*.scss";
 @import "./components/**/*.scss";

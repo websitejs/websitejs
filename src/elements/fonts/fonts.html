@@ -1,0 +1,26 @@
+{% if extends %}{% extends "styleguide/includes/layout.html" %}{% endif %}
+
+        {% block content %}
+        {% include "styleguide/includes/moduleinfo.html" %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Helvetica Neue (normal, roman, 400)</h2>
+                    <p>The quick brown fox jumped over the lazy dog. 1234567890.</p>
+                </div>
+                <div class="col-xs-12">
+                    <h2>Helvetica Neue (medium, 500)</h2>
+                    <p class="text--medium">The quick brown fox jumped over the lazy dog. 1234567890.</p>
+                </div>
+                <div class="col-xs-12">
+                    <h2>Helvetica Neue (bold, 700)</h2>
+                    <p class="text--bold">The quick brown fox jumped over the lazy dog. 1234567890.</p>
+                </div>
+                <div class="col-xs-12">
+                    <h2>Helvetica Neue Condensed (bold, 700)</h2>
+                    <p class="text--bold-condensed">The quick brown fox jumped over the lazy dog. 1234567890.</p>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
