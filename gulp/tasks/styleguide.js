@@ -10,8 +10,6 @@ var config = require('../config'),
     fs = require('fs'),
     path = require('path'),
     del = require('del'),
-    cache = require('gulp-cached'),
-    remember = require('gulp-remember'),
     nunjucksRender = require('gulp-nunjucks-render'),
     data = require('gulp-data'),
 
@@ -31,10 +29,7 @@ var config = require('../config'),
     srcSgComponents = [config.srcPath + '/components/**/*.html'],
     srcSgPages = [config.srcPath + '/styleguide/pages/**/*.html'],
     srcSgIndex = [config.srcPath + '/styleguide/index.html'],
-    dest = config.destPath + '/styleguide',
-    cacheNameElements = 'sgElements',
-    cacheNameComponents = 'sgComponents',
-    cacheNamePages = 'sgPages';
+    dest = config.destPath + '/styleguide';
 
 module.exports = function() {
 
@@ -79,10 +74,8 @@ module.exports = function() {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            //.pipe(cache(cacheNameElements))
             .pipe(data(getDataForFile))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            //.pipe(remember(cacheNameElements))
             .pipe(gulp.dest(dest + '/elements'));
         done();
     });
@@ -96,10 +89,8 @@ module.exports = function() {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            //.pipe(cache(cacheNameComponents))
             .pipe(data(getDataForFile))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            //.pipe(remember(cacheNameComponents))
             .pipe(gulp.dest(dest + '/components'));
         done();
     });
@@ -113,10 +104,8 @@ module.exports = function() {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            //.pipe(cache(cacheNamePages))
             .pipe(data(getDataForPage))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            //.pipe(remember(cacheNamePages))
             .pipe(gulp.dest(dest + '/pages'));
         done();
     });
@@ -168,46 +157,15 @@ module.exports = function() {
      */
     gulp.add('styleguide:watch', function(done) {
         // watch styleguide index changes
-        var wSgIndex = gulp.watch(srcSgIndex, ['styleguide:index', 'server:reload']);
+        gulp.watch(srcSgIndex, ['styleguide:index', 'server:reload']);
 
         // watch styleguide element chages
-        var wSgElements = gulp.watch(srcSgElements, ['styleguide:elements', 'styleguide:components', 'server:reload']);
-        wSgElements.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheNameElements][e.path];
-                remember.forget(cacheNameElements, e.path);
-            }
-        });
+        gulp.watch(srcSgElements, ['styleguide:elements', 'styleguide:components', 'server:reload']);
 
         // watch styleguide component changes
-        var wSgComponents = gulp.watch(srcSgComponents, ['styleguide:components', 'styleguide:pages', 'server:reload']);
-        wSgComponents.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheNameComponents][e.path];
-                remember.forget(cacheNameComponents, e.path);
-            }
-        });
+        gulp.watch(srcSgComponents, ['styleguide:components', 'styleguide:pages', 'server:reload']);
 
         // watch styleguide pages changes
-        var wSgPages = gulp.watch(srcSgPages, ['styleguide:pages', 'server:reload']);
-        wSgPages.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheNamePages][e.path];
-                remember.forget(cacheNamePages, e.path);
-            }
-        });
-    });
-
-    /**
-     * reset styleguide cache
-     */
-    gulp.add('styleguide:reset', function(done) {
-        delete cache.caches[cacheNameElements];
-        delete cache.caches[cacheNameComponents];
-        delete cache.caches[cacheNamePages];
-        remember.forgetAll(cacheNameElements);
-        remember.forgetAll(cacheNameComponents);
-        remember.forgetAll(cacheNamePages);
-        done();
+        gulp.watch(srcSgPages, ['styleguide:pages', 'server:reload']);
     });
 };
