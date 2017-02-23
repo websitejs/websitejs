@@ -66,8 +66,7 @@ module.exports = function() {
         var name = path.basename(file.relative, '.html');
         return {
             meta: { title: config.name + " - " + name },
-            paths: dataPaths//,
-            //extends: false
+            paths: dataPaths
         };
     };
 
