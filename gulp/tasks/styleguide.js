@@ -79,10 +79,10 @@ module.exports = function() {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            .pipe(cache(cacheNameElements))
+            //.pipe(cache(cacheNameElements))
             .pipe(data(getDataForFile))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(remember(cacheNameElements))
+            //.pipe(remember(cacheNameElements))
             .pipe(gulp.dest(dest + '/elements'));
         done();
     });
@@ -96,10 +96,10 @@ module.exports = function() {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            .pipe(cache(cacheNameComponents))
+            //.pipe(cache(cacheNameComponents))
             .pipe(data(getDataForFile))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(remember(cacheNameComponents))
+            //.pipe(remember(cacheNameComponents))
             .pipe(gulp.dest(dest + '/components'));
         done();
     });
@@ -113,10 +113,10 @@ module.exports = function() {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            .pipe(cache(cacheNamePages))
+            //.pipe(cache(cacheNamePages))
             .pipe(data(getDataForPage))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(remember(cacheNamePages))
+            //.pipe(remember(cacheNamePages))
             .pipe(gulp.dest(dest + '/pages'));
         done();
     });

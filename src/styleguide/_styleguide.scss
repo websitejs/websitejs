@@ -26,6 +26,16 @@
         &--modulename {
             margin-bottom: 30px;
         }
+
+        &--moduletype {
+            margin-top: 10px;
+        }
+
+        &--moduletype,
+        &--modulename {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
     }
 
     &__listing {
