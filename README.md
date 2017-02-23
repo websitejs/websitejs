@@ -3,7 +3,40 @@ Modular Frontend Architecture
  
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/websitejs/websitejs/master/LICENSE)
 
-## Testing
+## Setup
+Make sure you have installed NodeJS 7.5 or above [here](http://www.nodejs.org).
+This project uses Node Package Manager (npm) to manage depandencies and Gulp to compile the sourcecode.
+*Make sure npm is version 3.10 or above.*
+
+### Updating NPM
+```sh
+npm install --global npm
+```
+
+### Install Gulp command
+*If you've previously installed gulp globally, run `npm rm --global gulp` before following these instructions.*
+```sh
+npm install --global gulp-cli
+```
+
+### First run
+Switch to the projectroot and run
+```sh
+npm install
+```
+
+## Local server
+To start the local server, run
+```sh
+gulp server
+```
+
+To start a local server and simultaniously 'watch' your files, run
+```sh
+gulp serve
+```
+
+## Testing (Pre Alpha!)
 
 You need the [Java JRE/JDK](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html#javasejdk) in order to run testing.
 
