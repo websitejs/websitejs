@@ -9,14 +9,14 @@ var config = require('../config'),
     cache = require('gulp-cached'),
     remember = require('gulp-remember'),
     sourcemaps = require('gulp-sourcemaps'),
-    jshint = require('gulp-jshint'),    
-    concat = require('gulp-concat'),       
-    uglify = require('gulp-uglify'), 
-    stripJs = require('gulp-strip-comments'), 
+    jshint = require('gulp-jshint'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    stripJs = require('gulp-strip-comments'),
     jsdoc = require('gulp-jsdoc3');
 
 module.exports = function() {
-    
+
     // paths
     var fileName = 'scripts',
         srcGlob = [
@@ -48,7 +48,7 @@ module.exports = function() {
             .pipe(uglify({ mangle: false }))
             .pipe(concat(fileName + '.js'))
             .pipe(rename({ suffix: '.min' }))
-            .pipe(stripJs())
+            //.pipe(stripJs())
             .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(dest))
             .on('end', done);

@@ -34,4 +34,47 @@
     &__listing {
         margin-bottom: 30px;
     }
+
+
+    &__color {
+        position: relative;
+        width: 100%;
+        @include ratio-box(16/9);
+
+        &--primary {
+            background-color: $brand-primary;
+        }
+        &--secondary {
+            background-color: $brand-secondary;
+
+            &-light {
+                background-color: $brand-secondary-light;
+            }
+            &-lighter {
+                background-color: $brand-secondary-lighter;
+            }
+        }
+        &--thirtiary {
+            background-color: $brand-thirtiary;
+        }
+        &--gray {
+            background-color: $gray;
+
+            &-lightest {
+                background-color: $gray-lightest;
+            }
+            &-lighter {
+                background-color: $gray-lighter;
+            }
+            &-light {
+                background-color: $gray-light;
+            }
+            &-dark {
+                background-color: $gray-dark;
+            }
+            &-darker {
+                background-color: $gray-darker;
+            }
+        }
+    }
 }

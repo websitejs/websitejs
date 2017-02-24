@@ -2,7 +2,7 @@
 // background color
 .bg {
     &--light {
-        background-color: $gray-lighter;
+        background-color: $gray-lightest;
 
         h1, h2, h3, h4, h5, h6 {
             color: $gray-dark;
@@ -18,7 +18,7 @@
             color: #ffffff;
         }
         p {
-            color: $gray-light;
+            color: $gray-lighter;
         }
     }
 }
@@ -70,5 +70,8 @@
             font-size: 18px;
             @include line-height(28px, 18px);
         }
+    }
+    &--uppercase {
+        text-transform: uppercase;
     }
 }

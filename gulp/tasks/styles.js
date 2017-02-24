@@ -46,7 +46,7 @@ module.exports = function() {
             }))
             .pipe(autoprefixer({ browsers: ['> 5%', 'IE 11', 'last 3 version'], cascade: false }))
             .pipe(cssNano({ zindex: false }))
-            .pipe(strip({ preserve: false }))
+            //.pipe(strip({ preserve: false }))
             .pipe(rename({ suffix: '.min' }))
             .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(dest));
