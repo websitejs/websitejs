@@ -6,7 +6,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1, .h1 {
-    margin-bottom: 37px;
+    margin-bottom: 40px;
     font-family: $font-family-condensed;
     font-size: 42px;
     font-weight: 700;
@@ -43,6 +43,7 @@ h2, .h2 {
     @include line-height(24px, 24px);
 
     @media(min-width: $sm) {
+        margin-bottom: 10px;
         font-size: 40px;
         @include line-height(40px, 40px);
     }
@@ -54,51 +55,43 @@ h3, .h3 {
     @include line-height(20px, 18px);
 
     @media(min-width: $sm) {
+        margin-bottom: 5px;
         font-size: 24px;
         @include line-height(30px, 24px);
     }
 }
 
 h4, .h4 {
+    margin-bottom: 4px;
     font-size: 16px;
     font-weight: 500;
     @include line-height(20px, 16px);
-
-    @media(min-width: $sm) {
-        font-size: 18px;
-        @include line-height(28px, 18px);
-    }
 }
 
 h5, .h5 {
     font-size: 16px;
     font-weight: 400;
     @include line-height(23px, 16px);
-
-    @media(min-width: $sm) {
-        font-size: 16px;
-        @include line-height(24px, 16px);
-    }
 }
 
 h6, .h6 {
     font-size: 14px;
     font-weight: 400;
     @include line-height(22px, 14px);
-
-    @media(min-width: $sm) {
-        font-size: 16px;
-        @include line-height(21px, 16px);
-    }
 }
 
 p {
-    font-size: 12px;
+    margin: 0;
+    font-size: 14px;
     font-weight: 400;
-    @include line-height(16px, 12px);
+    @include line-height(22px, 14px);
 
     @media(min-width: $sm) {
-        font-size: 14px;
-        @include line-height(22px, 14px);
+        font-size: 16px;
+        @include line-height(24px, 16px);
+    }
+
+    + p {
+        margin-top: 15px;
     }
 }

@@ -1,28 +1,28 @@
-$gray-darker:               #000000;
-$gray-dark:                 #2f2b2b;
-$gray:                      #666666;
-$gray-light:                #888888;
-$gray-lighter:              #e6e6e6;
-$gray-lightest:             #f1f1f1;
+$gray-darker:               #21252b;
+$gray-dark:                 #353c45;
+$gray:                      #656b6f;
+$gray-light:                #b9c1c6;
+$gray-lighter:              #f1f1f1;
+$gray-lightest:             #ffffff;
 
 $brand-primary:             #fc5f01;
 $brand-secondary:           #00529c;
 $brand-secondary-light:     #266cab;
 $brand-secondary-lighter:   #80a9ce;
 
-$brand-thirtiary:           #000000;
+$brand-thirtiary:           #ed1b2e;
 $brand-success:             $brand-secondary;
 $brand-info:                #5bc0de;
 $brand-warning:             #f0ad4e;
-$brand-danger:              #e32500;
+$brand-danger:              $brand-thirtiary;
 
 // body
 $body-bg:                   #ffffff;
 
 // text
 $text-color:                $gray-dark;
-$link-color:                $gray-darker;
-$link-hover-color:          $brand-danger;
+$link-color:                $brand-secondary;
+$link-hover-color:          $brand-secondary;
 $link-hover-decoration:     none; // or ie: underline etc
 
 // typography
@@ -37,7 +37,7 @@ $line-height-base:          1.2;
 $headings-font-family:      $font-family-sans-serif;
 $headings-font-weight:      700;
 $headings-line-height:      $line-height-base;
-$headings-color:            $gray-darker;
+$headings-color:            $gray-dark;
 
 // breakpoints
 $xs:                        480px;
@@ -55,3 +55,11 @@ $screen-md-min:             $screen-md;
 $lg:                        1200px;
 $screen-lg:                 $lg;
 $screen-lg-min:             $screen-lg;
+
+// grid
+$grid-columns:              12;
+$grid-gutter-width:         20px;
+
+// nav breakpoints
+$grid-float-breakpoint:     $sm;
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1);

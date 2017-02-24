@@ -1,0 +1,9 @@
+.container {
+    padding-left: 30px;
+    padding-right: 30px;
+
+    @media(min-width: $sm) {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

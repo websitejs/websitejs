@@ -1,3 +1,56 @@
+
+// background color
+.bg {
+    &--light {
+        background-color: $gray-lighter;
+
+        h1, h2, h3, h4, h5, h6 {
+            color: $gray-dark;
+        }
+        p {
+            color: $gray-dark;
+        }
+    }
+    &--dark {
+        background-color: $gray-dark;
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+        }
+        p {
+            color: $gray-light;
+        }
+    }
+}
+
+// headings
+.heading {
+    &--subheading {
+        margin-bottom: 28px;
+
+        &:after {
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+            content: "";
+            width: 62px;
+            height: 3px;
+            background-color: $brand-primary;
+        }
+
+        @media(min-width: $sm) {
+            margin-bottom: 37px;
+
+            &:after {
+                bottom: -20px;
+                width: 108px;
+                height: 5px;
+            }
+        }
+    }
+}
+
+// text
 .text {
     &--medium {
         font-weight: 500;
@@ -7,6 +60,15 @@
 
         &-condensed {
             font-family: $font-family-condensed;
+        }
+    }
+    &--larger {
+        font-size: 16px;
+        @include line-height(23px, 16px);
+
+        @media(min-width: $sm) {
+            font-size: 18px;
+            @include line-height(28px, 18px);
         }
     }
 }
