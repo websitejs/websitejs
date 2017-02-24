@@ -9,6 +9,7 @@ var config = require('../config'),
     plumber = require('gulp-plumber'),
     fs = require('fs'),
     path = require('path'),
+    dir = require('node-dir'),
     del = require('del'),
     nunjucksRender = require('gulp-nunjucks-render'),
     data = require('gulp-data'),
@@ -34,6 +35,41 @@ var config = require('../config'),
 module.exports = function() {
 
     /**
+     * recursively return html files in (sub)dirs
+     * @param {string} dirName Directory to walk through.
+     * @param {function} cb Callback function.
+     */
+    function getFiles(dirName, cb) {
+        var retArray = [];
+
+        dir.readFiles(dirName, {
+            match: /.html$/,
+            sync: true
+        }, function(err, content, next) {
+            if (err) { throw err; }
+            next();
+        }, function(err, files) {
+            if (err) { throw err; }
+            files.forEach(function(file, i) {
+                var cleanPath = file.replace(config.srcPath, '').substring(1),
+                    filePath = path.dirname(cleanPath),
+                    type = filePath.split('\\').slice(-1)[0],
+                    name = path.basename(file, '.html');
+
+                retArray.push({
+                    path: cleanPath,
+                    type: type,
+                    name: name
+                });
+            });
+
+            if (typeof cb === 'function') {
+                cb(retArray);
+            }
+        });
+    }
+
+    /**
      * returns data object with file info for elements/components
      * @param {object} file File to process
      * @returns {object} File data object
@@ -49,7 +85,7 @@ module.exports = function() {
             type: type,
             extends: true
         };
-    };
+    }
 
     /**
      * returns data object with info for pages
@@ -63,7 +99,36 @@ module.exports = function() {
             meta: { title: config.name + " - " + name },
             paths: dataPaths
         };
-    };
+    }
+
+    /**
+     * Gets data to build styleguide index.
+     * @param {function} cb Callback function.
+     */
+    function getDataForIndex(cb) {
+
+        var elements = [],
+            components = [],
+            pages = [];
+
+        getFiles(config.srcPath + '/elements', function(res) {
+            elements = res;
+            getFiles(config.srcPath + '/components', function(res) {
+                components = res;
+                getFiles(config.srcPath + '/styleguide/pages', function(res) {
+                    pages = res;
+                    cb({
+                        meta: { title: config.name },
+                        paths: dataPaths,
+                        project: dataProject,
+                        elements: elements,
+                        components: components,
+                        pages: pages
+                    });
+                });
+            });
+        });
+    }
 
     /**
      * builds styleguide elements
@@ -114,22 +179,17 @@ module.exports = function() {
      * builds styleguide index
      */
     gulp.add('styleguide:index', function(done) {
-        gulp.src(srcSgIndex)
-            .pipe(plumber(function(error) {
-                gutil.log(error.message);
-                this.emit('end');
-            }))
-            .pipe(data({
-                meta: { title: config.name },
-                paths: dataPaths,
-                project: dataProject,
-                components: fs.readdirSync(config.srcPath + '/components'),
-                elements: fs.readdirSync(config.srcPath + '/elements'),
-                pages: fs.readdirSync(config.srcPath + '/styleguide/pages')
-            }))
-            .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(gulp.dest(dest));
-        done();
+        getDataForIndex(function(indexData) {
+            gulp.src(srcSgIndex)
+                .pipe(plumber(function(error) {
+                    gutil.log(error.message);
+                    this.emit('end');
+                }))
+                .pipe(data(indexData))
+                .pipe(nunjucksRender({ path: [config.srcPath] }))
+                .pipe(gulp.dest(dest));
+            done();
+        });
     });
 
     /**
