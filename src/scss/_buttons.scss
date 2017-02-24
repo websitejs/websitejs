@@ -46,6 +46,21 @@
         color: #ffffff;
     }
 
+    &__link {
+        padding-left: 0;
+        padding-right: 0;
+        background: transparent;
+        color: $link-color;
+
+        &.hover, &:hover {
+            color: $link-color;
+        }
+
+        &.active, &:active, &.focus, &:focus {
+            color: $link-color;
+        }
+    }
+
     &__primary {
         color: #ffffff;
         @include simple-gradient($brand-secondary-light, $brand-secondary);
@@ -59,7 +74,7 @@
     &__ghost {
         border: 1px solid $gray-lighter;
         color: $gray-dark;
-        transition: 250ms background-color ease-in-out;
+        //transition: 250ms background-color ease-in-out, 250ms background ease-in-out;
         background: transparent;
 
         &.hover, &:hover {
@@ -76,12 +91,49 @@
             color: $brand-secondary;
 
             &.hover, &:hover {
-                color: $brand-secondary;
-                background-color: rgba($brand-secondary, .1);
+                color: #ffffff;
+                @include simple-gradient($brand-secondary-light, $brand-secondary);
+
+                &.focus, &:focus {
+                    color: #ffffff;
+                }
             }
 
-            &.active, &:active, &.focus, &:focus {
+            &.active, &:active {
+                color: #ffffff;
+                @include simple-gradient($brand-secondary-light, $brand-secondary);
+
+                &.focus, &:focus {
+                    color: #ffffff;
+                }
+            }
+
+            &.focus, &:focus {
                 color: $brand-secondary;
+            }
+        }
+    }
+}
+
+.bg {
+    &--dark {
+        .btn {
+            &__link {
+                color: #ffffff;
+            }
+            &__ghost {
+                color: #ffffff;
+                border-color: #ffffff;
+
+                &.hover, &:hover {
+                    background-color: rgba(#ffffff, .1);
+                }
+
+                &--blue {
+                    &.hover, &:hover, &.active, &:active {
+                        border-color: $brand-secondary;
+                    }
+                }
             }
         }
     }
