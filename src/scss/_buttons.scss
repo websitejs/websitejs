@@ -1,0 +1,88 @@
+.btn {
+    margin-bottom: 15px;
+    padding: 11px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    @include line-height(16px, 14px);
+    min-height: 40px;
+    white-space: normal;
+    outline: none !important;
+
+    &-sm, &--sm {
+        padding: 9px 20px 7px 20px;
+        min-height: 34px;
+    }
+
+    &-lg, &--lg {
+        padding: 16px 20px;
+        min-height: 50px;
+    }
+
+    @media (min-width: $sm) {
+        margin-bottom: 20px;
+        padding: 10px 30px;
+        font-size: 20px;
+        @include line-height(32px, 20px);
+        min-height: 54px;
+
+        &-sm, &--sm {
+            padding: 12px 20px 11px 20px;
+            font-size: 16px;
+            @include line-height(20px, 16px);
+            min-height: 45px;
+        }
+
+        &-lg, &--lg {
+            padding: 15px 30px;
+            min-height: 64px;
+        }
+    }
+
+    &.active, &:active {
+        box-shadow: none;
+    }
+
+    &.hover, &:hover {
+        color: #ffffff;
+    }
+
+    &__primary {
+        color: #ffffff;
+        @include simple-gradient($brand-secondary-light, $brand-secondary);
+
+        &.active, &:active, &.focus, &:focus {
+            color: #ffffff;
+            @include simple-gradient($brand-secondary-light, $brand-secondary);
+        }
+    }
+
+    &__ghost {
+        border: 1px solid $gray-lighter;
+        color: $gray-dark;
+        transition: 250ms background-color ease-in-out;
+        background: transparent;
+
+        &.hover, &:hover {
+            color: $gray-dark;
+            background-color: rgba($gray-dark, .1);
+        }
+
+        &.active, &:active, &.focus, &:focus {
+            color: $gray-dark;
+        }
+
+        &--blue {
+            border-color: $brand-secondary;
+            color: $brand-secondary;
+
+            &.hover, &:hover {
+                color: $brand-secondary;
+                background-color: rgba($brand-secondary, .1);
+            }
+
+            &.active, &:active, &.focus, &:focus {
+                color: $brand-secondary;
+            }
+        }
+    }
+}

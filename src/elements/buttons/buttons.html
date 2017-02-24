@@ -3,5 +3,30 @@
         {% block content %}
         {% include "styleguide/includes/moduleinfo.html" %}
 
-        <button type="button" name="test">test button</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4">
+
+                    <button name="test" class="btn btn--lg btn__primary">primary button large</button>
+                    <input type="button" name="test" class="btn btn__primary" value="primary button normal" />
+                    <a href="#" class="btn btn--sm btn__primary">primary button small</a>
+
+                </div>
+                <div class="col-xs-12 col-sm-4">
+
+                    <button name="test" class="btn btn--lg btn__ghost">ghost button large</button>
+                    <input type="button" name="test" class="btn btn__ghost" value="ghost normal" />
+                    <a href="#" class="btn btn--sm btn__ghost">ghost button small</a>
+
+                </div>
+                <div class="col-xs-12 col-sm-4">
+
+                    <button name="test" class="btn btn--lg btn__ghost btn__ghost--blue">ghost button large blue</button>
+                    <input type="button" name="test" class="btn btn__ghost btn__ghost--blue" value="ghost button normal blue" />
+                    <a href="#" class="btn btn--sm btn__ghost btn__ghost--blue">ghost button small blue</a>
+
+                </div>
+            </div>
+        </div>
+
         {% endblock %}
