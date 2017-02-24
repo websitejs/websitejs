@@ -8,6 +8,33 @@
                     <h1 class="styleguide__heading styleguide__heading--title">{{ project.name }} styleguide</h1>
                     <h3 class="styleguide__heading styleguide__heading--subtitle">site v{{ project.version }} | jquery v{{ project.jqversion }} | bootstrap v{{ project.bsversion }}</h3>
 
+                    {% if pages %}
+                    <h4 class="styleguide__heading styleguide__heading--section">Pages</h4>
+                    <ul class="list list-unstyled styleguide__listing">
+                        {% for page in pages %}
+                        <li><a href="../{{ page.path }}">{{ page.type }}/{{ page.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {% if components %}
+                    <h4 class="styleguide__heading styleguide__heading--section">Components</h4>
+                    <ul class="list list-unstyled styleguide__listing">
+                        {% for component in components %}
+                        <li><a href="{{ component.path }}">{{ component.type }}/{{ component.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {% if elements %}
+                    <h4 class="styleguide__heading styleguide__heading--section">Elements</h4>
+                    <ul class="list list-unstyled styleguide__listing">
+                        {% for element in elements %}
+                        <li><a href="{{ element.path }}">{{ element.type }}/{{ element.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
                     <h4 class="styleguide__heading styleguide__heading--section">Technical Documentation</h4>
                     <ul class="list list-unstyled styleguide__listing">
                         <li><a href="../docs/script/index.html">javascript</a></li>
@@ -18,33 +45,6 @@
                     <ul class="list list-unstyled styleguide__listing">
                         <li><a href="../../tests/layout/report.html">layout (galen)</a></li>
                     </ul>
-
-                    {% if pages %}
-                    <h4 class="styleguide__heading styleguide__heading--section">Pages</h4>
-                    <ul class="list list-unstyled styleguide__listing">
-                        {% for page in pages %}
-                        <li><a href="pages/{{ page }}/{{ page}}.html">{{ page }}/{{ page }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-
-                    {% if components %}
-                    <h4 class="styleguide__heading styleguide__heading--section">Components</h4>
-                    <ul class="list list-unstyled styleguide__listing">
-                        {% for component in components %}
-                        <li><a href="components/{{ component }}/{{ component }}.html">{{ component }}/{{ component }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-
-                    {% if elements %}
-                    <h4 class="styleguide__heading styleguide__heading--section">Elements</h4>
-                    <ul class="list list-unstyled styleguide__listing">
-                        {% for element in elements %}
-                        <li><a href="elements/{{ element }}/{{ element }}.html">{{ element }}/{{ element }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
 
                 </div>
             </div>
