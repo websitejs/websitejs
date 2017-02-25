@@ -1,5 +1,5 @@
 ///
-/// unitless line height based font-size 
+/// unitless line height based font-size
 /// @param {string} $height Height in pixels
 /// @param {string} $font-size Font size in pixels
 /// @author Rocco Janse, rocco.janse@valtech.nl
@@ -9,7 +9,7 @@
 }
 
 ///
-/// vertically alignes elements 
+/// vertically alignes elements
 /// @param {string} $position Optional relative [default] or absolute
 /// @author Rocco Janse, rocco.janse@valtech.nl
 ///
@@ -20,7 +20,7 @@
 }
 
 ///
-/// horizontally alignes elements 
+/// horizontally alignes elements
 /// @param {string} $position Optional relative [default] or absolute
 /// @author Rocco Janse, rocco.janse@valtech.nl
 ///
@@ -40,6 +40,18 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+///
+/// simple vertical gradient
+/// @param {string} $top Top color (hex)
+/// @param {string} $bottom Bottom color (hex)
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin simple-gradient($top: $brand-secondary-light, $bottom: $brand-secondary) {
+	background: rgba($bottom, 1);
+	background: linear-gradient(to bottom, rgba($top, 1) 0%,rgba($bottom, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 );
 }
 
 ///

@@ -40,10 +40,11 @@ gulp.add('config:watch', function() {
 // main tasks
 gulp.task('docs', ['styles:docs', 'scripts:docs']);
 gulp.task('vendor', ['vendor:build']);
-gulp.task('assets', ['assets:svg:icons', 'assets:images']);
+gulp.task('fonts', ['assets:fonts']);
+gulp.task('assets', ['assets:svg:icons', 'assets:images', 'assets:fonts']);
 gulp.task('styles', ['styles:build']);
 gulp.task('scripts', ['scripts:reset', 'scripts:build']);
-gulp.task('styleguide', ['styleguide:reset', 'styleguide:build']);
+gulp.task('styleguide', ['styleguide:build']);
 
 gulp.task('watch', ['config:watch', 'styles:watch', 'scripts:watch', 'styleguide:watch', 'assets:images:watch']);
 gulp.task('serve', ['server:start' , 'watch']);

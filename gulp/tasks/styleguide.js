@@ -9,9 +9,8 @@ var config = require('../config'),
     plumber = require('gulp-plumber'),
     fs = require('fs'),
     path = require('path'),
+    dir = require('node-dir'),
     del = require('del'),
-    cache = require('gulp-cached'),
-    remember = require('gulp-remember'),
     nunjucksRender = require('gulp-nunjucks-render'),
     data = require('gulp-data'),
 
@@ -31,12 +30,44 @@ var config = require('../config'),
     srcSgComponents = [config.srcPath + '/components/**/*.html'],
     srcSgPages = [config.srcPath + '/styleguide/pages/**/*.html'],
     srcSgIndex = [config.srcPath + '/styleguide/index.html'],
-    dest = config.destPath + '/styleguide',
-    cacheNameElements = 'sgElements',
-    cacheNameComponents = 'sgComponents',
-    cacheNamePages = 'sgPages';
+    dest = config.destPath + '/styleguide';
 
 module.exports = function() {
+
+    /**
+     * recursively return html files in (sub)dirs
+     * @param {string} dirName Directory to walk through.
+     * @param {function} cb Callback function.
+     */
+    function getFiles(dirName, cb) {
+        var retArray = [];
+
+        dir.readFiles(dirName, {
+            match: /.html$/,
+            sync: true
+        }, function(err, content, next) {
+            if (err) { throw err; }
+            next();
+        }, function(err, files) {
+            if (err) { throw err; }
+            files.forEach(function(file, i) {
+                var cleanPath = file.replace(config.srcPath, '').substring(1),
+                    filePath = path.dirname(cleanPath),
+                    type = filePath.split('\\').slice(-1)[0],
+                    name = path.basename(file, '.html');
+
+                retArray.push({
+                    path: cleanPath,
+                    type: type,
+                    name: name
+                });
+            });
+
+            if (typeof cb === 'function') {
+                cb(retArray);
+            }
+        });
+    }
 
     /**
      * returns data object with file info for elements/components
@@ -54,7 +85,7 @@ module.exports = function() {
             type: type,
             extends: true
         };
-    };
+    }
 
     /**
      * returns data object with info for pages
@@ -66,10 +97,38 @@ module.exports = function() {
         var name = path.basename(file.relative, '.html');
         return {
             meta: { title: config.name + " - " + name },
-            paths: dataPaths,
-            extends: false
+            paths: dataPaths
         };
-    };
+    }
+
+    /**
+     * Gets data to build styleguide index.
+     * @param {function} cb Callback function.
+     */
+    function getDataForIndex(cb) {
+
+        var elements = [],
+            components = [],
+            pages = [];
+
+        getFiles(config.srcPath + '/elements', function(res) {
+            elements = res;
+            getFiles(config.srcPath + '/components', function(res) {
+                components = res;
+                getFiles(config.srcPath + '/styleguide/pages', function(res) {
+                    pages = res;
+                    cb({
+                        meta: { title: config.name },
+                        paths: dataPaths,
+                        project: dataProject,
+                        elements: elements,
+                        components: components,
+                        pages: pages
+                    });
+                });
+            });
+        });
+    }
 
     /**
      * builds styleguide elements
@@ -80,10 +139,8 @@ module.exports = function() {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            .pipe(cache(cacheNameElements))
             .pipe(data(getDataForFile))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(remember(cacheNameElements))
             .pipe(gulp.dest(dest + '/elements'));
         done();
     });
@@ -97,10 +154,8 @@ module.exports = function() {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            .pipe(cache(cacheNameComponents))
             .pipe(data(getDataForFile))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(remember(cacheNameComponents))
             .pipe(gulp.dest(dest + '/components'));
         done();
     });
@@ -114,10 +169,8 @@ module.exports = function() {
                 gutil.log(error.message);
                 this.emit('end');
             }))
-            .pipe(cache(cacheNamePages))
-            .pipe(data(getDataForFile))
+            .pipe(data(getDataForPage))
             .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(remember(cacheNamePages))
             .pipe(gulp.dest(dest + '/pages'));
         done();
     });
@@ -126,22 +179,17 @@ module.exports = function() {
      * builds styleguide index
      */
     gulp.add('styleguide:index', function(done) {
-        gulp.src(srcSgIndex)
-            .pipe(plumber(function(error) {
-                gutil.log(error.message);
-                this.emit('end');
-            }))
-            .pipe(data({
-                meta: { title: config.name },
-                paths: dataPaths,
-                project: dataProject,
-                components: fs.readdirSync(config.srcPath + '/components'),
-                elements: fs.readdirSync(config.srcPath + '/elements'),
-                pages: fs.readdirSync(config.srcPath + '/styleguide/pages')
-            }))
-            .pipe(nunjucksRender({ path: [config.srcPath] }))
-            .pipe(gulp.dest(dest));
-        done();
+        getDataForIndex(function(indexData) {
+            gulp.src(srcSgIndex)
+                .pipe(plumber(function(error) {
+                    gutil.log(error.message);
+                    this.emit('end');
+                }))
+                .pipe(data(indexData))
+                .pipe(nunjucksRender({ path: [config.srcPath] }))
+                .pipe(gulp.dest(dest));
+            done();
+        });
     });
 
     /**
@@ -169,46 +217,15 @@ module.exports = function() {
      */
     gulp.add('styleguide:watch', function(done) {
         // watch styleguide index changes
-        var wSgIndex = gulp.watch(srcSgIndex, ['styleguide:index', 'server:reload']);
+        gulp.watch(srcSgIndex, ['styleguide:index', 'server:reload']);
 
         // watch styleguide element chages
-        var wSgElements = gulp.watch(srcSgElements, ['styleguide:elements', 'server:reload']);
-        wSgElements.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheNameElements][e.path];
-                remember.forget(cacheNameElements, e.path);
-            }
-        });
+        gulp.watch(srcSgElements, ['styleguide:elements', 'styleguide:components', 'server:reload']);
 
         // watch styleguide component changes
-        var wSgComponents = gulp.watch(srcSgComponents, ['styleguide:components', 'server:reload']);
-        wSgComponents.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheNameComponents][e.path];
-                remember.forget(cacheNameComponents, e.path);
-            }
-        });
+        gulp.watch(srcSgComponents, ['styleguide:components', 'styleguide:pages', 'server:reload']);
 
         // watch styleguide pages changes
-        var wSgPages = gulp.watch(srcSgPages, ['styleguide:pages', 'server:reload']);
-        wSgPages.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheNamePages][e.path];
-                remember.forget(cacheNamePages, e.path);
-            }
-        });
-    });
-
-    /**
-     * reset styleguide cache
-     */
-    gulp.add('styleguide:reset', function(done) {
-        delete cache.caches[cacheNameElements];
-        delete cache.caches[cacheNameComponents];
-        delete cache.caches[cacheNamePages];
-        remember.forgetAll(cacheNameElements);
-        remember.forgetAll(cacheNameComponents);
-        remember.forgetAll(cacheNamePages);
-        done();
+        gulp.watch(srcSgPages, ['styleguide:pages', 'server:reload']);
     });
 };

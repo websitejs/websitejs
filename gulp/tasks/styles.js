@@ -15,7 +15,7 @@ var config = require('../config'),
     sassdoc = require('sassdoc');
 
 module.exports = function() {
-    
+
     // paths
     var srcGlob = config.srcPath + '/styles.scss',
         dest = config.destPath + '/css',
@@ -46,11 +46,12 @@ module.exports = function() {
             }))
             .pipe(autoprefixer({ browsers: ['> 5%', 'IE 11', 'last 3 version'], cascade: false }))
             .pipe(cssNano({ zindex: false }))
-            .pipe(strip({ preserve: false }))
+            //.pipe(strip({ preserve: false }))
             .pipe(rename({ suffix: '.min' }))
             .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest(dest))
-            .on('end', done);
+            .pipe(gulp.dest(dest));
+
+        done();
     });
 
     gulp.add('styles:watch', function() {

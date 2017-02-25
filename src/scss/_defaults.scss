@@ -1,0 +1,101 @@
+
+h1, h2, h3, h4, h5, h6 {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+h1, .h1 {
+    margin-bottom: 40px;
+    font-family: $font-family-condensed;
+    font-size: 42px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    @include line-height(36px, 42px);
+
+    &:after {
+        position: absolute;
+        left: 0;
+        bottom: -23px;
+        content: "";
+        width: 100px;
+        height: 5px;
+        background-color: $brand-primary;
+    }
+
+    @media(min-width: $sm) {
+        margin-bottom: 57px;
+        font-size: 70px;
+        @include line-height(61px, 70px);
+        letter-spacing: -2px;
+
+        &:after {
+            bottom: -33px;
+            width: 108px;
+            height: 7px;
+        }
+    }
+}
+
+h2, .h2 {
+    font-family: $font-family-condensed;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    @include line-height(24px, 24px);
+
+    @media(min-width: $sm) {
+        margin-bottom: 10px;
+        font-size: 40px;
+        @include line-height(40px, 40px);
+        letter-spacing: -2px;
+    }
+}
+
+h3, .h3 {
+    font-size: 18px;
+    font-weight: 500;
+    @include line-height(20px, 18px);
+
+    @media(min-width: $sm) {
+        margin-bottom: 5px;
+        font-size: 24px;
+        @include line-height(30px, 24px);
+    }
+}
+
+h4, .h4 {
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    @include line-height(20px, 16px);
+}
+
+h5, .h5 {
+    font-size: 16px;
+    font-weight: 400;
+    @include line-height(23px, 16px);
+}
+
+h6, .h6 {
+    font-size: 14px;
+    font-weight: 400;
+    @include line-height(22px, 14px);
+}
+
+p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    @include line-height(22px, 14px);
+
+    @media(min-width: $sm) {
+        font-size: 16px;
+        @include line-height(24px, 16px);
+    }
+
+    + p {
+        margin-top: 15px;
+    }
+}

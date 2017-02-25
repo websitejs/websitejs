@@ -34,9 +34,11 @@ module.exports = function() {
 
     gulp.task('server:reload', function(done) {
         browserSync.reload();
+        done();
     });
 
     gulp.task('server:stop', function(done) {
         browserSync.exit();
+        done();
     });
 };

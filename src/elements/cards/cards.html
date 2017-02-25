@@ -1,0 +1,25 @@
+{% if extends %}{% extends "styleguide/includes/layout.html" %}{% endif %}
+
+        {% block content %}
+        {% include "styleguide/includes/moduleinfo.html" %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-sm-4 col-md-2">
+
+                    <div class="card">
+                        <div class="card__image">
+                            <div class="styleguide__color styleguide__color--primary"></div>
+                        </div>
+                        <div class="card__title">
+                            <h6 class="text text--uppercase">Card title</h6>
+                        </div>
+                        <div class="card__description">
+                            <h6>Card description</h6>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endblock %}

@@ -1,16 +1,13 @@
 {% if extends %}{% extends "styleguide/includes/layout.html" %}{% endif %}
-{% if extends %}{% set extends = "" %}{% endif %}
 
         {% block content %}
         {% include "styleguide/includes/moduleinfo.html" %}
-        {% if name %}{% set name = "" %}{% endif %}
-        {% if type %}{% set type = "" %}{% endif %}
 
         <div class="container gmaps js-maps">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="gmaps__map map">
-                        {% include "elements/loader/loader.html" %}
+                        <div class="loader"></div>
                     </div>
                 </div>
             </div>
@@ -22,7 +19,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="gmaps__map map">
-                        {% include "elements/loader/loader.html" %}
+                        <div class="loader"></div>
                     </div>
                 </div>
             </div>

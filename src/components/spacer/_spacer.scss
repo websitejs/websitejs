@@ -1,0 +1,21 @@
+.spacer {
+    height: 20px;
+
+    &--medium {
+        height: 30px;
+    }
+    &--large {
+        height: 40px;
+    }
+
+    @media(min-width: $sm) {
+        height: 25px;
+
+        &--medium {
+            height: 50px;
+        }
+        &--large {
+            height: 80px;
+        }
+    }
+}
