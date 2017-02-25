@@ -11,7 +11,7 @@ h1, .h1 {
     font-size: 42px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: -2px;
+    letter-spacing: -1px;
     @include line-height(36px, 42px);
 
     &:after {
@@ -28,6 +28,7 @@ h1, .h1 {
         margin-bottom: 57px;
         font-size: 70px;
         @include line-height(61px, 70px);
+        letter-spacing: -2px;
 
         &:after {
             bottom: -33px;
@@ -41,13 +42,14 @@ h2, .h2 {
     font-family: $font-family-condensed;
     font-size: 24px;
     font-weight: 700;
-    letter-spacing: -2px;
+    letter-spacing: -1px;
     @include line-height(24px, 24px);
 
     @media(min-width: $sm) {
         margin-bottom: 10px;
         font-size: 40px;
         @include line-height(40px, 40px);
+        letter-spacing: -2px;
     }
 }
 

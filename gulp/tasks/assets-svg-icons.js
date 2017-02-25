@@ -14,7 +14,7 @@ var config = require('../config'),
 
 // paths
 var srcGlob = [
-        config.srcPath + '/assets/icons/**/*.svg'
+        config.srcPath + '/assets/icons/svg-icons/**/*.svg'
     ],
     dest = config.destPath + '/assets/icons';
 
@@ -24,9 +24,9 @@ module.exports = function() {
 
         // cleanup first
         del.sync([dest + '**/*[.svg]']);
-        
-        gulp.src(srcGlob, { 
-                base: config.srcPath + '/assets/icons'
+
+        gulp.src(srcGlob, {
+                base: config.srcPath + '/assets/icons/svg-icons'
             })
             .pipe(svgmin({
                 plugins: [{
@@ -47,5 +47,5 @@ module.exports = function() {
 
     gulp.add('assets:svg:icons:watch', function() {
         var watcher = gulp.watch(srcGlob, ['assets:svg:icons', 'server:reload']);
-    }); 
+    });
 };

@@ -8,6 +8,34 @@
     white-space: normal;
     outline: none !important;
 
+    .icon {
+        width: 16px;
+        height: 16px;
+        vertical-align: sub;
+
+        &--first {
+            margin-right: 10px;
+        }
+
+        &--last {
+            margin-left: 8px;
+        }
+
+        @media(min-width: $sm) {
+            width: 25px;
+            height: 25px;
+            vertical-align: text-bottom;
+
+            &--first {
+                margin-right: 20px;
+            }
+
+            &--last {
+                margin-left: 10px;
+            }
+        }
+    }
+
     &-sm, &--sm {
         padding: 9px 20px 7px 20px;
         min-height: 34px;
@@ -30,6 +58,11 @@
             font-size: 16px;
             @include line-height(20px, 16px);
             min-height: 45px;
+
+            .icon {
+                width: 20px;
+                height: 20px;
+            }
         }
 
         &-lg, &--lg {
@@ -59,6 +92,10 @@
         &.active, &:active, &.focus, &:focus {
             color: $link-color;
         }
+
+        .icon {
+            fill: $link-color;
+        }
     }
 
     &__primary {
@@ -69,12 +106,15 @@
             color: #ffffff;
             @include simple-gradient($brand-secondary-light, $brand-secondary);
         }
+
+        .icon {
+            fill: #ffffff;
+        }
     }
 
     &__ghost {
         border: 1px solid $gray-lighter;
         color: $gray-dark;
-        //transition: 250ms background-color ease-in-out, 250ms background ease-in-out;
         background: transparent;
 
         &.hover, &:hover {
@@ -84,6 +124,57 @@
 
         &.active, &:active, &.focus, &:focus {
             color: $gray-dark;
+        }
+
+        .icon {
+            fill: $gray-dark;
+        }
+
+        &--light {
+            color: #ffffff;
+            border-color: #ffffff;
+
+            &.hover, &:hover {
+                background-color: rgba(#ffffff, .1);
+                color: #ffffff;
+
+                &.focus, &:focus {
+                    color: #ffffff;
+
+                    .icon {
+                        fill: #ffffff;
+                    }
+                }
+
+                .icon {
+                    fill: #ffffff;
+                }
+            }
+
+            &.active, &:active {
+                background-color: rgba(#ffffff, .1);
+                color: #ffffff;
+
+                &.focus, &:focus {
+                    color: #ffffff;
+
+                    .icon {
+                        fill: #ffffff;
+                    }
+                }
+
+                .icon {
+                    fill: #ffffff;
+                }
+            }
+
+            &.focus, &:focus {
+                color: #ffffff;
+            }
+
+            .icon {
+                fill: #ffffff;
+            }
         }
 
         &--blue {
@@ -96,6 +187,14 @@
 
                 &.focus, &:focus {
                     color: #ffffff;
+
+                    .icon {
+                        fill: #ffffff;
+                    }
+                }
+
+                .icon {
+                    fill: #ffffff;
                 }
             }
 
@@ -105,11 +204,23 @@
 
                 &.focus, &:focus {
                     color: #ffffff;
+
+                    .icon {
+                        fill: #ffffff;
+                    }
+                }
+
+                .icon {
+                    fill: #ffffff;
                 }
             }
 
             &.focus, &:focus {
                 color: $brand-secondary;
+            }
+
+            .icon {
+                fill: $brand-secondary;
             }
         }
     }
@@ -120,6 +231,10 @@
         .btn {
             &__link {
                 color: #ffffff;
+
+                .icon {
+                    fill: #ffffff;
+                }
             }
             &__ghost {
                 color: #ffffff;
@@ -127,6 +242,10 @@
 
                 &.hover, &:hover {
                     background-color: rgba(#ffffff, .1);
+                }
+
+                .icon {
+                    fill: #ffffff;
                 }
 
                 &--blue {

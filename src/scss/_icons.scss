@@ -1,0 +1,10 @@
+.icon {
+    width: 20px;
+    height: 20px;
+    fill: $text-color;
+
+    @media(min-width: $sm) {
+        width: 25px;
+        height: 25px;
+    }
+}
