@@ -1,6 +1,9 @@
 
 // background color
 .bg {
+    &--white {
+        background-color: #ffffff;
+    }
     &--light {
         background-color: $gray-lightest;
 
