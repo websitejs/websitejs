@@ -25,6 +25,12 @@ Switch to the projectroot and run
 npm install
 ```
 
+### Build files
+Before starting the local server, make sure you run 
+```sh
+gulp all 
+```
+
 ## Local server
 To start the local server, run
 ```sh
