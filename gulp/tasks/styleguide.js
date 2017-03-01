@@ -134,6 +134,7 @@ module.exports = function() {
      * builds styleguide elements
      */
     gulp.add('styleguide:elements', function(done) {
+        del.sync([dest + '/elements']);
         gulp.src(srcSgElements)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
@@ -149,6 +150,7 @@ module.exports = function() {
      * builds styleguide components
      */
     gulp.add('styleguide:components', function(done) {
+        del.sync([dest + '/components']);
         gulp.src(srcSgComponents)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
@@ -164,6 +166,7 @@ module.exports = function() {
      * builds styleguide pages
      */
     gulp.add('styleguide:pages', function(done) {
+        del.sync([dest + '/pages']);
         gulp.src(srcSgPages)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
@@ -229,7 +232,7 @@ module.exports = function() {
             read: false
         }, function(file) {
             gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
-            gulp.start(['styleguide:elements', 'styleguide:components', 'server:reload']);
+            gulp.start(['styleguide:build', 'server:reload']);
         });
 
         // watch styleguide component changes
@@ -237,7 +240,7 @@ module.exports = function() {
             read: false
         }, function(file) {
             gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
-            gulp.start(['styleguide:components', 'styleguide:pages', 'server:reload']);
+            gulp.start(['styleguide:build', 'server:reload']);
         });
 
         // watch styleguide pages changes
@@ -245,7 +248,7 @@ module.exports = function() {
             read: false
         }, function(file) {
             gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
-            gulp.start(['styleguide:components', 'styleguide:pages', 'server:reload']);
+            gulp.start(['styleguide:build', 'server:reload']);
         });
     });
 };
