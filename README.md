@@ -54,7 +54,7 @@ npm version [<newversion> | major | minor | patch | premajor | preminor | prepat
 You need the [Java JRE/JDK](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html#javasejdk) in order to run testing.
 
 #### Webdrivers
-You will also need to download the webdrivers suitable for your system and place them in a "webdrivers" folder next to your gulpfile.
+If you want to test with You will also need to download the webdrivers suitable for your system and place them in a "webdrivers" folder next to your gulpfile.
 
 * FireFox: [geckodriver.exe](https://github.com/mozilla/geckodriver/releases/)
 * Chrome: [cromedriver.exe](http://chromedriver.storage.googleapis.com/index.html)
@@ -73,3 +73,22 @@ Created by [Rocco Janse](http://roccojanse.nl), [roccojanse@outlook.com](mailto:
 ## License
 
 [The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
+
+
+## Add icons
+
+Setup for adding an icon. Make a file "svgname.svg" inside the folder assets/icons/svg-icons/foldername. In there the minimum code should be as follows.
+```sh
+<svg viewBox="0 0 48 48">
+    <path d=""></path>
+</svg>
+```
+
+If you want to insert an icon, use the id "foldername-svgname". Then your icon will be shown.
+```sh
+<svg class="icon">
+    <use xlink:href="foldername-svgname"></use>
+</svg>
+```
+
+Make sure to not add a ```<symbol>``` tag around the path or the svg, then your icon won't work.
