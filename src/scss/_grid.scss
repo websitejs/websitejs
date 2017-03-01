@@ -9,14 +9,14 @@
 
     .row {
         &.nogutters {
-            [class^=col-]:not(:first-child):not(:last-child) {
+            > [class^=col-]:not(:first-child):not(:last-child) {
                 padding-left: 0;
                 padding-right: 0;
             }
-            [class^=col-]:first-child {
+            > [class^=col-]:first-child {
                 padding-right: 0;
             }
-            [class^=col-]:last-child {
+            > [class^=col-]:last-child {
                 padding-left: 0;
             }
         }
