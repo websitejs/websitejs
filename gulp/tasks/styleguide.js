@@ -7,12 +7,12 @@ var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
-    fs = require('fs'),
     path = require('path'),
     dir = require('node-dir'),
     del = require('del'),
     nunjucksRender = require('gulp-nunjucks-render'),
     data = require('gulp-data'),
+    watch = require('gulp-watch'),
 
     dataPaths = {
         css: config.tplCssPath,
@@ -217,15 +217,35 @@ module.exports = function() {
      */
     gulp.add('styleguide:watch', function(done) {
         // watch styleguide index changes
-        gulp.watch(srcSgIndex, ['styleguide:index', 'server:reload']);
+        watch(srcSgIndex, {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['styleguide:index', 'server:reload']);
+        });
 
         // watch styleguide element chages
-        gulp.watch(srcSgElements, ['styleguide:elements', 'styleguide:components', 'server:reload']);
+        watch(srcSgElements, {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['styleguide:elements', 'styleguide:components', 'server:reload']);
+        });
 
         // watch styleguide component changes
-        gulp.watch(srcSgComponents, ['styleguide:components', 'styleguide:pages', 'server:reload']);
+        watch(srcSgComponents, {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['styleguide:components', 'styleguide:pages', 'server:reload']);
+        });
 
         // watch styleguide pages changes
-        gulp.watch(srcSgPages, ['styleguide:pages', 'server:reload']);
+        watch(srcSgPages, {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['styleguide:components', 'styleguide:pages', 'server:reload']);
+        });
     });
 };

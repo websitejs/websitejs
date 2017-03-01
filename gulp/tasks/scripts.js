@@ -4,6 +4,7 @@ var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
+    path = require('path'),
     del = require('del'),
     rename = require('gulp-rename'),
     cache = require('gulp-cached'),
@@ -13,7 +14,8 @@ var config = require('../config'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     stripJs = require('gulp-strip-comments'),
-    jsdoc = require('gulp-jsdoc3');
+    jsdoc = require('gulp-jsdoc3'),
+    watch = require('gulp-watch');
 
 module.exports = function() {
 
@@ -55,13 +57,15 @@ module.exports = function() {
     });
 
     gulp.add('scripts:watch', function() {
-
-        var watcher = gulp.watch(srcGlob, ['scripts:build', 'server:reload']);
-        watcher.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheName][e.path];
-                remember.forget(cacheName, e.path);
+        watch(srcGlob, {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            if (file.event === 'unlink') {
+                delete cache.caches[cacheName][file.path];
+                remember.forget(cacheName, file.path);
             }
+            gulp.start(['scripts:build', 'server:reload']);
         });
     });
 

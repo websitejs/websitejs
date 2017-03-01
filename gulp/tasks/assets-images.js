@@ -4,9 +4,11 @@ var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
+    path = require('path'),
     changed = require('gulp-changed'),
     imagemin = require('gulp-imagemin'),
-    pngquant = require('imagemin-pngquant');
+    pngquant = require('imagemin-pngquant'),
+    watch = require('gulp-watch');
 
 // paths
 var srcGlob = [
@@ -34,6 +36,11 @@ module.exports = function() {
     });
 
     gulp.add('assets:images:watch', function() {
-        var watcher = gulp.watch(srcGlob, ['assets:images', 'server:reload']);
+        watch(srcGlob, {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['assets:images', 'server:reload']);
+        });
     });
 };

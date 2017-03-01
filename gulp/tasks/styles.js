@@ -4,6 +4,7 @@ var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
+    path = require('path'),
     del = require('del'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
@@ -12,7 +13,8 @@ var config = require('../config'),
     cssGlob = require('gulp-css-globbing'),
     cssNano = require('gulp-cssnano'),
     strip = require('gulp-strip-css-comments'),
-    sassdoc = require('sassdoc');
+    sassdoc = require('sassdoc'),
+    watch = require('gulp-watch');
 
 module.exports = function() {
 
@@ -55,7 +57,12 @@ module.exports = function() {
     });
 
     gulp.add('styles:watch', function() {
-        gulp.watch(config.srcPath + '/**/*.scss', ['styles:build', 'server:reload']);
+        watch(config.srcPath + '/**/*.scss', {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['styles:build', 'server:reload']);
+        });
     });
 
     gulp.add('styles:docs', function(done) {
