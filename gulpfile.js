@@ -46,9 +46,9 @@ gulp.task('styles', ['styles:build']);
 gulp.task('scripts', ['scripts:reset', 'scripts:build']);
 gulp.task('styleguide', ['styleguide:build']);
 
-gulp.task('watch', ['config:watch', 'styles:watch', 'scripts:watch', 'styleguide:watch', 'assets:images:watch']);
-gulp.task('serve', ['server:start' , 'watch']);
-gulp.task('server', ['server:start']);
+gulp.task('watch', ['config:watch', 'styles:watch', 'scripts:watch', 'styleguide:watch', 'assets:images:watch', 'assets:svg:icons:watch']);
+gulp.task('serve', ['default', 'server:start' , 'watch']);
+gulp.task('server', ['default', 'server:start']);
 gulp.task('all', ['vendor', 'styles', 'scripts', 'styleguide', 'assets', 'docs']);
 gulp.task('prod', ['vendor', 'styles', 'scripts', 'assets']);
 gulp.task('default', ['vendor', 'styles', 'scripts', 'styleguide', 'assets']);
