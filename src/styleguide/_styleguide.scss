@@ -42,38 +42,38 @@
         @include ratio-box(16/9);
 
         &--primary {
-            background-color: $brand-primary;
+            background-color: $color-brand-blaze-orange;
         }
         &--secondary {
-            background-color: $brand-secondary;
+            background-color: $color-brand-endeavour;
 
             &-light {
-                background-color: $brand-secondary-light;
+                background-color: $color-brand-jelly-bean;
             }
             &-lighter {
-                background-color: $brand-secondary-lighter;
+                background-color: $color-brand-jelly-bean;
             }
         }
         &--thirtiary {
-            background-color: $brand-thirtiary;
+            background-color: $color-brand-crimson;
         }
         &--gray {
             background-color: $gray;
 
             &-lightest {
-                background-color: $gray-lightest;
+                background-color: $color-seashell;
             }
             &-lighter {
-                background-color: $gray-lighter;
+                background-color: $color-submarine;
             }
             &-light {
-                background-color: $gray-light;
+                background-color: $color-oslo-gray;
             }
             &-dark {
-                background-color: $gray-dark;
+                background-color: $color-bright-gray;
             }
             &-darker {
-                background-color: $gray-darker;
+                background-color: $color-shark;
             }
         }
     }
