@@ -15,7 +15,7 @@ var srcGlob = [
     dest = config.destPath + '/assets/images';
 
 module.exports = function() {
-    
+
     gulp.add('assets:images', function(done) {
 
         gulp.src(srcGlob)
@@ -29,11 +29,11 @@ module.exports = function() {
                 svgoPlugins: [{ removeViewBox: false }],
                 use: [pngquant()]
             }))
-            .pipe(gulp.dest(dest))
-            .on('end', done);
-    }); 
+            .pipe(gulp.dest(dest));
+        done();
+    });
 
     gulp.add('assets:images:watch', function() {
         var watcher = gulp.watch(srcGlob, ['assets:images', 'server:reload']);
-    }); 
+    });
 };

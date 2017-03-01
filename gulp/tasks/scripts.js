@@ -50,9 +50,8 @@ module.exports = function() {
             .pipe(rename({ suffix: '.min' }))
             //.pipe(stripJs())
             .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest(dest))
-            .on('end', done);
-
+            .pipe(gulp.dest(dest));
+        done();
     });
 
     gulp.add('scripts:watch', function() {

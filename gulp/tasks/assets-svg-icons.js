@@ -41,11 +41,11 @@ module.exports = function() {
                 file.basename = name.join('-');
             }))
             .pipe(svgstore())
-            .pipe(gulp.dest(dest))
-            .on('end', done);
+            .pipe(gulp.dest(dest));
+         done();
     });
 
     gulp.add('assets:svg:icons:watch', function() {
-        var watcher = gulp.watch(srcGlob, ['assets:svg:icons', 'server:reload']);
+        gulp.watch(srcGlob, ['assets:svg:icons', 'server:reload']);
     });
 };

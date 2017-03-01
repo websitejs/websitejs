@@ -17,7 +17,7 @@ module.exports = function() {
                 this.emit('end');
             }))
             .pipe(changed(dest))
-            .pipe(gulp.dest(dest))
-            .on('end', done);
+            .pipe(gulp.dest(dest));
+        done();
     });
 };
