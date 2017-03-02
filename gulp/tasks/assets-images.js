@@ -5,6 +5,7 @@ var config = require('../config'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
     path = require('path'),
+    del = require('del'),
     changed = require('gulp-changed'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
@@ -12,9 +13,9 @@ var config = require('../config'),
 
 // paths
 var srcGlob = [
-        config.srcPath + '/assets/images/**/*.*'
+        config.srcPath + '/assets/img/**/*.*'
     ],
-    dest = config.destPath + '/assets/images';
+    dest = config.destPath + '/assets/img';
 
 module.exports = function() {
 
@@ -40,7 +41,12 @@ module.exports = function() {
             read: false
         }, function(file) {
             gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
-            gulp.start(['assets:images', 'server:reload']);
+
+            if (file.event === 'unlink') {
+                del.sync([path.join(dest, path.relative(file.base, file.path))]);
+            } else {
+                gulp.start(['assets:images', 'server:reload']);
+            }
         });
     });
 };
