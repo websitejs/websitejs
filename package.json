@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/websitejs/websitejs#readme",
   "devDependencies": {
+    "@material/ripple": "^0.3.0",
     "bootstrap-sass": "^3.3.7",
     "browser-sync": "^2.18.5",
     "chromedriver": "^2.26.1",

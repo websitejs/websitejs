@@ -44,7 +44,8 @@ module.exports = function() {
                 stopOnError: false,
                 cacheLocation: config.srcPath + '.sass-cache/',
                 precision: 4,
-                compass: false
+                compass: false,
+                includePaths: ['node_modules']
             }))
             .pipe(autoprefixer({ browsers: ['> 5%', 'IE 11', 'last 3 version'], cascade: false }))
             .pipe(cssNano({ zindex: false }))

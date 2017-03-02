@@ -1,0 +1,10 @@
+@import "@material/ripple/mixins";
+
+.btn {
+    &--ripple {
+        @include mdc-ripple-base;
+        @include mdc-ripple-bg((pseudo: "::before"));
+        @include mdc-ripple-fg((pseudo: "::after"));
+        overflow: hidden;
+    }
+}
