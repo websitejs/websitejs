@@ -42,6 +42,33 @@ To start a local server and simultaniously 'watch' your files, run
 gulp serve
 ```
 
+## Add and use SVG icons
+
+Setup for adding an icon. Make a file "svgname.svg" inside the folder assets/icons/svg-icons/foldername. In there the minimum code should be as follows.
+```sh
+<svg viewBox="0 0 48 48">
+    <path d=""></path>
+</svg>
+```
+Make sure to not add a ```<symbol>``` tag around the path or the svg, then your icon won't work.
+Ideally you'll want to add a ```<title>``` to your icon, screenreaders will read the defined title.
+Optionally you can add a ```<g>``` (group) to isolate multiple paths or fills as a grouped icon.
+```sh
+<svg viewBox="0 0 48 48">
+    <g>
+        <title>Download</title>
+        <path d=""></path>
+    </g>
+</svg>
+```
+
+If you want to insert an icon, use the id "foldername-svgname". Then your icon will be shown.
+```sh
+<svg class="icon">
+    <use xlink:href="#foldername-svgname"></use>
+</svg>
+```
+
 ## Versioning
 The newversion argument should be a valid semver string, a valid second argument to [semver.inc](https://github.com/npm/node-semver#functions).
 To update the version of the code, use
@@ -54,7 +81,7 @@ npm version [<newversion> | major | minor | patch | premajor | preminor | prepat
 You need the [Java JRE/JDK](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html#javasejdk) in order to run testing.
 
 #### Webdrivers
-You will also need to download the webdrivers suitable for your system and place them in a "webdrivers" folder next to your gulpfile.
+If you want to test with You will also need to download the webdrivers suitable for your system and place them in a "webdrivers" folder next to your gulpfile.
 
 * FireFox: [geckodriver.exe](https://github.com/mozilla/geckodriver/releases/)
 * Chrome: [cromedriver.exe](http://chromedriver.storage.googleapis.com/index.html)

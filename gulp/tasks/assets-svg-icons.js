@@ -3,14 +3,12 @@
 var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
-    plumber = require('gulp-plumber'),
     path = require('path'),
     del = require('del'),
     rename = require('gulp-rename'),
-    cache = require('gulp-cached'),
-    remember = require('gulp-remember'),
     svgmin = require('gulp-svgmin'),
-    svgstore = require('gulp-svgstore');
+    svgstore = require('gulp-svgstore'),
+    watch = require('gulp-watch');
 
 // paths
 var srcGlob = [
@@ -46,6 +44,11 @@ module.exports = function() {
     });
 
     gulp.add('assets:svg:icons:watch', function() {
-        gulp.watch(srcGlob, ['assets:svg:icons', 'server:reload']);
+        watch(srcGlob, {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['assets:svg:icons', 'server:reload']);
+        });
     });
 };
