@@ -101,11 +101,11 @@
 
     &__primary {
         color: #ffffff;
-        @include simple-gradient($brand-secondary-light, $brand-secondary);
+        @include simple-gradient($color-brand-jelly-bean, $color-brand-endeavour);
 
         &.active, &:active, &.focus, &:focus {
             color: #ffffff;
-            @include simple-gradient($brand-secondary-light, $brand-secondary);
+            @include simple-gradient($color-brand-jelly-bean, $color-brand-endeavour);
         }
 
         .icon {
@@ -114,21 +114,21 @@
     }
 
     &__ghost {
-        border: 1px solid $gray-lighter;
-        color: $gray-dark;
+        border: 1px solid $color-submarine;
+        color: $color-bright-gray;
         background: transparent;
 
         &.hover, &:hover {
-            color: $gray-dark;
-            background-color: rgba($gray-dark, .1);
+            color: $color-bright-gray;
+            background-color: rgba($color-bright-gray, .1);
         }
 
         &.active, &:active, &.focus, &:focus {
-            color: $gray-dark;
+            color: $color-bright-gray;
         }
 
         .icon {
-            fill: $gray-dark;
+            fill: $color-bright-gray;
         }
 
         &--light {
@@ -179,12 +179,12 @@
         }
 
         &--blue {
-            border-color: $brand-secondary;
-            color: $brand-secondary;
+            border-color: $color-brand-endeavour;
+            color: $color-brand-endeavour;
 
             &.hover, &:hover {
                 color: #ffffff;
-                @include simple-gradient($brand-secondary-light, $brand-secondary);
+                @include simple-gradient($color-brand-jelly-bean, $color-brand-endeavour);
 
                 &.focus, &:focus {
                     color: #ffffff;
@@ -201,7 +201,7 @@
 
             &.active, &:active {
                 color: #ffffff;
-                @include simple-gradient($brand-secondary-light, $brand-secondary);
+                @include simple-gradient($color-brand-jelly-bean, $color-brand-endeavour);
 
                 &.focus, &:focus {
                     color: #ffffff;
@@ -217,11 +217,11 @@
             }
 
             &.focus, &:focus {
-                color: $brand-secondary;
+                color: $color-brand-endeavour;
             }
 
             .icon {
-                fill: $brand-secondary;
+                fill: $color-brand-endeavour;
             }
         }
     }
@@ -251,7 +251,7 @@
 
                 &--blue {
                     &.hover, &:hover, &.active, &:active {
-                        border-color: $brand-secondary;
+                        border-color: $color-brand-endeavour;
                     }
                 }
             }
