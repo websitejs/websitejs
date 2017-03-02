@@ -41,40 +41,41 @@
         width: 100%;
         @include ratio-box(16/9);
 
-        &--primary {
-            background-color: $color-brand-blaze-orange;
+        &--blaze-orange {
+            background-color: $color-blaze-orange;
         }
-        &--secondary {
-            background-color: $color-brand-endeavour;
-
-            &-light {
-                background-color: $color-brand-jelly-bean;
-            }
-            &-lighter {
-                background-color: $color-brand-jelly-bean;
-            }
+        &--endeavor {
+            background-color: $color-endeavour;
         }
-        &--thirtiary {
-            background-color: $color-brand-crimson;
+        &--jelly-bean {
+            background-color: $color-jelly-bean;
         }
-        &--gray {
-            background-color: $gray;
-
-            &-lightest {
-                background-color: $color-seashell;
-            }
-            &-lighter {
-                background-color: $color-submarine;
-            }
-            &-light {
-                background-color: $color-oslo-gray;
-            }
-            &-dark {
-                background-color: $color-bright-gray;
-            }
-            &-darker {
-                background-color: $color-shark;
-            }
+        &--polo-blue {
+            background-color: $color-polo-blue;
+        }
+        &--crimson {
+            background-color: $color-crimson;
+        }
+        &--jewel {
+            background-color: $color-jewel;
+        }
+        &--nevada {
+            background-color: $color-nevada;
+        }
+        &--seashell {
+            background-color: $color-seashell;
+        }
+        &--submarine {
+            background-color: $color-submarine;
+        }
+        &--oslo-gray {
+            background-color: $color-oslo-gray;
+        }
+        &--bright-gray {
+            background-color: $color-bright-gray;
+        }
+        &--shark {
+            background-color: $color-shark;
         }
     }
 }
