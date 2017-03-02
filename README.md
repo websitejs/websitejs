@@ -42,6 +42,33 @@ To start a local server and simultaniously 'watch' your files, run
 gulp serve
 ```
 
+## Add and use SVG icons
+
+Setup for adding an icon. Make a file "svgname.svg" inside the folder assets/icons/svg-icons/foldername. In there the minimum code should be as follows.
+```sh
+<svg viewBox="0 0 48 48">
+    <path d=""></path>
+</svg>
+```
+Make sure to not add a ```<symbol>``` tag around the path or the svg, then your icon won't work.
+Ideally you'll want to add a ```<title>``` to your icon, screenreaders will read the defined title.
+Optionally you can add a ```<g>``` (group) to isolate multiple paths or fills as a grouped icon.
+```sh
+<svg viewBox="0 0 48 48">
+    <g>
+        <title>Download</title>
+        <path d=""></path>
+    </g>
+</svg>
+```
+
+If you want to insert an icon, use the id "foldername-svgname". Then your icon will be shown.
+```sh
+<svg class="icon">
+    <use xlink:href="#foldername-svgname"></use>
+</svg>
+```
+
 ## Versioning
 The newversion argument should be a valid semver string, a valid second argument to [semver.inc](https://github.com/npm/node-semver#functions).
 To update the version of the code, use
@@ -73,22 +100,3 @@ Created by [Rocco Janse](http://roccojanse.nl), [roccojanse@outlook.com](mailto:
 ## License
 
 [The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
-
-
-## Add icons
-
-Setup for adding an icon. Make a file "svgname.svg" inside the folder assets/icons/svg-icons/foldername. In there the minimum code should be as follows.
-```sh
-<svg viewBox="0 0 48 48">
-    <path d=""></path>
-</svg>
-```
-
-If you want to insert an icon, use the id "foldername-svgname". Then your icon will be shown.
-```sh
-<svg class="icon">
-    <use xlink:href="foldername-svgname"></use>
-</svg>
-```
-
-Make sure to not add a ```<symbol>``` tag around the path or the svg, then your icon won't work.
