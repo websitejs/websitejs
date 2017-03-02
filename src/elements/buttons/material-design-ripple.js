@@ -8,8 +8,8 @@
 (function($, viewport) {
     'use strict';
 
-    var MDCRipple = mdc.ripple.MDCRipple,
-        MDCRippleFoundation = mdc.ripple.MDCRippleFoundation;
+    var MDCRipple = mdc.ripple.MDCRipple;//,
+        //MDCRippleFoundation = mdc.ripple.MDCRippleFoundation;
 
     var ripples = $('.btn--ripple');
     $.each(ripples, function(i, ripple) {

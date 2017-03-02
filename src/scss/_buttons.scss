@@ -101,11 +101,11 @@
 
     &__primary {
         color: #ffffff;
-        @include simple-gradient($color-brand-jelly-bean, $color-brand-endeavour);
+        @include simple-gradient($color-jelly-bean, $color-endeavour);
 
         &.active, &:active, &.focus, &:focus {
             color: #ffffff;
-            @include simple-gradient($color-brand-jelly-bean, $color-brand-endeavour);
+            @include simple-gradient($color-jelly-bean, $color-endeavour);
         }
 
         .icon {
@@ -179,12 +179,12 @@
         }
 
         &--blue {
-            border-color: $color-brand-endeavour;
-            color: $color-brand-endeavour;
+            border-color: $color-endeavour;
+            color: $color-endeavour;
 
             &.hover, &:hover {
                 color: #ffffff;
-                @include simple-gradient($color-brand-jelly-bean, $color-brand-endeavour);
+                @include simple-gradient($color-jelly-bean, $color-endeavour);
 
                 &.focus, &:focus {
                     color: #ffffff;
@@ -201,7 +201,7 @@
 
             &.active, &:active {
                 color: #ffffff;
-                @include simple-gradient($color-brand-jelly-bean, $color-brand-endeavour);
+                @include simple-gradient($color-jelly-bean, $color-endeavour);
 
                 &.focus, &:focus {
                     color: #ffffff;
@@ -217,11 +217,11 @@
             }
 
             &.focus, &:focus {
-                color: $color-brand-endeavour;
+                color: $color-endeavour;
             }
 
             .icon {
-                fill: $color-brand-endeavour;
+                fill: $color-endeavour;
             }
         }
     }
@@ -251,7 +251,7 @@
 
                 &--blue {
                     &.hover, &:hover, &.active, &:active {
-                        border-color: $color-brand-endeavour;
+                        border-color: $color-endeavour;
                     }
                 }
             }
