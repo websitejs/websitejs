@@ -5,6 +5,7 @@ var config = require('../config'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
     changed = require('gulp-changed'),
+    notify = require('gulp-notify'),
 
     srcFonts = [ config.srcPath + '/assets/fonts/**/*.{woff,woff2}' ],
     dest = config.destPath + '/assets/fonts';
@@ -14,6 +15,7 @@ module.exports = function() {
         gulp.src(srcFonts)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
+                notify().write(error.message);
                 this.emit('end');
             }))
             .pipe(changed(dest))

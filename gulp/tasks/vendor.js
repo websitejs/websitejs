@@ -11,13 +11,14 @@ var config = require('../config'),
     cssnano = require('gulp-cssnano'),
     concat = require('gulp-concat'),
     stripJs = require('gulp-strip-comments'),
-    stripCss = require('gulp-strip-css-comments');
+    stripCss = require('gulp-strip-css-comments'),
+    notify = require('gulp-notify');
 
 module.exports = function() {
-    
+
     gulp.task('vendor:build', function(done) {
 
-    var srcPath = config.srcPath,  
+    var srcPath = config.srcPath,
         destPath = config.destPath;
 
         // cleanup
@@ -38,6 +39,7 @@ module.exports = function() {
             gulp.src(config.vendor[lib])
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
+                    notify().write(error.message);
                     this.emit('end');
                 }))
                 .pipe(filterScripts)
@@ -46,16 +48,17 @@ module.exports = function() {
                 .pipe(filterScriptsMin.restore)
                 .pipe(concat(lib + '.js'))
                 .pipe(stripJs())
-                .pipe(rename({ 
-                    suffix: '.min' 
+                .pipe(rename({
+                    suffix: '.min'
                 }))
                 .pipe(gulp.dest(destPath + '/js/vendor'));
 
-            gulp.src(config.vendor[lib]) 
+            gulp.src(config.vendor[lib])
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
+                    notify().write(error.message);
                     this.emit('end');
-                })) 
+                }))
                 .pipe(filterStyles)
                 .pipe(filterStylesMin)
                 .pipe(cssnano({ zindex: false }))

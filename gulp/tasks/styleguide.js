@@ -14,6 +14,7 @@ var config = require('../config'),
     nunjucksRender = require('gulp-nunjucks-render'),
     data = require('gulp-data'),
     watch = require('gulp-watch'),
+    notify = require('gulp-notify'),
 
     dataPaths = {
         css: config.tplCssPath,
@@ -155,6 +156,7 @@ module.exports = function() {
             gulp.src(srcSgElements)
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
+                    notify().write(error.message);
                     this.emit('end');
                 }))
                 .pipe(data(function(file) {
@@ -177,6 +179,7 @@ module.exports = function() {
             gulp.src(srcSgComponents)
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
+                    notify().write(error.message);
                     this.emit('end');
                 }))
                 .pipe(data(function(file) {
@@ -199,6 +202,7 @@ module.exports = function() {
             gulp.src(srcSgPages)
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
+                    notify().write(error.message);
                     this.emit('end');
                 }))
                 .pipe(data(function(file) {
@@ -220,6 +224,7 @@ module.exports = function() {
             gulp.src(srcSgIndex)
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
+                    notify().write(error.message);
                     this.emit('end');
                 }))
                 .pipe(data(indexData))

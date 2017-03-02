@@ -12,9 +12,10 @@ var config = require('../config'),
     autoprefixer = require('gulp-autoprefixer'),
     cssGlob = require('gulp-css-globbing'),
     cssNano = require('gulp-cssnano'),
-    strip = require('gulp-strip-css-comments'),
+    //strip = require('gulp-strip-css-comments'),
     sassdoc = require('sassdoc'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    notify = require('gulp-notify');
 
 module.exports = function() {
 
@@ -35,6 +36,7 @@ module.exports = function() {
         gulp.src(srcGlob)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
+                notify().write(error.message);
                 this.emit('end');
             }))
             .pipe(sourcemaps.init())
@@ -43,12 +45,16 @@ module.exports = function() {
                 outputStyle: 'expanded',
                 defaultEncoding: 'utf-8',
                 unixNewlines: false,
-                errLogToConsole: true,
-                stopOnError: false,
                 cacheLocation: config.srcPath + '.sass-cache/',
                 precision: 4,
                 compass: false,
-                includePaths: ['node_modules']
+                includePaths: ['node_modules'],
+                errLogToConsole: true,
+                stopOnError: false
+            }).on('error', function(err) {
+                notify({ title: 'SASS compile issue' }).write('line ' + err.line + ', col ' + err.column + ': ' + err.messageOriginal);
+                //notify(err.messageOriginal);
+                this.emit('end');
             }))
             .pipe(autoprefixer({ browsers: ['> 5%', 'IE 11', 'last 3 version'], cascade: false }))
             .pipe(cssNano({ zindex: false }))

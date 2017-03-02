@@ -9,7 +9,8 @@ var config = require('../config'),
     changed = require('gulp-changed'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    notify = require('gulp-notify');
 
 // paths
 var srcGlob = [
@@ -24,6 +25,7 @@ module.exports = function() {
         gulp.src(srcGlob)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
+                notify().write(error.message);
                 this.emit('end');
             }))
             .pipe(changed(dest))

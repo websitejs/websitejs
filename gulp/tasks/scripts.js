@@ -13,9 +13,10 @@ var config = require('../config'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    stripJs = require('gulp-strip-comments'),
+    //stripJs = require('gulp-strip-comments'),
     jsdoc = require('gulp-jsdoc3'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    notify = require('gulp-notify');
 
 module.exports = function() {
 
@@ -40,12 +41,25 @@ module.exports = function() {
         gulp.src(srcGlob)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
+                notify().write(error.message);
                 this.emit('end');
             }))
             .pipe(sourcemaps.init())
             .pipe(cache(cacheName))
             .pipe(jshint())
-            .pipe(jshint.reporter('jshint-stylish'))
+            //.pipe(jshint.reporter('jshint-stylish'))
+            .pipe(notify(function(file) {
+                if (file.jshint.success) {
+                    return false;
+                }
+                var errors = file.jshint.results.map(function(data) {
+                    if (data.error) {
+                        return 'line ' + data.error.line + ', col ' + data.error.character + ': ' + data.error.reason;
+                    }
+                }).join('\n');
+
+                return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
+            }))
             .pipe(remember(cacheName))
             .pipe(uglify({ mangle: false }))
             .pipe(concat(fileName + '.js'))

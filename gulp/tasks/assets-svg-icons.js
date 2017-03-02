@@ -3,12 +3,14 @@
 var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
+    plumber = require('gulp-plumber'),
     path = require('path'),
     del = require('del'),
     rename = require('gulp-rename'),
     svgmin = require('gulp-svgmin'),
     svgstore = require('gulp-svgstore'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    notify = require('gulp-notify');
 
 // paths
 var srcGlob = [
@@ -26,6 +28,11 @@ module.exports = function() {
         gulp.src(srcGlob, {
                 base: config.srcPath + '/assets/icons/svg-icons'
             })
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                notify().write(error.message);
+                this.emit('end');
+            }))
             .pipe(svgmin({
                 plugins: [{
                     removeDoctype: false

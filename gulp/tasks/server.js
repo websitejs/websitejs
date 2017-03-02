@@ -29,7 +29,7 @@ module.exports = function() {
             notify: false,
             reloadDelay: 1000
         });
-
+        done();
     });
 
     gulp.task('server:reload', function(done) {

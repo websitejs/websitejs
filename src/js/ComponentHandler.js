@@ -4,12 +4,12 @@
     /**
      * Keeps track of registered elements and components.
      * Upgrades components when classnames are found in the DOM.
-     * 
+     *
      * @author Rocco Janse <rocco.janse@valtech.nl>
      * @class ComponentHandler
      */
     var ComponentHandler = function() {
-        
+
         this.registeredItems = [];
         this.createdItems = [];
 
@@ -24,7 +24,7 @@
          * @public
          */
         register: function(item) {
-            
+
             $.each(this.registeredItems, function(i, component) {
 
                 // check for css classname already in use
@@ -133,7 +133,7 @@
                 classesToUpgrade = [];
 
             if (typeof jsClass === 'undefined') {
-                
+
                 var classList = $element[0].classList;
                 $.each(this.registeredItems, function(i, item) {
                     if (classList.contains(item.cssClass) && classesToUpgrade.indexOf(item) === -1 && this.isElementUpgraded($element, item.className) === false) {
@@ -144,7 +144,7 @@
             } else if (this.isElementUpgraded($element, jsClass) === false) {
                 classesToUpgrade.push(this.findRegisteredItem(jsClass));
             }
-            
+
             for (var i = 0; i < classesToUpgrade.length; i++) {
                 var registeredClass = classesToUpgrade[i];
                 upgradedList.push(registeredClass.className);
@@ -159,7 +159,7 @@
 
                 for (var j = 0; j < registeredClass.callbacks.length; j++) {
                     registeredClass.callbacks[j]($element);
-                }  
+                }
             }
 
         },
