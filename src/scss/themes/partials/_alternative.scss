@@ -1,0 +1,47 @@
+///
+/// color definitions (convention)
+/// Variables are named after closest matching color name.
+/// http://chir.ag/projects/name-that-color (includes 1500+ names)
+/// Slight tone adjustment (2.5% - 5%) possible using (standard) sass functions darken() and lighten().
+///
+$color-black:               #000000;
+$color-shark:               #21252b;
+$color-bright-gray:         #353c45;
+$color-nevada:              #656b6f;
+$color-oslo-gray:           #8c9093;
+$color-submarine:           #b9c1c6;
+$color-seashell:            #f1f1f1;
+$color-white:               #ffffff;
+
+$color-blaze-orange:        #21BEC0;
+$color-endeavour:           #C0219B;
+$color-jelly-bean:          #D161B7;
+$color-polo-blue:           #ECCBE4;
+$color-jewel:               #16883F;
+$color-crimson:             #ed1b2e;
+$color-sandy-brown:         #f0ad4e;
+
+// body
+$body-bg:                   $color-white !default;
+
+// text
+$text-color:                $color-bright-gray;
+$link-color:                $color-endeavour;
+$link-hover-color:          $color-endeavour;
+$link-hover-decoration:     none; // or ie: underline etc
+
+// typography
+$font-family-sans-serif:    Trebuchet, Arial, sans-serif;
+$font-family-condensed:     Arial, sans-serif;
+$font-family-serif:         Georgia, "Times New Roman", Times, serif;
+$font-family-base:          $font-family-sans-serif;
+
+$font-size-base:            18px;
+$line-height-base:          1.2;
+
+$headings-font-family:      $font-family-sans-serif;
+$headings-font-weight:      700;
+$headings-line-height:      $line-height-base;
+$headings-color:            $color-crimson;
+
+$icon-font-family:         "FontAwesome";

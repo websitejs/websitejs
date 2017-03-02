@@ -19,14 +19,17 @@ var config = require('../config'),
 module.exports = function() {
 
     // paths
-    var srcGlob = config.srcPath + '/styles.scss',
+    var srcGlob = [
+            config.srcPath + '/styles.scss',
+            config.srcPath + '/scss/**/*.scss'
+        ],
         dest = config.destPath + '/css',
         docs = config.destPath + '/docs/styles';
 
     gulp.add('styles:build', function(done) {
 
         // cleanup
-        del.sync([dest + '*[.css,.css.map']);
+        del.sync([dest + '*[.css,.css.map', dest + '/themes/*[.css,.css.map']);
 
         // build
         gulp.src(srcGlob)
