@@ -107,7 +107,7 @@ Optionally you can add a ```<g>``` (group) to isolate multiple paths or fills as
 ```
 
 ### Using SVG icons
-If you want to use and insert an icon, use the id "#<foldername>-<svgname>" inside a <use>-tag. SVG Icons should always have an <svg>-tag with the minimum base class "icon". See below.
+If you want to use and insert an icon, use the id "#<foldername>-<svgname>" inside a ```<use>```-tag. SVG Icons should always have an ```<svg>```-tag with the minimum base class "icon". See below.
 ```sh
 <svg class="icon">
     <use xlink:href="#foldername-svgname"></use>
