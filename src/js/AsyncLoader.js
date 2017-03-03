@@ -3,23 +3,40 @@
 
     /**
      * Loads scripts asynchrone
-     * 
+     *
      * @author Rocco Janse <rocco.janse@valtech.nl>
      * @class AsyncLoader
      */
     var AsyncLoader = function() {
 
         this.createdElements = [];
-        
+
         /**
          * Loads a script asychronously.
-         * @param {String} url Url to load.
+         * @param {String|Array} paramUrl Url or urls to load.
          * @param {Function} [callback] Optional callback function.
          * @memberof AsyncLoader
          * @public
          */
-        this.loadScript = function(url, callback) {
-            this.createElement('script', 'type', 'text/javascript', 'src', url, callback);
+        this.loadScript = function(paramUrl, callback) {
+            var _this = this;
+            if (typeof paramUrl === 'string') {
+                this.createElement('script', 'type', 'text/javascript', 'src', paramUrl, callback);
+            } else if (Array.isArray(paramUrl)) {
+                var current = 0;
+                // recursively load scripts untill all scripts are loaded
+                var recursiveCreateElement = function(url) {
+                    _this.createElement('script', 'type', 'text/javascript', 'src', url, function() {
+                        current++;
+                        if (current <= paramUrl.length - 1) {
+                            recursiveCreateElement(paramUrl[current]);
+                        } else {
+                            callback();
+                        }
+                    });
+                };
+                recursiveCreateElement(paramUrl[current]);
+            }
         };
 
         /**
@@ -32,7 +49,6 @@
         this.loadStylesheet = function(url, callback) {
             this.createElement('link', 'rel', 'stylesheet', 'href', url, callback);
         };
-
 
         return this;
     };
@@ -59,12 +75,12 @@
                 element = document.createElement(elementType);
                 element[fileTypeAttr] = fileType;
                 document.body.appendChild(element);
-                
+
                 if (typeof callback === 'function') {
                     element.addEventListener('load', function() {
                         _this.createdElements.push(fileUrl);
                         callback();
-                    });  
+                    });
                 }
 
                 element[fileUrlAttr] = fileUrl;
@@ -77,12 +93,12 @@
                         element[0].addEventListener('load', function() {
                             _this.createdElements.push(fileUrl);
                             callback();
-                        });  
-                    }                  
+                        });
+                    }
                 } else {
                     if (typeof callback === 'function') {
                         callback();
-                    }                     
+                    }
                 }
             }
         },

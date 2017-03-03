@@ -152,7 +152,7 @@
 
                 // create class instance
                 var instance = new registeredClass.classConstructor($element);
-                //instance.init();
+                instance.init();
                 //instance['itemProperty'] = registeredClass;
 
                 this.createdItems.push(instance);
