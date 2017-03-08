@@ -1,3 +1,5 @@
+/* global Utils */
+
 (function($) {
     'use strict';
 
@@ -12,7 +14,51 @@
         this.createdElements = [];
 
         /**
-         * Loads a script asychronously.
+         * Load external files asychronously, based on file extension (js/css).
+         * @param {String|Array} urls Url or urls to load.
+         * @param {Function} [callback] Optional callback function.
+         * @memberof AsyncLoader
+         * @public
+         */
+        this.load = function(urls, cb) {
+            var _this = this,
+                test = null,
+                arrJS = [],
+                arrCSS = [];
+
+            if (typeof urls === 'string') {
+
+                test = Utils.getFileExtension(urls);
+                if (test === 'css') {
+                    this.loadStylesheet(urls, cb);
+                } else {
+                    this.loadScript(urls, cb);
+                }
+
+            } else if (Array.isArray(urls)) {
+
+                for(var i = 0; i < urls.length; i++) {
+
+                    test = Utils.getFileExtension(urls[i]);
+                    if (test === 'css') {
+                        arrCSS.push(urls[i]);
+                    } else {
+                        arrJS.push(urls[i]);
+                    }
+                }
+
+                this.loadScript(arrJS, function() {
+                    _this.loadStylesheet(arrCSS, function() {
+                        if (typeof cb === 'function') {
+                            cb();
+                        }
+                    });
+                });
+            }
+        };
+
+        /**
+         * Loads a script, or an array of scripts asychronously and dependend.
          * @param {String|Array} paramUrl Url or urls to load.
          * @param {Function} [callback] Optional callback function.
          * @memberof AsyncLoader
@@ -40,14 +86,31 @@
         };
 
         /**
-         * Loads a stylesheet asychronously.
-         * @param {String} url Url to load.
+         * Loads a stylesheet, or an array of stylesheets asychronously and dependend.
+         * @param {String} paramUrl Url or urls to load.
          * @param {Function} [callback] Optional callback function.
          * @memberof AsyncLoader
          * @public
          */
-        this.loadStylesheet = function(url, callback) {
-            this.createElement('link', 'rel', 'stylesheet', 'href', url, callback);
+        this.loadStylesheet = function(paramUrl, callback) {
+            var _this = this;
+            if (typeof paramUrl === 'string') {
+                this.createElement('link', 'rel', 'stylesheet', 'href', paramUrl, callback);
+            } else if (Array.isArray(paramUrl)) {
+                var current = 0;
+                // recursively load scripts untill all scripts are loaded
+                var recursiveCreateElement = function(url) {
+                    _this.createElement('link', 'rel', 'stylesheet', 'href', url, function() {
+                        current++;
+                        if (current <= paramUrl.length - 1) {
+                            recursiveCreateElement(paramUrl[current]);
+                        } else {
+                            callback();
+                        }
+                    });
+                };
+                recursiveCreateElement(paramUrl[current]);
+            }
         };
 
         return this;
