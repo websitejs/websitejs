@@ -28,9 +28,9 @@ var config = require('../config'),
         jqversion: jq.version
     },
 
-    srcSgElements = [config.srcPath + '/elements/**/*.html'],
-    srcSgComponents = [config.srcPath + '/components/**/*.html'],
-    srcSgPages = [config.srcPath + '/styleguide/pages/**/*.html'],
+    srcSgElements = [config.srcPath + '/elements/**/*.{html,json}'],
+    srcSgComponents = [config.srcPath + '/components/**/*.{html,json}'],
+    srcSgPages = [config.srcPath + '/styleguide/pages/**/*.{html,json}'],
     srcSgIndex = [config.srcPath + '/styleguide/index.html'],
     dest = config.destPath + '/styleguide';
 
