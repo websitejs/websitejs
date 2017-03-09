@@ -1,4 +1,4 @@
-/* globals Maps, google */
+/* globals Maps, google, MarkerClusterer */
 
 (function($, viewport) {
     'use strict';
@@ -19,7 +19,10 @@
         var config = {
             markerDataUrl: '/styleguide/elements/maps/data.json',
             api: {
-                url: '//maps.googleapis.com/maps/api/js',
+                url: [
+                    '//maps.googleapis.com/maps/api/js',
+                    '/js/vendor/googlemaps.min.js'
+                ],
                 key: 'AIzaSyByqYYEoSA1hQ2MAxXnWe9VyrD_K-3t4Rk',
                 language: 'nl-NL',
                 region: 'NL'
@@ -27,7 +30,7 @@
             map: {
                 type: 'roadmap',
                 defaultUI: true,
-                clustring: true
+                clustering: true
             }
         };
 
@@ -37,14 +40,16 @@
         }
 
         // combine url and key for gm api call
-        var url = config.api.url;
+        var url = config.api.url[0];
         if (config.api.key) { url += '?key=' + config.api.key; }
         if (config.api.language) { url += '&language=' + config.api.language; }
         if (config.api.region) { url += '&region=' + config.api.region; }
-        config.api.url = url;
+        config.api.url[0] = url;
 
         // init base class
         Maps.call(this, $element, config);
+
+        this.markerClusterer = null;
 
         return this;
     };
@@ -91,8 +96,15 @@
                     ];
                     var icon = icons[Math.floor(Math.random()*icons.length)];
                     var position = markerData.dealers[i].latLng.split(',');
-                    _this.addMarker({ lat: parseFloat(position[0]), lng: parseFloat(position[1])}, icon);
+                    _this.markers.push(_this.addMarker({ lat: parseFloat(position[0]), lng: parseFloat(position[1])}, icon));
                 }
+
+                if (_this.clustering) {
+                    _this.markerClusterer = new MarkerClusterer(_this.map, _this.markers, {
+                        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+                    });
+                }
+
             });
         },
 
@@ -120,7 +132,7 @@
          * @param {sring} icon Path to image or html/svg string.
          */
         addMarker: function(coords, icon) {
-            new google.maps.Marker({
+            return new google.maps.Marker({
                 icon: icon,
                 position: coords,
                 map: this.map

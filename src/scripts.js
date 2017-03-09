@@ -40,13 +40,17 @@ $(document).ready(function() {
         $.each(gmaps, function(i, map) {
             new window.MapsGoogle($(map), {
                 api: {
-                    url: '//maps.googleapis.com/maps/api/js',
+                    url: [
+                        '//maps.googleapis.com/maps/api/js',
+                        '/js/vendor/googlemaps.min.js'
+                    ],
                     key: 'AIzaSyByqYYEoSA1hQ2MAxXnWe9VyrD_K-3t4Rk'
                 },
                 map: {
                     type: 'hybrid',
                     //overlay: 'traffic'
-                    disableDefaultUI: true
+                    disableDefaultUI: true,
+                    clustering: false
                 }
             }).init();
         });
@@ -64,7 +68,8 @@ $(document).ready(function() {
                 map: {
                     type: 'satellite',
                     overlay: 'traffic',
-                    disableDefaultUI: false
+                    disableDefaultUI: false,
+                    clustering: false
                 }
             }).init();
         });

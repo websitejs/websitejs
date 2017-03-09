@@ -45,6 +45,7 @@
         this.draggable = true;
         this.zoomControl = true;
 
+        this.markers = [];
         return this;
     };
 

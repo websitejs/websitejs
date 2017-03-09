@@ -26,6 +26,9 @@ module.exports =  {
         'libs': [
             "node_modules/js-cookie/src/js.cookie.js",
             "node_modules/@material/ripple/dist/mdc.ripple.min.js"
+        ],
+        'googlemaps': [
+            "node_modules/markerclustererplus/dist/markerclusterer.min.js"
         ]
     }
 

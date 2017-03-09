@@ -103,8 +103,6 @@
                 this.createElement('link', 'rel', 'stylesheet', 'href', paramUrl, callback);
             } else if (Array.isArray(paramUrl) && paramUrl.length > 0) {
                 var current = 0;
-
-                console.log(paramUrl);
                 // recursively load scripts untill all scripts are loaded
                 var recursiveCreateElement = function(url) {
                     _this.createElement('link', 'rel', 'stylesheet', 'href', url, function() {

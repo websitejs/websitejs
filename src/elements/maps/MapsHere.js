@@ -45,6 +45,7 @@
 
         // vars
         this.platform = null;
+        this.clusteredDataProvider = null;
 
         return this;
     };
@@ -66,10 +67,6 @@
 
             // create default layer
             this.defaultLayers = this.platform.createDefaultLayers();
-
-            this.getMarkerData(this.config.markerDataUrl, {}, function(markerData) {
-                console.log(markerData);
-            });
 
             // set map type to roadmap
             this.setMapType(this.defaultLayers[this.config.map.type].map);
@@ -108,7 +105,19 @@
                     ];
                     var icon = icons[Math.floor(Math.random()*icons.length)];
                     var position = markerData.dealers[i].latLng.split(',');
-                    _this.addMarker({ lat: parseFloat(position[0]), lng: parseFloat(position[1])}, icon);
+
+                    if (_this.clustering) {
+                        _this.markers.push(new H.clustering.DataPoint(parseFloat(position[0]), parseFloat(position[1])));
+                    } else {
+                        _this.markers.push(_this.addMarker({ lat: parseFloat(position[0]), lng: parseFloat(position[1])}, icon));
+                    }
+                }
+
+                // clustering
+                if (_this.clustering) {
+                    _this.clusteredDataProvider = new H.clustering.Provider(_this.markers);
+                    var layer = new H.map.layer.ObjectLayer(_this.clusteredDataProvider);
+                    _this.map.addLayer(layer);
                 }
             });
 
@@ -139,6 +148,7 @@
 
             var marker = new H.map.Marker(coords, ico);
             this.map.addObject(marker);
+            return marker;
         }
 
     });
