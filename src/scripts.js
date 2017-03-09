@@ -46,6 +46,7 @@ $(document).ready(function() {
                 map: {
                     type: 'hybrid',
                     //overlay: 'traffic'
+                    disableDefaultUI: true
                 }
             }).init();
         });
@@ -62,7 +63,8 @@ $(document).ready(function() {
                 },
                 map: {
                     type: 'satellite',
-                    overlay: 'traffic'
+                    overlay: 'traffic',
+                    disableDefaultUI: false
                 }
             }).init();
         });

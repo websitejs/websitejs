@@ -8,28 +8,39 @@
      * @class Maps
      * @author Rocco Janse, rocco.janse@valtech.nl
      * @param {jQueryElement} $element jQuery Element to upgrade with this class.
-     * @param {object} options Options object.
+     * @param {config} options Config object.
      * @requires AsyncLoader
      */
-    var Maps = function($element, options) {
+    var Maps = function($element, config) {
 
         this.config = {
             api: {
-                url: []
+                url: [],
+                language: 'nl-NL',
+                region: 'NL'
+            },
+            map: {
+                type: 'normal',
+                overlay: null,
+                disableDefaultUI: false,
+                zoomLevel: 7,
+                clustering: false
             }
         };
 
-        if (options) {
-            $.extend(this.config, options);
+        if (config) {
+            this.config = $.extend(true, this.config, config);
         }
 
         this.$element = $element;
         this.map = null;
-
-        this.zoomLevel = 7;
-        this.mapCenter = { lat: 51.44344, lng: 5.46137 };
-        this.mapType = null;
-        this.disableDefaultUI = true;
+        this.language = this.config.api.language;
+        this.region = this.config.api.region;
+        this.zoomLevel = this.config.map.zoomLevel;
+        this.mapCenter = { lat: 52.2129919, lng: 5.2793703 };
+        this.mapType = this.config.map.type;
+        this.disableDefaultUI = this.config.map.disableDefaultUI;
+        this.clustering = this.config.map.clustering;
         this.scrollwheel = false;
         this.draggable = true;
         this.zoomControl = true;
@@ -48,7 +59,7 @@
             var _this = this;
 
             // async load maps api
-            AsyncLoader.loadScript(this.config.api.url, function() {
+            AsyncLoader.load(this.config.api.url, function() {
                 _this.initMap();
             });
         },
@@ -63,7 +74,29 @@
             this.mapType = type;
         },
 
-        setOverlays: function() {}
+        /**
+         * Returns marker data object from request.
+         * @param {string} url Url where API is located on.
+         * @param {object} data Data to send to request url.
+         * @param {functon} [cb] Callback function.
+         */
+        getMarkerData: function(url, data, cb) {
+            $.ajax({
+                url: url,
+                data: data,
+                type: 'GET',
+                dataType: 'json'
+            })
+            .done(function(response) {
+                if (typeof cb === 'function') {
+                    cb(response);
+                }
+            })
+            .fail( function(d, textStatus, error) {
+                console.error("getJSON failed, status: " + textStatus + ", error: "+error);
+            });
+        }
+
 
     });
 
