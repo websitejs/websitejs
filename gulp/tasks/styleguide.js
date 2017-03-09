@@ -28,9 +28,9 @@ var config = require('../config'),
         jqversion: jq.version
     },
 
-    srcSgElements = [config.srcPath + '/elements/**/*.{html,json}'],
-    srcSgComponents = [config.srcPath + '/components/**/*.{html,json}'],
-    srcSgPages = [config.srcPath + '/styleguide/pages/**/*.{html,json}'],
+    srcSgElements = [config.srcPath + '/elements/**/*.html'],
+    srcSgComponents = [config.srcPath + '/components/**/*.html'],
+    srcSgPages = [config.srcPath + '/styleguide/pages/**/*.html'],
     srcSgIndex = [config.srcPath + '/styleguide/index.html'],
     dest = config.destPath + '/styleguide';
 
@@ -152,7 +152,12 @@ module.exports = function() {
      */
     gulp.add('styleguide:elements', function(done) {
         getFiles(config.destPath, '/css', '.css', function(res) {
+
             del.sync([dest + '/elements']);
+
+            gulp.src(config.srcPath + '/elements/**/*.json')
+                .pipe(gulp.dest(dest + '/elements'));
+
             gulp.src(srcSgElements)
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
@@ -175,7 +180,12 @@ module.exports = function() {
      */
     gulp.add('styleguide:components', function(done) {
         getFiles(config.destPath, '/css', '.css', function(res) {
+
             del.sync([dest + '/components']);
+
+            gulp.src(config.srcPath + '/components/**/*.json')
+                .pipe(gulp.dest(dest + '/components'));
+
             gulp.src(srcSgComponents)
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
@@ -198,7 +208,12 @@ module.exports = function() {
      */
     gulp.add('styleguide:pages', function(done) {
         getFiles(config.destPath, '/css', '.css', function(res) {
+
             del.sync([dest + '/pages']);
+
+            gulp.src(config.srcPath + '/pages/**/*.json')
+                .pipe(gulp.dest(dest + '/pages'));
+
             gulp.src(srcSgPages)
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
@@ -258,12 +273,21 @@ module.exports = function() {
      * watch all styleguide changes
      */
     gulp.add('styleguide:watch', function(done) {
+
         // watch styleguide index changes
         watch(srcSgIndex, {
             read: false
         }, function(file) {
             gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
             gulp.start(['styleguide:index', 'server:reload']);
+        });
+
+        // watch styleguide element chages
+        watch(config.srcPath + '/**/*.json', {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['styleguide:build', 'server:reload']);
         });
 
         // watch styleguide element chages
