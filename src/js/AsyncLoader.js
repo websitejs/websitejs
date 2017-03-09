@@ -40,6 +40,7 @@
                 for(var i = 0; i < urls.length; i++) {
 
                     test = Utils.getFileExtension(urls[i]);
+
                     if (test === 'css') {
                         arrCSS.push(urls[i]);
                     } else {
@@ -68,7 +69,7 @@
             var _this = this;
             if (typeof paramUrl === 'string') {
                 this.createElement('script', 'type', 'text/javascript', 'src', paramUrl, callback);
-            } else if (Array.isArray(paramUrl)) {
+            } else if (Array.isArray(paramUrl) && paramUrl.length > 0) {
                 var current = 0;
                 // recursively load scripts untill all scripts are loaded
                 var recursiveCreateElement = function(url) {
@@ -82,6 +83,10 @@
                     });
                 };
                 recursiveCreateElement(paramUrl[current]);
+            } else {
+                if (typeof callback === 'function') {
+                    callback();
+                }
             }
         };
 
@@ -96,8 +101,10 @@
             var _this = this;
             if (typeof paramUrl === 'string') {
                 this.createElement('link', 'rel', 'stylesheet', 'href', paramUrl, callback);
-            } else if (Array.isArray(paramUrl)) {
+            } else if (Array.isArray(paramUrl) && paramUrl.length > 0) {
                 var current = 0;
+
+                console.log(paramUrl);
                 // recursively load scripts untill all scripts are loaded
                 var recursiveCreateElement = function(url) {
                     _this.createElement('link', 'rel', 'stylesheet', 'href', url, function() {
@@ -110,6 +117,10 @@
                     });
                 };
                 recursiveCreateElement(paramUrl[current]);
+            } else {
+                if (typeof callback === 'function') {
+                    callback();
+                }
             }
         };
 
