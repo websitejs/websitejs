@@ -57,9 +57,10 @@ module.exports = function() {
             }, function(err, files) {
                 if (err) { gutil.log(err); }
                 files.forEach(function(file, i) {
+
                     var cleanPath = file.replace(root, '').substring(1),
                         filePath = path.dirname(cleanPath),
-                        type = filePath.split('\\').slice(-1)[0],
+                        type = filePath.split('\\').slice(1).join('/'),
                         name = path.basename(file, ext).replace('.min', '');
 
                     retArray.push({
@@ -87,7 +88,7 @@ module.exports = function() {
      * @private
      */
     function getDataForFile(file) {
-        var type = path.relative('.', file.relative).split('\\')[0],
+        var type = path.relative('.', file.relative).split('\\').join('/'),
             name = path.basename(file.relative, '.html');
         return {
             meta: { title: config.name + " - " + type + " - " + name },
