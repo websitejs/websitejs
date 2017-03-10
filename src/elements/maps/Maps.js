@@ -1,5 +1,3 @@
-/* globals AsyncLoader */
-
 (function($, viewport) {
     'use strict';
 
@@ -21,9 +19,10 @@
             },
             map: {
                 type: 'normal',
+                center: { lat: 52.2129919, lng: 5.2793703 },
+                zoomLevel: 7,
                 overlay: null,
                 disableDefaultUI: false,
-                zoomLevel: 7,
                 clustering: false
             }
         };
@@ -37,7 +36,7 @@
         this.language = this.config.api.language;
         this.region = this.config.api.region;
         this.zoomLevel = this.config.map.zoomLevel;
-        this.mapCenter = { lat: 52.2129919, lng: 5.2793703 };
+        this.mapCenter = this.config.map.center;
         this.mapType = this.config.map.type;
         this.disableDefaultUI = this.config.map.disableDefaultUI;
         this.clustering = this.config.map.clustering;
@@ -51,25 +50,21 @@
 
     $.extend(Maps.prototype, /** @lends Maps.prototype */ {
 
+        init: function() { console.error('Maps base class should be extended.'); },
+        initMap: function() { console.error('Maps base class should be extended.'); },
+        initialized: function() { console.error('Maps base class should be extended.'); },
+
         /**
-         * Loads depended api's and inits map.
-         * @public
+         * Sets a new map center.
+         * @param {object} center Center lat/lng object.
          */
-        init: function() {
-
-            var _this = this;
-
-            // async load maps api
-            AsyncLoader.load(this.config.api.url, function() {
-                _this.initMap();
-            });
+        setMapCenter: function(center) {
+            this.map.setCenter(center);
         },
 
-        initMap: function() { console.error('Maps base class should be extended.'); },
-
         /**
-         * Sets Map type
-         * @param {String} type Map type.
+         * Sets map type.
+         * @param {string} type Map type.
          */
         setMapType: function(type) {
             this.mapType = type;
