@@ -14,13 +14,13 @@ This project uses Node Package Manager (npm) to manage dependencies and Gulp to 
 
 ### Updating NPM
 ```sh
-npm install --global npm
+npm install -global npm
 ```
 
 ### Install Gulp command
-*If you've previously installed gulp globally, run `npm rm --global gulp` before following these instructions.*
+*If you've previously installed gulp globally, run `npm rm -global gulp` before following these instructions.*
 ```sh
-npm install --global gulp-cli
+npm install -global gulp-cli
 ```
 
 ### First run

@@ -1,6 +1,36 @@
-{% extends "styleguide/includes/layout.html" %}
+<!DOCTYPE html>
+<html lang="nl">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#21252b">
+        <title>DAF2.0 - styleguide</title>
 
-        {% block content %}
+        <link rel="stylesheet" title="current" href="/css/styles.min.css">
+
+
+    
+<link rel="stylesheet alternate" title="styles" href="/css\styles.min.css">
+    
+<link rel="stylesheet alternate" title="theme-alternative" href="/css\themes\theme-alternative.min.css">
+    
+
+
+    </head>
+    <body>
+        
+        <div class="styleguide__css-switcher js-css-switcher">
+
+     <a href="/css\styles.min.css" class="css-switcher__item active">styles</a>
+
+    | <a href="/css\themes\theme-alternative.min.css" class="css-switcher__item ">theme-alternative</a>
+
+</div>
+
+        
+
+        
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -271,7 +301,7 @@
         <div class="container-fluid nogutters bg bg--light">
             <p>full width without gutters</p>
             <div class="container nogutters bg bg--dark">
-                <p>page width without gutters</p>
+                <p>page width with gutters, cols without gutters</p>
                 <div class="row nogutters">
                     <div class="col-xs-1"><p class="bg bg--white">1</p></div>
                     <div class="col-xs-1"><p class="bg bg--white">1</p></div>
@@ -294,6 +324,7 @@
         <div class="container-fluid nogutters bg bg--light">
             <p>full width without gutters</p>
             <div class="container bg bg--dark">
+                <p>page width and cols without gutters</p>
                 <div class="row nogutters">
                     <div class="col-xs-1"><p class="bg bg--white">1</p></div>
                     <div class="col-xs-1"><p class="bg bg--white">1</p></div>
@@ -316,6 +347,7 @@
         <div class="container-fluid nogutters bg bg--light">
             <p>full width without gutters</p>
             <div class="container bg bg--dark">
+                <p>some cols without gutters</p>
                 <div class="row">
                     <div class="col-xs-1"><p class="bg bg--white">1</p></div>
                     <div class="col-xs-1"><p class="bg bg--white">1</p></div>
@@ -334,4 +366,27 @@
         </div>
 
         <div class="container-fluid spacer spacer--large"></div>
-        {% endblock %}
+        
+
+        <script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/vendor/bootstrap.min.js"></script>
+<script src="/js/vendor/libs.min.js"></script>
+<script src="/js/scripts.min.js"></script>
+
+
+<script>
+    // quick and dirty switch for stylesheets/themes
+    var themeLinks = $('.js-css-switcher a');
+    themeLinks.on('click', function(e) {
+        e.preventDefault();
+        var $currentStyleSheet = $('link[rel=stylesheet][title=current]'),
+            $newStyleSheet = $('<link>').attr('href', $(this).attr('href')).attr('rel', 'stylesheet').attr('title', 'current');
+        $currentStyleSheet.replaceWith($newStyleSheet);
+        themeLinks.removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
+
+
+    </body>
+</html>
