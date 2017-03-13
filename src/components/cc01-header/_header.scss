@@ -1,3 +1,41 @@
 .header {
-    background-color: $color-blaze-orange;
+    // background-color: $color-blaze-orange;
+
+    .logo-bg {
+        background: linear-gradient(#ffffff, #dddee2);
+    }
+
+    .logo-daf {
+        height: 100%;
+        max-width: 100%;
+        padding: 1.5em .75em 1.5em;
+    }
+
+        
+    .navbar {
+        background: linear-gradient(#8c9093, #353c45);
+        color: white;
+        border: none;
+        border-radius: 0;
+    }
+        .nav {
+            li a {
+                background: linear-gradient(#8c9093, #353c45);
+                color: white;
+            }
+
+            .divider-vertical {
+                width: 1px;
+                height: 49.18px;
+                background-color: rgba(0, 0, 0, .5);
+                padding-left: 1px;
+                border-right: solid;
+                border-color: rgba(255, 255, 255, 0.5);
+                border-width: 0 1px;
+            }
+
+            .dropdown {
+                display: none;
+            }
+        }
 }
