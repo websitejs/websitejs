@@ -39,6 +39,10 @@
         // instantiate base class, bound to 'this'
         MapsGoogle.call(this, $element, config);
 
+        // init resultlist
+        this.$resultsList = $element.find('.resultslist');
+        this.$resultHtmlTpl = this.$resultsList.find('.tpl');
+
         console.log(this);
 
     };
@@ -78,7 +82,7 @@
                     var position = { lat: parseFloat(dealer.Latitude), lng: parseFloat(dealer.Longitude) };
 
                     // add marker to marker array an add it to the map
-                    _this.markers.push(_this.addMarker(position, icon));
+                    _this.markers.push(_this.addMarker(position, icon, dealer));
                 }
 
                 // if clustering is on, add clusterer layer
@@ -86,7 +90,22 @@
                     _this.setMarkerClusterer(_this.markers, 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m');
                 }
 
+                _this.updateResultsList();
+
             });
+
+        },
+
+        updateResultsList: function() {
+
+            var currentMapBounds = this.map.getBounds();
+            console.log(currentMapBounds);
+            for (var i = 0; i < this.markers.length; i++) {
+
+                if (currentMapBounds.contains(this.markers[i].getPosition())) {
+                    console.log(this.markers[i].data, 'IN VIEWPORT');
+                }
+            }
 
         }
 
