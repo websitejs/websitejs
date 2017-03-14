@@ -74,6 +74,8 @@
          */
         initMap: function() {
 
+            var _this = this;
+
            // define map
             this.map = new google.maps.Map(this.$element.find('.map')[0], {
                 zoom: this.zoomLevel,
@@ -92,7 +94,9 @@
             }
 
             // call initialized method
-            this.initialized();
+            google.maps.event.addListenerOnce(this.map, 'idle', function() {
+                _this.initialized();
+            });
         },
 
         /**
@@ -116,13 +120,18 @@
         /**
          * Adds a marker to a map.
          * @param {object} coords Lat/lng coordinates.
-         * @param {sring} icon Path to image or html/svg string.
+         * @param {string} icon Path to image or html/svg string.
+         * @param {object} [data] Object for custom data.
          */
-        addMarker: function(coords, icon) {
+        addMarker: function(coords, icon, data) {
+            if (typeof data === 'undefined') {
+                data = {};
+            }
             return new google.maps.Marker({
                 icon: icon,
                 position: coords,
-                map: this.map
+                map: this.map,
+                data: data
             });
         },
 

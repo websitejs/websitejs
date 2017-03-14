@@ -6,6 +6,24 @@
         <div class="container storelocator-shimano js-storelocator-shimano" data-initial-lat="52.0634675" data-initial-lng="5.1004992" data-initial-zoom="7">
             <div class="row">
                 <div class="col-xs-12">
+                    <form class="storelocator-search">
+                        <input type="text" class="storelocator-search__query js-autosuggest" name="storelocator-search__query" id="storelocator-search__query" value="" placeholder="Enter searchquery..." />
+                        <input type="submit" class="storelocator-search__submit" name="storelocator-search__submit" id="storelocator-search__submit" value="Find your dealer" />
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="storelocator-shimano__results">
+                        <ul class="resultslist">
+                            <li class="tpl">
+                                <h3>Dealer name</h3>
+                                <p>Address 1</p>
+
+                            </li>
+                        </ul>
+                        <div class="loader"></div>
+                    </div>
                     <div class="storelocator-shimano__map map">
                         <div class="loader"></div>
                     </div>
