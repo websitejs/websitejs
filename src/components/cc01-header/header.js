@@ -16,7 +16,7 @@
          */
         this.$element = $element;
 
-        this.init();
+        // this.init();
         
         return this;
     };

@@ -1,3 +1,43 @@
 .footer {
-    background-color: $color-endeavour;
+    background-color: $color-bright-gray;
+    color: $color-white;
+
+    &__text {
+        h4, a {
+            color: $color-white;
+        }
+    }
+
+    h4 {
+        margin-bottom: 1.5em;
+        font-weight: 600;
+    }
+
+    a {
+        font-size: 12px;
+    }
+
+    .icon {
+        fill: $color-white;
+    }
+
+    &__bottom-text {
+        margin-top: 1.5em;
+        font-size: 12px;
+        color: $color-oslo-gray;
+
+        p,a {
+            font-size: 12px;
+            color: $color-oslo-gray;
+        }
+    }
+
+    &__line-bottom {
+        // height: 50px;
+        // width: 100%;
+        background-color: $color-bright-gray;
+        border-top: 1px solid $color-white;
+        right: 0;
+        margin: 1.5em;
+    }
 }
