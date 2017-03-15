@@ -7,10 +7,10 @@ var config = require('../config'),
     path = require('path'),
     del = require('del'),
     rename = require('gulp-rename'),
-    cache = require('gulp-cached'),
-    remember = require('gulp-remember'),
     svgmin = require('gulp-svgmin'),
-    svgstore = require('gulp-svgstore');
+    svgstore = require('gulp-svgstore'),
+    watch = require('gulp-watch'),
+    notify = require('gulp-notify');
 
 // paths
 var srcGlob = [
@@ -28,6 +28,11 @@ module.exports = function() {
         gulp.src(srcGlob, {
                 base: config.srcPath + '/assets/icons/svg-icons'
             })
+            .pipe(plumber(function(error) {
+                gutil.log(error.message);
+                notify().write(error.message);
+                this.emit('end');
+            }))
             .pipe(svgmin({
                 plugins: [{
                     removeDoctype: false
@@ -41,11 +46,16 @@ module.exports = function() {
                 file.basename = name.join('-');
             }))
             .pipe(svgstore())
-            .pipe(gulp.dest(dest))
-            .on('end', done);
+            .pipe(gulp.dest(dest));
+         done();
     });
 
     gulp.add('assets:svg:icons:watch', function() {
-        var watcher = gulp.watch(srcGlob, ['assets:svg:icons', 'server:reload']);
+        watch(srcGlob, {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['assets:svg:icons', 'server:reload']);
+        });
     });
 };

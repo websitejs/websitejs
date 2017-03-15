@@ -1,24 +1,27 @@
 
 // background color
 .bg {
+    &--white {
+        background-color: #ffffff;
+    }
     &--light {
-        background-color: $gray-lightest;
+        background-color: $color-seashell;
 
         h1, h2, h3, h4, h5, h6 {
-            color: $gray-dark;
+            color: $color-bright-gray;
         }
         p {
-            color: $gray-dark;
+            color: $color-bright-gray;
         }
     }
     &--dark {
-        background-color: $gray-dark;
+        background-color: $color-bright-gray;
 
         h1, h2, h3, h4, h5, h6 {
             color: #ffffff;
         }
         p {
-            color: $gray-lighter;
+            color: $color-submarine;
         }
     }
 }
@@ -35,7 +38,7 @@
             content: "";
             width: 62px;
             height: 3px;
-            background-color: $brand-primary;
+            background-color: $color-blaze-orange;
         }
 
         @media(min-width: $sm) {

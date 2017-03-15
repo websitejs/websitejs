@@ -1,0 +1,38 @@
+{
+	"Dealers":
+	{
+		"Dealer":
+		[
+			{
+				"ID":"20170101",
+				"Name":"Van der Linde Almere",
+				"Latitude":"51.8837638",
+				"Longitude":"51.8837638",
+				"Address1":"Brouwersstraat 8 B",
+				"Address2":"",
+				"Zipcode":"1315BP",
+				"City":"ALMERE",
+				"Country":"Nederland",
+				"Telephone":"+43 (0) 2252/256637",
+				"EmailAddress":"info@vanderLindeAlmere.nl",
+				"URL":"www.vanderLindeAlmere.nl",
+				"Distance":"128"
+			},
+			{
+				"ID":"20170102",
+				"Name":"V.O.F. Tweewielercentrum Leo Smit",
+				"Latitude":"52.76352019999999",
+				"Longitude":"5.094920799999954",
+				"Address1":"Almereweg 41a",
+				"Address2":"",
+				"Zipcode":"1671ND",
+				"City":"MEDEMBLIK",
+				"Country":"Nederland",
+				"Telephone":"",
+				"EmailAddress":"",
+				"URL":"",
+				"Distance":"65"
+			}
+		]
+	}
+}

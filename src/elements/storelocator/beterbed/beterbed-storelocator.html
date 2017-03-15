@@ -1,0 +1,15 @@
+{% if extends %}{% extends "styleguide/includes/layout.html" %}{% endif %}
+
+        {% block content %}
+        {% include "styleguide/includes/moduleinfo.html" %}
+
+        <div class="container storelocator-beterbed js-storelocator-beterbed">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="storelocator-beterbed__map map">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}

@@ -4,6 +4,7 @@ var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
+    path = require('path'),
     del = require('del'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
@@ -11,25 +12,31 @@ var config = require('../config'),
     autoprefixer = require('gulp-autoprefixer'),
     cssGlob = require('gulp-css-globbing'),
     cssNano = require('gulp-cssnano'),
-    strip = require('gulp-strip-css-comments'),
-    sassdoc = require('sassdoc');
+    //strip = require('gulp-strip-css-comments'),
+    sassdoc = require('sassdoc'),
+    watch = require('gulp-watch'),
+    notify = require('gulp-notify');
 
 module.exports = function() {
 
     // paths
-    var srcGlob = config.srcPath + '/styles.scss',
+    var srcGlob = [
+            config.srcPath + '/styles.scss',
+            config.srcPath + '/scss/**/*.scss'
+        ],
         dest = config.destPath + '/css',
         docs = config.destPath + '/docs/styles';
 
     gulp.add('styles:build', function(done) {
 
         // cleanup
-        del.sync([dest + '*[.css,.css.map']);
+        del.sync([dest + '*[.css,.css.map', dest + '/themes/*[.css,.css.map']);
 
         // build
         gulp.src(srcGlob)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
+                notify().write(error.message);
                 this.emit('end');
             }))
             .pipe(sourcemaps.init())
@@ -38,11 +45,16 @@ module.exports = function() {
                 outputStyle: 'expanded',
                 defaultEncoding: 'utf-8',
                 unixNewlines: false,
-                errLogToConsole: true,
-                stopOnError: false,
                 cacheLocation: config.srcPath + '.sass-cache/',
                 precision: 4,
-                compass: false
+                compass: false,
+                includePaths: ['node_modules'],
+                errLogToConsole: true,
+                stopOnError: false
+            }).on('error', function(err) {
+                notify({ title: 'SASS compile issue' }).write('line ' + err.line + ', col ' + err.column + ': ' + err.messageOriginal);
+                //notify(err.messageOriginal);
+                this.emit('end');
             }))
             .pipe(autoprefixer({ browsers: ['> 5%', 'IE 11', 'last 3 version'], cascade: false }))
             .pipe(cssNano({ zindex: false }))
@@ -55,7 +67,12 @@ module.exports = function() {
     });
 
     gulp.add('styles:watch', function() {
-        gulp.watch(config.srcPath + '/**/*.scss', ['styles:build', 'server:reload']);
+        watch(config.srcPath + '/**/*.scss', {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            gulp.start(['styles:build', 'server:reload']);
+        });
     });
 
     gulp.add('styles:docs', function(done) {

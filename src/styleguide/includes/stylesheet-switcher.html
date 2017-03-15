@@ -1,0 +1,5 @@
+<div class="styleguide__css-switcher js-css-switcher">
+{% for theme in stylesheets %}
+    {% if loop.index !== 1 %}|{% endif %} <a href="/{{ theme.path }}" class="css-switcher__item {% if loop.index === 1 %}active{% endif %}">{{ theme.name }}</a>
+{% endfor %}
+</div>

@@ -1,1 +1,7 @@
-<link rel="stylesheet" href="{{ paths.css }}/styles.min.css">
+<link rel="stylesheet" title="current" href="{{ paths.css }}/styles.min.css">
+
+{% if stylesheets | length > 1 %}
+    {% for stylesheet in stylesheets %}
+<link rel="stylesheet alternate" title="{{ stylesheet.name }}" href="/{{ stylesheet.path }}">
+    {% endfor %}
+{% endif %}

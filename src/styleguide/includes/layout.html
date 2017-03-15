@@ -10,6 +10,9 @@
         {% include "styleguide/includes/headerscripts.html" %}
     </head>
     <body>
+        {% if stylesheets | length > 1 %}
+        {% include "styleguide/includes/stylesheet-switcher.html" %}
+        {% endif %}
 
         {% block content %} {% endblock %}
 

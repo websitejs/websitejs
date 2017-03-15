@@ -41,39 +41,61 @@
         width: 100%;
         @include ratio-box(16/9);
 
-        &--primary {
-            background-color: $brand-primary;
+        &--blaze-orange {
+            background-color: $color-blaze-orange;
         }
-        &--secondary {
-            background-color: $brand-secondary;
+        &--endeavor {
+            background-color: $color-endeavour;
+        }
+        &--jelly-bean {
+            background-color: $color-jelly-bean;
+        }
+        &--polo-blue {
+            background-color: $color-polo-blue;
+        }
+        &--crimson {
+            background-color: $color-crimson;
+        }
+        &--jewel {
+            background-color: $color-jewel;
+        }
+        &--nevada {
+            background-color: $color-nevada;
+        }
+        &--seashell {
+            background-color: $color-seashell;
+        }
+        &--submarine {
+            background-color: $color-submarine;
+        }
+        &--oslo-gray {
+            background-color: $color-oslo-gray;
+        }
+        &--bright-gray {
+            background-color: $color-bright-gray;
+        }
+        &--shark {
+            background-color: $color-shark;
+        }
+    }
 
-            &-light {
-                background-color: $brand-secondary-light;
-            }
-            &-lighter {
-                background-color: $brand-secondary-lighter;
-            }
-        }
-        &--thirtiary {
-            background-color: $brand-thirtiary;
-        }
-        &--gray {
-            background-color: $gray;
+    &__css-switcher {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px 10px;
+        background-color: rgba(0, 0, 0, .3);
+        z-index: 99999;
+        font-family: Arial, Helvetica;
+        font-size: 12px;
+        color: #fff;
 
-            &-lightest {
-                background-color: $gray-lightest;
-            }
-            &-lighter {
-                background-color: $gray-lighter;
-            }
-            &-light {
-                background-color: $gray-light;
-            }
-            &-dark {
-                background-color: $gray-dark;
-            }
-            &-darker {
-                background-color: $gray-darker;
+        a {
+            color: #fff;
+            text-decoration: none;
+
+            &.active {
+                text-decoration: underline;
             }
         }
     }

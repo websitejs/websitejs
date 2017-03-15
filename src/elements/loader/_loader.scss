@@ -1,10 +1,9 @@
 $base-line-height: 24px;
-$color: $brand-primary;
+$color: $color-blaze-orange;
 $off-color: rgba($color, 0.2);
 $spin-duration: 1s;
 
 .loader {
-    margin-top: 0 - ($base-line-height / 2);
     border-radius: 50%;
     width: $base-line-height;
     height: $base-line-height;
@@ -16,9 +15,9 @@ $spin-duration: 1s;
 
 @keyframes spin {
   0% {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }

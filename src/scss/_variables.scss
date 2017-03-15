@@ -1,43 +1,16 @@
-$gray-darker:               #21252b;
-$gray-dark:                 #353c45;
-$gray:                      #656b6f;
-$gray-light:                #8c9093;
-$gray-lighter:              #b9c1c6;
-$gray-lightest:             #f1f1f1;
+// colors bootstrap compatibility
+$gray-base:                 $color-black;
+$gray-darker:               $color-shark;
+$gray-dark:                 $color-bright-gray;
+$gray:                      $color-nevada;
+$gray-light:                $color-oslo-gray;
+$gray-lighter:              $color-submarine;
 
-$brand-primary:             #fc5f01;
-$brand-secondary:           #00529c;
-$brand-secondary-light:     #266cab;
-$brand-secondary-lighter:   #80a9ce;
-
-$brand-thirtiary:           #ed1b2e;
-$brand-success:             $brand-secondary;
-$brand-info:                #5bc0de;
-$brand-warning:             #f0ad4e;
-$brand-danger:              $brand-thirtiary;
-
-// body
-$body-bg:                   #ffffff;
-
-// text
-$text-color:                $gray-dark;
-$link-color:                $brand-secondary;
-$link-hover-color:          $brand-secondary;
-$link-hover-decoration:     none; // or ie: underline etc
-
-// typography
-$font-family-sans-serif:    "HelveticaNeueLTW1G", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-condensed:     "HelveticaNeueLTW1G-Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-serif:         Georgia, "Times New Roman", Times, serif;
-$font-family-base:          $font-family-sans-serif;
-
-$font-size-base:            16px;
-$line-height-base:          1.2;
-
-$headings-font-family:      $font-family-sans-serif;
-$headings-font-weight:      700;
-$headings-line-height:      $line-height-base;
-$headings-color:            $gray-dark;
+$brand-primary:             $color-endeavour;
+$brand-success:             $color-jewel;
+$brand-info:                $color-jelly-bean;
+$brand-warning:             $color-sandy-brown;
+$brand-danger:              $color-crimson;
 
 // breakpoints
 $xs:                        480px;
@@ -59,6 +32,16 @@ $screen-lg-min:             $screen-lg;
 // grid
 $grid-columns:              12;
 $grid-gutter-width:         20px;
+
+// container widths
+$container-tablet:          (720px + $grid-gutter-width);
+$container-sm:              $container-tablet;
+
+$container-desktop:         (940px + $grid-gutter-width);
+$container-md:              $container-desktop;
+
+$container-large-desktop:   (1140px + $grid-gutter-width);
+$container-lg:              $container-large-desktop;
 
 // nav breakpoints
 $grid-float-breakpoint:     $sm;

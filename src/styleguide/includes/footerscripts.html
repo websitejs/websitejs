@@ -2,3 +2,18 @@
 <script src="{{ paths.js }}/vendor/bootstrap.min.js"></script>
 <script src="{{ paths.js }}/vendor/libs.min.js"></script>
 <script src="{{ paths.js }}/{{ paths.jsFilename }}.min.js"></script>
+
+{% if stylesheets %}
+<script>
+    // quick and dirty switch for stylesheets/themes
+    var themeLinks = $('.js-css-switcher a');
+    themeLinks.on('click', function(e) {
+        e.preventDefault();
+        var $currentStyleSheet = $('link[rel=stylesheet][title=current]'),
+            $newStyleSheet = $('<link>').attr('href', $(this).attr('href')).attr('rel', 'stylesheet').attr('title', 'current');
+        $currentStyleSheet.replaceWith($newStyleSheet);
+        themeLinks.removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
+{% endif %}

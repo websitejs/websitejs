@@ -1,6 +1,6 @@
 {
   "name": "websitejs",
-  "version": "0.1.4",
+  "version": "0.5.0",
   "description": "Modular Frontend Architecture",
   "main": "dist/websitejs.min.js",
   "scripts": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/websitejs/websitejs#readme",
   "devDependencies": {
+    "@material/ripple": "^0.3.0",
     "bootstrap-sass": "^3.3.7",
     "browser-sync": "^2.18.5",
     "chromedriver": "^2.26.1",
@@ -42,6 +43,7 @@
     "gulp-imagemin": "^3.1.1",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-jshint": "^2.0.2",
+    "gulp-notify": "^3.0.0",
     "gulp-nunjucks-render": "^2.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-remember": "^0.3.1",
@@ -53,12 +55,14 @@
     "gulp-svgmin": "^1.2.3",
     "gulp-svgstore": "^6.1.0",
     "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.11",
     "iedriver": "^3.0.0",
     "imagemin-pngquant": "^5.0.0",
     "jquery": "^3.1.1",
     "js-cookie": "^2.1.3",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
+    "markerclustererplus": "^2.1.4",
     "node-dir": "^0.1.16",
     "responsive-toolkit": "^2.6.3",
     "sassdoc": "^2.1.20",

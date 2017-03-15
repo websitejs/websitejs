@@ -4,6 +4,7 @@ var config = require('../config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
+    path = require('path'),
     del = require('del'),
     rename = require('gulp-rename'),
     cache = require('gulp-cached'),
@@ -12,8 +13,10 @@ var config = require('../config'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    stripJs = require('gulp-strip-comments'),
-    jsdoc = require('gulp-jsdoc3');
+    //stripJs = require('gulp-strip-comments'),
+    jsdoc = require('gulp-jsdoc3'),
+    watch = require('gulp-watch'),
+    notify = require('gulp-notify');
 
 module.exports = function() {
 
@@ -38,31 +41,45 @@ module.exports = function() {
         gulp.src(srcGlob)
             .pipe(plumber(function(error) {
                 gutil.log(error.message);
+                notify().write(error.message);
                 this.emit('end');
             }))
             .pipe(sourcemaps.init())
             .pipe(cache(cacheName))
             .pipe(jshint())
-            .pipe(jshint.reporter('jshint-stylish'))
+            //.pipe(jshint.reporter('jshint-stylish'))
+            .pipe(notify(function(file) {
+                if (file.jshint.success) {
+                    return false;
+                }
+                var errors = file.jshint.results.map(function(data) {
+                    if (data.error) {
+                        return 'line ' + data.error.line + ', col ' + data.error.character + ': ' + data.error.reason;
+                    }
+                }).join('\n');
+
+                return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
+            }))
             .pipe(remember(cacheName))
             .pipe(uglify({ mangle: false }))
             .pipe(concat(fileName + '.js'))
             .pipe(rename({ suffix: '.min' }))
             //.pipe(stripJs())
             .pipe(sourcemaps.write('.'))
-            .pipe(gulp.dest(dest))
-            .on('end', done);
-
+            .pipe(gulp.dest(dest));
+        done();
     });
 
     gulp.add('scripts:watch', function() {
-
-        var watcher = gulp.watch(srcGlob, ['scripts:build', 'server:reload']);
-        watcher.on('change', function(e) {
-            if (e.type === 'deleted') {
-                delete cache.caches[cacheName][e.path];
-                remember.forget(cacheName, e.path);
+        watch(srcGlob, {
+            read: false
+        }, function(file) {
+            gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
+            if (file.event === 'unlink') {
+                delete cache.caches[cacheName][file.path];
+                remember.forget(cacheName, file.path);
             }
+            gulp.start(['scripts:build', 'server:reload']);
         });
     });
 

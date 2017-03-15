@@ -6,7 +6,7 @@ var config = require('../config'),
     gulpGalen = require('gulp-galenframework');
 
 module.exports = function() {
-    
+
     gulp.add('test:galen', function(done) {
 
         del.sync([config.paths.dest + config.paths.galen.report]);
@@ -21,9 +21,7 @@ module.exports = function() {
                     'webdriver.chrome.driver': './node_modules/chromedriver/lib/chromedriver/chromedriver.exe',
                     'webdriver.gecko.driver': './webdrivers/geckodriver.exe',
                     'webdriver.edge.driver': './webdrivers/MicrosoftWebDriver.exe',
-                    'webdriver.ie.driver': './node_modules/iedriver/lib/iedriver64/IEDriverServer.exe',
-                    'browserstack.username': 'efocustester',
-                    'browserstack.key': 'mMj3qR64dSyC5t244nuS'
+                    'webdriver.ie.driver': './node_modules/iedriver/lib/iedriver64/IEDriverServer.exe'
                 },
                 'cwd': '.'
             }, done()));
