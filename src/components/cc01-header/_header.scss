@@ -17,25 +17,73 @@
         color: white;
         border: none;
         border-radius: 0;
+        height: 49.18px;
+        
+        &__standard-menu {
+            opacity: 0;
+        }
+
+        &__more-menu {
+            display: none;
+        }
     }
-        .nav {
-            li a {
-                background: linear-gradient($color-oslo-gray, $color-bright-gray);
-                color: white;
-            }
 
-            &__divider-vertical {
-                width: 1px;
-                height: 49.18px;
-                background-color: rgba(0, 0, 0, .5);
-                padding-left: 1px;
-                border-right: solid;
-                border-color: rgba(255, 255, 255, .5);
-                border-width: 0 1px;
-            }
+    .nav {
+        height: 49.18px;
 
-            .dropdown {
-                // display: none;
+        li a {
+            color: white;
+        }
+        
+        .header-button {
+            background: linear-gradient($color-oslo-gray, $color-bright-gray);
+            color: white;
+        }
+
+        // make instead of <li>, an :after class of the following code
+        &__divider-vertical {
+            width: 1px;
+            height: 49.18px;
+            background-color: rgba(0, 0, 0, .5);
+            padding-left: 1px;
+            border-right: solid;
+            border-color: rgba(255, 255, 255, .5);
+            border-width: 0 1px;
+        }
+    
+    }
+
+    p {
+        color: black;
+    }
+
+
+    .dropdown {
+        &__dropdown-icon {
+            margin: 0 0 5px 5px;
+        }
+        &__more-button {
+            margin: 0;
+            border-bottom: 1px solid $color-submarine;
+            width: 20em;
+            font-size: .875em;
+            // font-size: 14px;
+            
+            a {
+                padding: .5em 1.5em;
+                background: $color-oslo-gray;
+            }
+            
+            a:hover {
+                background: $color-bright-gray;
             }
         }
+        
+        ul.dropdown-menu {
+            padding: 0;
+        }
+        .divider {
+            margin: 0;
+        }
+    }
 }
