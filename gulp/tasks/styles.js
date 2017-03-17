@@ -25,7 +25,7 @@ module.exports = function() {
             config.srcCssPath + '/**/*.scss'
         ],
         dest = config.destCssPath,
-        docs = config.destDocsPath + '/styles';
+        docs = config.destDocsPathCss;
 
     gulp.add('styles:build', function(done) {
 

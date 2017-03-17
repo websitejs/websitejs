@@ -42,8 +42,9 @@ module.exports =  {
     destStyleguidePath: destPath + '/styleguide',
 
     // docs
-    destDocsPath: destPath + '/docs',
+    destDocsPathJs: destPath + '/docs/scripts',
+    destDocsPathCss: destPath + '/docs/styles',
 
     // galen
-    destGalenReport: + '/test/layout'
+    destGalenReportLayout: destPath + '/test/layout'
 };

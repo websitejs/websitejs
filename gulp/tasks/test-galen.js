@@ -13,7 +13,7 @@ module.exports = function() {
 
         gulp.src(config.destStyleguidePath + '/**/*.test')
             .pipe(gulpGalen.test({
-                'htmlreport': config.destGalenReport,
+                'htmlreport': config.destGalenReportLayout,
                 //'parallel-tests': 3,
                 'properties': {
                     'galen.default.browser': 'chrome',

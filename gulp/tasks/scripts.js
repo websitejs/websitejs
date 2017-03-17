@@ -27,10 +27,10 @@ module.exports = function() {
             config.srcJsPath + '/base/**/*.js',
             config.srcElementsPath + '/**/*.js',
             config.srcComponentsPath + '/**/*.js',
-            config.srcJsPath + '/' + config.scriptsFileName + '.js'
+            config.srcPath + '/' + config.scriptsFilename + '.js'
         ],
         dest = config.destJsPath,
-        docs = config.destDocsPath + '/script',
+        docs = config.destDocsPathJs,
         cacheName = 'scriptFiles';
 
     gulp.add('scripts:build', function(done) {

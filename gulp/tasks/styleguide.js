@@ -140,7 +140,10 @@ module.exports = function() {
                             elements: elements,
                             components: components,
                             pages: pages,
-                            stylesheets: stylesheets
+                            stylesheets: stylesheets,
+                            docsjs: config.destDocsPathJs.replace(config.destPath, ''),
+                            docscss: config.destDocsPathCss.replace(config.destPath, ''),
+                            testlayout: config.destGalenReportLayout.replace(config.destPath, '')
                         };
                         cb(ret);
                     });
