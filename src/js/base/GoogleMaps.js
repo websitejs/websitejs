@@ -134,6 +134,20 @@
         },
 
         /**
+         * Adds Google Maps events to map.
+         * @param {string} event Event name.
+         * @param {function} cb Function to execute when triggered.
+         * @param {boolean} [once] Set this to true to trigger event only once.
+         */
+        addMapEventListener: function(event, cb, once) {
+            if (once === true) {
+                google.maps.event.addListenerOnce(this.map, event, cb);
+            } else {
+                google.maps.event.addListener(this.map, event, cb);
+            }
+        },
+
+        /**
          * Adds an overlay to a map.
          * @param {String} overlay Overlay type name.
          */
@@ -142,13 +156,16 @@
                 case 'traffic': {
                     this.trafficLayer = new google.maps.TrafficLayer();
                     this.trafficLayer.setMap(this.map);
-                    console.log(this.map);
                     break;
                 }
                 default: {
                     break;
                 }
             }
+        },
+
+        getMapBounds: function() {
+            return this.map.getBounds();
         },
 
         /**

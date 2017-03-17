@@ -192,6 +192,4 @@
         cssClass: 'js-autosuggest'
     });
 
-    window['AutoSuggest'] = AutoSuggest;
-
 })(jQuery, ResponsiveBootstrapToolkit);

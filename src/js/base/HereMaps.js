@@ -177,6 +177,10 @@
             this.map.setBaseLayer(this.defaultLayers[this.config.map.type][overlay]);
         },
 
+        getMapBounds: function() {
+            return this.map.getViewBounds();
+        },
+
         addMarker: function(coords, icon) {
             var ico = {};
             if (typeof icon !== 'undefined') {
