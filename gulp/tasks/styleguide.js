@@ -1,9 +1,10 @@
 'use strict';
 
-var config = require('../config'),
-    pkg = require('../../package.json'),
-    bs = require('bootstrap-sass/package.json'),
-    jq = require('jquery/package.json'),
+var config = require('../../.project/.config'),
+    sgConfig = require('../../'+ config.srcPath + '/styleguide/.config'),
+    pkg = require('../../package'),
+    bs = require('bootstrap-sass/package'),
+    jq = require('jquery/package'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -17,9 +18,9 @@ var config = require('../config'),
     notify = require('gulp-notify'),
 
     dataPaths = {
-        css: config.tplCssPath,
-        js: config.tplJsPath,
-        jsFilename: config.jsFilename
+        css: sgConfig.cssPath,
+        js: sgConfig.jsPath,
+        jsFilename: config.scriptsFilename
     },
     dataProject = {
         name: config.name,
@@ -32,7 +33,7 @@ var config = require('../config'),
     srcSgComponents = [config.srcPath + '/components/**/*.html'],
     srcSgPages = [config.srcPath + '/styleguide/pages/**/*.html'],
     srcSgIndex = [config.srcPath + '/styleguide/index.html'],
-    dest = config.destPath + '/styleguide';
+    dest = config.destStyleguidePath;
 
 module.exports = function() {
 

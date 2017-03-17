@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config'),
+var config = require('../../.project/.config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -23,13 +23,14 @@ module.exports = function() {
     // paths
     var fileName = 'scripts',
         srcGlob = [
-            config.srcPath + '/js/**/*.js',
-            config.srcPath + '/elements/**/*.js',
-            config.srcPath + '/components/**/*.js',
-            config.srcPath + '/' + fileName + '.js'
+            config.srcJsPath + '/ComponentHandler.js',
+            config.srcJsPath + '/base/**/*.js',
+            config.srcElementsPath + '/**/*.js',
+            config.srcComponentsPath + '/**/*.js',
+            config.srcJsPath + '/' + config.scriptsFileName + '.js'
         ],
-        dest = config.destPath + '/js',
-        docs = config.destPath + '/docs/script',
+        dest = config.destJsPath,
+        docs = config.destDocsPath + '/script',
         cacheName = 'scriptFiles';
 
     gulp.add('scripts:build', function(done) {
