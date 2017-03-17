@@ -26,7 +26,7 @@ $(document).ready(function() {
     var gmaps = $('.js-custom-maps');
     if (gmaps.length > 0) {
         $.each(gmaps, function(i, map) {
-            new window.MapsGoogle($(map), {
+            new window.GoogleMaps($(map), {
                 api: {
                     url: [
                         '//maps.googleapis.com/maps/api/js',
@@ -47,7 +47,7 @@ $(document).ready(function() {
     var hmaps = $('.js-custom-heremaps');
     if (hmaps.length > 0) {
         $.each(hmaps, function(i, map) {
-            new window.MapsHere($(map), {
+            new window.HereMaps($(map), {
                 api: {
                     url: ['//js.api.here.com/v3/3.0/mapsjs-core.js', '//js.api.here.com/v3/3.0/mapsjs-service.js'],
                     appId: 'PA5BWpI7imMUv5p6FKmT',

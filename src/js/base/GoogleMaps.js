@@ -1,19 +1,20 @@
-/* globals Maps, google, AsyncLoader, MarkerClusterer */
+/* globals google, Maps, AsyncLoader, MarkerClusterer */
 
 (function($, viewport) {
     'use strict';
 
     /**
      * Loads and displays a Google Map.
-     * @class MapsGoogle
+     * @class GoogleMaps
      * @author Rocco Janse, rocco.janse@valtech.nl
      * @param {jQueryElement} $element jQuery Element to upgrade with this class.
      * @param {Object} [options] Config object.
      * @param {String|Array} [options.api.url] Url of google maps api.
      * @param {String} [options.api.key] Google Maps api key.
-     * @requires AsyncLoader
+     * @requires AsyncLoader.js
+     * @requires Maps.js
      */
-    var MapsGoogle = function($element, options) {
+    var GoogleMaps = function($element, options) {
 
         // default config
         var config = {
@@ -23,6 +24,7 @@
                     '//maps.googleapis.com/maps/api/js',
                     '/js/vendor/googlemaps.min.js'
                 ],
+                key: 'AIzaSyByqYYEoSA1hQ2MAxXnWe9VyrD_K-3t4Rk',
                 language: 'nl-NL',
                 region: 'NL'
             },
@@ -33,7 +35,24 @@
             }
         };
 
-        // extend defaults
+        // get center and zoomlevel from elemens' data attributes
+        if ($element.attr('data-mapcenter')) {
+            config.map.center =  {
+                lat: parseFloat($element.attr('data-mapcenter').split(',')[0]),
+                lng: parseFloat($element.attr('data-mapcenter').split(',')[1])
+            };
+        }
+        if ($element.attr('data-zoomlevel')) {
+            config.map.zoomLevel = parseInt($element.attr('data-zoomlevel'));
+        }
+        if ($element.attr('data-markerpos')) {
+            this.markerPos = {
+                lat: parseFloat($element.attr('data-markerpos').split(',')[0]),
+                lng: parseFloat($element.attr('data-markerpos').split(',')[1])
+            };
+        }
+
+        // extend defaults and overwrite current config
         if (options) {
             config = $.extend(true, config, options);
         }
@@ -48,12 +67,13 @@
         // init base class
         Maps.call(this, $element, config);
 
+        // vars
         this.markerClusterer = null;
 
         return this;
     };
 
-    $.extend(MapsGoogle.prototype, Maps.prototype, /** @lends MapsGoogle.prototype */ {
+    $.extend(GoogleMaps.prototype, Maps.prototype, /** @lends GoogleMaps.prototype */ {
 
         /**
          * Loads depended api's and inits map.
@@ -79,7 +99,7 @@
            // define map
             this.map = new google.maps.Map(this.$element.find('.map')[0], {
                 zoom: this.zoomLevel,
-                //center: this.mapCenter,
+                center: this.mapCenter,
                 mapTypeId: this.mapType,
                 disableDefaultUI: this.disableDefaultUI,
                 scrollwheel: this.scrollwheel,
@@ -100,7 +120,21 @@
         },
 
         /**
-         * Adds overlay to a map.
+         * Always runs when map is initialized.
+         * Startpoint for logic.
+         */
+        initialized: function() {
+
+            // set initial marker, if set in element attribute
+            if (this.markerPos) {
+                this.addMarker(this.markerPos);
+            }
+
+            console.log('initialized!');
+        },
+
+        /**
+         * Adds an overlay to a map.
          * @param {String} overlay Overlay type name.
          */
         setOverlay: function(overlay) {
@@ -148,13 +182,13 @@
 
     });
 
-    window['MapsGoogle'] = MapsGoogle;
+    window['GoogleMaps'] = GoogleMaps;
 
     // The component registers itself to the componentHandler in the global scope.
     ComponentHandler.register({
-        constructor: MapsGoogle,
-        classAsString: 'MapsGoogle',
+        constructor: GoogleMaps,
+        classAsString: 'GoogleMaps',
         cssClass: 'js-googlemaps'
     });
 
-})(jQuery, window.viewport);
+})(jQuery, ResponsiveBootstrapToolkit);

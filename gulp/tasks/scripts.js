@@ -11,6 +11,7 @@ var config = require('../../.project/.config'),
     remember = require('gulp-remember'),
     sourcemaps = require('gulp-sourcemaps'),
     jshint = require('gulp-jshint'),
+    resolveDependencies = require('gulp-resolve-dependencies'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     //stripJs = require('gulp-strip-comments'),
@@ -44,6 +45,9 @@ module.exports = function() {
                 gutil.log(error.message);
                 notify().write(error.message);
                 this.emit('end');
+            }))
+            .pipe(resolveDependencies({
+                pattern: /\* @requires [\s-]*(.*\.js)/g
             }))
             .pipe(sourcemaps.init())
             .pipe(cache(cacheName))
