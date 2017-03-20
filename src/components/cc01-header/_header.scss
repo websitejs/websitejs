@@ -39,6 +39,11 @@
             background: linear-gradient($color-oslo-gray, $color-bright-gray);
             color: white;
         }
+        
+        li a:hover, 
+        li a:focus {
+            background: $color-bright-gray;
+        }
 
         // make instead of <li>, an :after class of the following code
         &__divider-vertical {
