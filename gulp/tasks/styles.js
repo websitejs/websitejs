@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config'),
+var config = require('../../.project/.config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -22,10 +22,10 @@ module.exports = function() {
     // paths
     var srcGlob = [
             config.srcPath + '/styles.scss',
-            config.srcPath + '/scss/**/*.scss'
+            config.srcCssPath + '/**/*.scss'
         ],
-        dest = config.destPath + '/css',
-        docs = config.destPath + '/docs/styles';
+        dest = config.destCssPath,
+        docs = config.destDocsPathCss;
 
     gulp.add('styles:build', function(done) {
 

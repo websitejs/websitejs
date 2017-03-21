@@ -1,4 +1,4 @@
-// (function($) {
+(function($) {
     'use strict';
 
     /**
@@ -15,13 +15,11 @@
          */
         getFileExtension: function(path) {
             return path.substr(path.lastIndexOf('.')+1);
-            // var regex = /(?:\.([^.]+))?$/;
-            // var cleanPath = path.split('?')[0];
-            // return regex.exec(cleanPath)[1];
         }
 
 
     };
 
     window['Utils'] = Utils;
-// });
+
+})(jQuery);

@@ -40,4 +40,4 @@
         cssClass: 'js-{{name}}'
     });
 
-})(jQuery, window.viewport);
+})(jQuery, ResponsiveBootstrapToolkit);
