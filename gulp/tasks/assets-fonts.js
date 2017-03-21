@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config'),
+var config = require('../../.project/.config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),

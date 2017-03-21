@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config'),
+var config = require('../../.project/.config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -11,6 +11,7 @@ var config = require('../config'),
     remember = require('gulp-remember'),
     sourcemaps = require('gulp-sourcemaps'),
     jshint = require('gulp-jshint'),
+    resolveDependencies = require('gulp-resolve-dependencies'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     //stripJs = require('gulp-strip-comments'),
@@ -23,13 +24,14 @@ module.exports = function() {
     // paths
     var fileName = 'scripts',
         srcGlob = [
-            config.srcPath + '/js/**/*.js',
-            config.srcPath + '/elements/**/*.js',
-            config.srcPath + '/components/**/*.js',
-            config.srcPath + '/' + fileName + '.js'
+            config.srcJsPath + '/ComponentHandler.js',
+            config.srcJsPath + '/base/**/*.js',
+            config.srcElementsPath + '/**/*.js',
+            config.srcComponentsPath + '/**/*.js',
+            config.srcPath + '/' + config.scriptsFilename + '.js'
         ],
-        dest = config.destPath + '/js',
-        docs = config.destPath + '/docs/script',
+        dest = config.destJsPath,
+        docs = config.destDocsPathJs,
         cacheName = 'scriptFiles';
 
     gulp.add('scripts:build', function(done) {
@@ -43,6 +45,9 @@ module.exports = function() {
                 gutil.log(error.message);
                 notify().write(error.message);
                 this.emit('end');
+            }))
+            .pipe(resolveDependencies({
+                pattern: /\* @requires [\s-]*(.*\.js)/g
             }))
             .pipe(sourcemaps.init())
             .pipe(cache(cacheName))

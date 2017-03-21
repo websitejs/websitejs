@@ -45,6 +45,8 @@
         this.zoomControl = true;
 
         this.markers = [];
+
+
         return this;
     };
 
@@ -68,34 +70,9 @@
          */
         setMapType: function(type) {
             this.mapType = type;
-        },
-
-        /**
-         * Returns marker data object from request.
-         * @param {string} url Url where API is located on.
-         * @param {object} data Data to send to request url.
-         * @param {functon} [cb] Callback function.
-         */
-        getMarkerData: function(url, data, cb) {
-            $.ajax({
-                url: url,
-                data: data,
-                type: 'GET',
-                dataType: 'json'
-            })
-            .done(function(response) {
-                if (typeof cb === 'function') {
-                    cb(response);
-                }
-            })
-            .fail( function(d, textStatus, error) {
-                console.error("getJSON failed, status: " + textStatus + ", error: "+error);
-            });
         }
-
-
     });
 
     window['Maps'] = Maps;
 
-})(jQuery, window.viewport);
+})(jQuery, ResponsiveBootstrapToolkit);

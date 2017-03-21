@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config'),
+var config = require('../../.project/.config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -14,9 +14,9 @@ var config = require('../config'),
 
 // paths
 var srcGlob = [
-        config.srcPath + '/assets/icons/svg-icons/**/*.svg'
+        config.srcSvgIconPath + '/**/*.svg'
     ],
-    dest = config.destPath + '/assets/icons';
+    dest = config.destSvgIconPath;
 
 module.exports = function() {
 
@@ -26,7 +26,7 @@ module.exports = function() {
         del.sync([dest + '**/*[.svg]']);
 
         gulp.src(srcGlob, {
-                base: config.srcPath + '/assets/icons/svg-icons'
+                base: config.srcSvgIconPath
             })
             .pipe(plumber(function(error) {
                 gutil.log(error.message);

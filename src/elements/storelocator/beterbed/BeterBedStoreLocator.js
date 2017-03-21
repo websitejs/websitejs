@@ -1,19 +1,19 @@
-/* globals MapsGoogle */
+/* globals StoreLocatorBase */
 
 (function($, viewport) {
     'use strict';
 
     /**
-     * Shimano storelocator based on Google Maps.
-     * @class MapsGoogleStoreLocatorShimano
+     * BeterBed Storelocator.
+     * @class BeterBedStoreLocator
      * @author Rocco Janse, rocco.janse@valtech.nl
      * @param {jQueryElement} $element jQuery Element to upgrade with this class.
      * @param {Object} [options] Config object.
      * @param {String|Array} [options.api.url] Url of google maps api.
      * @param {String} [options.api.key] Google Maps api key.
-     * @requires AsyncLoader
+     * @requires ../StoreLocatorBase.js
      */
-    var MapsGoogleStoreLocatorShimano = function($element, options) {
+    var BeterBedStoreLocator = function($element, options) {
 
         // get center and zoomlevel from elemens' data attributes
         var mapCenter = { lat: $element.data('initial-lat'), lng: $element.data('initial-lng') },
@@ -36,8 +36,13 @@
             }
         };
 
-        // instantiate base class, bound to 'this'
-        MapsGoogle.call(this, $element, config);
+        // extend defaults and overwrite current config
+        if (options) {
+            config = $.extend(true, config, options);
+        }
+
+        // instantiate maps class, bound to 'this'
+        StoreLocatorBase.call(this, $element, config);
 
         // init resultlist
         this.$resultsList = $element.find('.resultslist');
@@ -47,7 +52,7 @@
 
     };
 
-    $.extend(MapsGoogleStoreLocatorShimano.prototype, MapsGoogle.prototype, /** @lends MapsGoogleStoreLocatorShimano.prototype */ {
+    $.extend(BeterBedStoreLocator.prototype, StoreLocatorBase.prototype, /** @lends BeterBedStoreLocator.prototype */ {
 
         /**
          * Runs directly after map initialization.
@@ -90,35 +95,35 @@
                     _this.setMarkerClusterer(_this.markers, 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m');
                 }
 
-                _this.updateResultsList();
+                //_this.updateResultsList();
 
             });
 
-        },
-
-        updateResultsList: function() {
-
-            var currentMapBounds = this.map.getBounds();
-            console.log(currentMapBounds);
-            for (var i = 0; i < this.markers.length; i++) {
-
-                if (currentMapBounds.contains(this.markers[i].getPosition())) {
-                    console.log(this.markers[i].data, 'IN VIEWPORT');
-                }
-            }
-
         }
+
+//         updateResultsList: function() {
+
+//             var currentMapBounds = this.map.getBounds();
+//             console.log(currentMapBounds);
+//             for (var i = 0; i < this.markers.length; i++) {
+
+//                 if (currentMapBounds.contains(this.markers[i].getPosition())) {
+//                     console.log(this.markers[i].data, 'IN VIEWPORT');
+//                 }
+//             }
+
+//         }
 
     });
 
 
-    window['MapsGoogleStoreLocatorShimano'] = MapsGoogleStoreLocatorShimano;
+    window['BeterBedStoreLocator'] = BeterBedStoreLocator;
 
     // The component registers itself to the componentHandler in the global scope.
     ComponentHandler.register({
-        constructor: MapsGoogleStoreLocatorShimano,
-        classAsString: 'MapsGoogleStoreLocatorShimano',
-        cssClass: 'js-storelocator-shimano'
+        constructor: BeterBedStoreLocator,
+        classAsString: 'BeterBedStoreLocator',
+        cssClass: 'js-storelocator-beterbed'
     });
 
-})(jQuery, window.viewport);
+})(jQuery, ResponsiveBootstrapToolkit);

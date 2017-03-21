@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('./gulp/config'),
+var config = require('./.project/.config'),
     fs = require('fs'),
     gulp = require('gulp');
 
@@ -15,19 +15,6 @@ var getAllTasks = function() {
     files.forEach(function(file, i) {
         require(path + '/' + file)();
     });
-};
-
-/**
- * get external defined tasks
- * @param {string} task Taskname
- * @param {string} [path] Optional path
- * @private
- */
-var getTask = function(task, path) {
-    if (typeof path === 'undefined') {
-        path = config.gulpTaskPath;
-    }
-    require(path + '/' + task)();
 };
 
 // load tasks

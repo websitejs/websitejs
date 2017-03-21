@@ -1,0 +1,11 @@
+.hmaps {
+
+    &__map {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 400px;
+        min-height: 400px;
+        background-color: $color-seashell;
+    }
+}
