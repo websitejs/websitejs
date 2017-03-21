@@ -1,26 +1,34 @@
 .header {
-    // background-color: $color-blaze-orange;
-
-    &__logo-bg {
-        background: linear-gradient($color-white, #dddee3);
-    }
+    height: 50px;
+    position: relative;
+    background-color: $color-white;
+    color: $color-bright-gray;
 
     &__logo {
-        height: 100%;
-        max-width: 100%;
-        padding: 1.5em .75em 1.5em;
+        width: 100px;
+        height: 39/144 * 100px;
+        // width: 7em;
+        margin-left: 0 !important;
+        margin-right: 3em;
+
+        img {
+            @include align-vertical(absolute);
+            width: 100px;
+            height: 39/144 * 100px;
+        }
     }
 
         
     .navbar {
-        background: linear-gradient($color-oslo-gray, $color-bright-gray);
-        color: white;
-        border: none;
+        // border: none;
         border-radius: 0;
-        height: 49.18px;
         
         &__standard-menu {
             opacity: 0;
+
+            a:hover {
+                background-color: $color-seashell;
+            }
         }
 
         &__more-menu {
@@ -29,20 +37,18 @@
     }
 
     .nav {
-        height: 49.18px;
-
         li a {
-            color: white;
+            color: $color-bright-gray;
+            font-weight: 600;            
+            // color: white;
         }
         
         .header-button {
-            background: linear-gradient($color-oslo-gray, $color-bright-gray);
-            color: white;
         }
         
         li a:hover, 
         li a:focus {
-            background: $color-bright-gray;
+            // background: $color-bright-gray;
         }
 
         // make instead of <li>, an :after class of the following code
@@ -58,37 +64,29 @@
     
     }
 
-    p {
-        color: black;
-    }
-
-
     .dropdown {
         &__dropdown-icon {
             margin: 0 0 5px 5px;
         }
         &__more-button {
-            margin: 0;
-            border-bottom: 1px solid $color-submarine;
-            width: 20em;
-            font-size: .875em;
+            // margin: 0;
+            // border-bottom: 1px solid $color-submarine;
+            // width: 20em;
+            // font-size: .875em;
             // font-size: 14px;
             
             a {
-                padding: .5em 1.5em;
-                background: $color-oslo-gray;
+                // padding: .5em 1.5em;
+                // background: $color-oslo-gray;
             }
             
             a:hover {
-                background: $color-bright-gray;
+                // background: $color-bright-gray;
             }
         }
         
         ul.dropdown-menu {
             padding: 0;
-        }
-        .divider {
-            margin: 0;
         }
     }
 }
