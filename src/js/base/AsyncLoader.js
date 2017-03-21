@@ -8,6 +8,7 @@
      *
      * @author Rocco Janse <rocco.janse@valtech.nl>
      * @class AsyncLoader
+     * @requires Utils.js
      */
     var AsyncLoader = function() {
 

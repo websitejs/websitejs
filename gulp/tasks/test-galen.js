@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config'),
+var config = require('../../.project/.config'),
     gulp = require('gulp'),
     del = require('del'),
     gulpGalen = require('gulp-galenframework');
@@ -9,11 +9,11 @@ module.exports = function() {
 
     gulp.add('test:galen', function(done) {
 
-        del.sync([config.paths.dest + config.paths.galen.report]);
+        del.sync([config.galenReport]);
 
-        gulp.src(config.paths.src + config.paths.galen.src + '/**/*.test')
+        gulp.src(config.destStyleguidePath + '/**/*.test')
             .pipe(gulpGalen.test({
-                'htmlreport': config.paths.dest + config.paths.galen.report,
+                'htmlreport': config.destGalenReportLayout,
                 //'parallel-tests': 3,
                 'properties': {
                     'galen.default.browser': 'chrome',
