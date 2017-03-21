@@ -48,7 +48,7 @@
 /// @param {string} $bottom Bottom color (hex)
 /// @author Rocco Janse, rocco.janse@valtech.nl
 ///
-@mixin simple-gradient($top: $color-jelly-bean, $bottom: $color-endeavour) {
+@mixin simple-gradient($top: $brand-secondary-light, $bottom: $brand-secondary) {
 	background: rgba($bottom, 1);
 	background: linear-gradient(to bottom, rgba($top, 1) 0%,rgba($bottom, 1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 );
