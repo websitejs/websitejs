@@ -1,12 +1,12 @@
 .footer {
     background-color: $brand-secondary;
-    color: $color-white;
+    color: #fff;
 
     &__text {
         margin-top: 1.5em;
         
         h4, a {
-            color: $color-white;
+            color: #fff;
         }
 
         h4 {
@@ -25,7 +25,7 @@
             height: 15px;
             font-size: 11px;
             line-height: 1.1;
-            fill: $color-white;
+            fill: #fff;
         }
 
         &__social-icons {
@@ -44,7 +44,7 @@
         }
 
         &__lang-dropdown {
-            color: $color-black;
+            color: #000;
             margin-top: 1em;
         }
     }
