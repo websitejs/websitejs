@@ -1,21 +1,71 @@
-.header {
-    height: 50px;
-    position: relative;
-    background-color: #fff;
-    color: $gray-dark;
+.header-border {
+    border-bottom: 1px solid $gray-lightest;
+}
+.header-border-bottom {
+    border-bottom: 1px solid $gray-lighter;
+}
+
+.header-logobar {
+    height: 60px;
+    color: $gray;
 
     &__logo {
         width: 100px;
         height: 27px;
-        margin-left: 0 !important;
+        margin: 16px 0;
+        float: left;
 
         img {
             width: 100%;
         }
     }
 
+    .dropdown { 
+        position: relative;
+
+        .lang-dropdown {
+            right: 0;
+            position: absolute;
+            font-size: 14px;
+            height: 35px;
+            margin: 12px 0;
+            padding: 10px 30px 10px 10px;
+            color: $gray;
+            border: 1px solid $gray-lighter;
+            border-radius: 5px;
+
+
+            .icon-font--angle-down {
+                position: relative;
+                padding-left: 30px;
+                margin-right: -10px;
+                font-size: 20px;
+            }
+        }
+        .dropdown-menu {
+            right: 11px; //how to solve best??
+            top: 44px;
+            position: absolute;
+            left: auto;
+            white-space: normal;
+
+            li {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.header {
+    position: relative;
+    background-color: #fff;
+    color: $gray;
         
     .navbar {
+        min-height: 40px;
+        max-height: 40px;
+        margin-bottom: 0;
+
         &__standard-menu {
             opacity: 0;
         }
@@ -23,20 +73,28 @@
         &__more-menu {
             display: none;
         }
+
+        &-collapse {
+            padding-left: 0;
+        }
     }
 
     .nav {
 
-        .dropdown {
+        .dropdown { // don't fill class
             .menu-item {
                 border-right: solid $gray-lightest 1px;
-                padding: 15px 30px; // right left should be 40px according to the design
+                font-size: 15px;
+                padding: 10px 30px; 
                 font-weight: 600;
-                color: $gray-dark;
+                color: $gray;
+
+                &--first-level {
+                    margin-right: 20px;
+                }
             }
             &:first-child { // why doesn't this work??
                 border-left: solid $gray-lightest 1px;
-                margin-left: 30px;
             }
 
             .menu-item:hover,
@@ -71,10 +129,6 @@
 
         .dropdown-submenu {
             position: relative;
-            
-            .menu-item--first-level {
-                margin-right: 20px;
-            }
 
             .dropdown-menu {
                 top: 0;
