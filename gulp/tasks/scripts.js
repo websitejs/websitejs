@@ -37,7 +37,7 @@ module.exports = function() {
     gulp.add('scripts:build', function(done) {
 
         // cleanup
-        del.sync([dest + '*[.js,.js.map']);
+        del.sync([dest + '*[.js,.js.map'], { force: true });
 
         // build
         gulp.src(srcGlob)

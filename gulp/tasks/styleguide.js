@@ -158,7 +158,7 @@ module.exports = function() {
     gulp.add('styleguide:elements', function(done) {
         getFiles(config.destPath, '/css', '.css', function(res) {
 
-            del.sync([dest + '/elements']);
+            del.sync([dest + '/elements'], { force: true });
 
             gulp.src(config.srcPath + '/elements/**/*.json')
                 .pipe(gulp.dest(dest + '/elements'));
@@ -186,7 +186,7 @@ module.exports = function() {
     gulp.add('styleguide:components', function(done) {
         getFiles(config.destPath, '/css', '.css', function(res) {
 
-            del.sync([dest + '/components']);
+            del.sync([dest + '/components'], { force: true });
 
             gulp.src(config.srcPath + '/components/**/*.json')
                 .pipe(gulp.dest(dest + '/components'));
@@ -214,7 +214,7 @@ module.exports = function() {
     gulp.add('styleguide:pages', function(done) {
         getFiles(config.destPath, '/css', '.css', function(res) {
 
-            del.sync([dest + '/pages']);
+            del.sync([dest + '/pages'], { force: true });
 
             gulp.src(config.srcPath + '/pages/**/*.json')
                 .pipe(gulp.dest(dest + '/pages'));
@@ -270,7 +270,7 @@ module.exports = function() {
      */
     gulp.add('styleguide:clean', function(done) {
         // cleanup
-        del.sync([dest]);
+        del.sync([dest], { force: true });
         done();
     });
 
