@@ -1,10 +1,10 @@
 @charset "utf-8";
 
-// theme
-@import "./scss/themes/partials/default";
-
 // vars
 @import "./scss/variables";
+
+// theme
+@import "./scss/themes/partials/default";
 
 // helpers
 @import "./scss/helpers/functions";

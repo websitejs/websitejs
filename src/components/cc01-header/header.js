@@ -15,8 +15,6 @@
          */
         this.$element = $element;
 
-        // this.init();
-
         return this;
     };
 
@@ -30,52 +28,84 @@
             console.log('Inited Header.', this);
             this.calculateButtonWidth();
             this.dropdownFirstLevel();
+            this.dropdownReplaceLang();
+            this.mobileMenuDropdown();
+
         }, 
 
-        /* 
-        * calculate buttons width total,
-        * to determine if the standard menu or menu with more button should be shown.
-        */
+        /**
+         * calculate buttons width total,
+         * to determine if the standard menu or menu with more button should be shown.
+         */
         calculateButtonWidth: function() { 
-            // check if width is more then max container width of page - take predefined widths of the styleguide
-            // if it's less, show first part js-all-buttons
-            // if it's more, show second part js-more-button
-
             var buttonWidth = 0;
-            $('.menu-item').each(function(index, value) {
+
+            $('.navbar__standard-menu .menu-item').each(function(index, value) {
                 buttonWidth += parseInt($(this).outerWidth());
-
-                // PUT IF STATEMENT OUTSIDE OF EACH LOOP
-                if(buttonWidth > $('.navbar__standard-menu').width() || viewport.is('<sm')) {
-                    // TOGGLE CLASS, NOT STYLE 
-                    $('.navbar__standard-menu').css('display', 'none');
-                    $('.navbar__more-menu').css('display', 'block');
-                } else {
-                    $('.navbar__standard-menu').css('opacity', '1');
-                }
             });
+            console.log(viewport.current());
 
+            if(viewport.is('>xs')) {
+                console.log('groot');
+                if(buttonWidth > $('.navbar__standard-menu').width() || viewport.is('<sm')) {
+                    console.log('ja hallo');
+                    $('.navbar__standard-menu').addClass('hidden');
+                    
+                    $('.navbar__more-menu').addClass('show');
+                    $('.navbar__more-menu').removeClass('hidden');
+                } else {
+                    $('.navbar__more-menu').removeClass('show');
+                    $('.navbar__more-menu').addClass('hidden');
+
+                    $('.navbar__standard-menu').removeClass('hidden');
+                    console.log('poep');
+                    $('.navbar__standard-menu').removeClass('navbar__standard-menu--opacity');
+                }
+            } else { // current website: breakpoint mobile menu is at 600px wide, bootstrap uses 768px.
+                $('.navbar__more-menu').removeClass('show');
+                $('.navbar__more-menu').addClass('hidden');
+
+                $('.navbar__standard-menu').removeClass('navbar__standard-menu--opacity');
+            }
         },
 
-        /*
-        * Toggle dropdown (bootstrap) on hover
-        */
+        /**
+         * Toggle dropdown (bootstrap) on hover
+         */
         dropdownFirstLevel: function() {
 
-            this.$element.find('.dropdown .menu-item').on('mouseenter', function() {
-                // console.log(this);
-                $(this).dropdown('toggle');
-            });
+            if(viewport.is('>xs')) {
+                this.$element.find('.dropdown .menu-item').on('mouseenter', function() {
+                    $(this).dropdown('toggle');
+                });
 
-            this.$element.find('.dropdown-submenu').on({
-                'mouseover': function() {
-                    // console.log('ja ', this);
-                    $(this).find('.dropdown-menu').show();
-                },
-                'mouseout': function() {
-                    // console.log(this);
-                    $(this).find('.dropdown-menu').hide();
-                }
+                this.$element.find('.dropdown-submenu').on({
+                    'mouseover': function() {
+                        $(this).find('.dropdown-menu').show();
+                    },
+                    'mouseout': function() {
+                        $(this).find('.dropdown-menu').hide();
+                    }
+                });
+            }      
+        },
+
+        /** 
+         * Language dropdown replace language text
+         */ 
+        dropdownReplaceLang: function(){
+
+            $('.header-logobar .dropdown-menu li a').on("click", function(){
+                $('.lang-dropdown').html($(this).html());
+            });
+        },
+
+        mobileMenuDropdown: function() {
+             $('.menu-item--first-level').on('click', function(event) {
+                event.preventDefault(); 
+                event.stopPropagation(); 
+                $(this).parent().siblings().removeClass('open');
+                $(this).parent().toggleClass('open');
             });
         }
 

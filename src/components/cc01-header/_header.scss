@@ -28,29 +28,36 @@
             position: absolute;
             font-size: 14px;
             height: 35px;
+            width: 200px;
             margin: 12px 0;
-            padding: 10px 30px 10px 10px;
+            padding: 10px;
             color: $gray;
             border: 1px solid $gray-lighter;
             border-radius: 5px;
 
 
             .icon-font--angle-down {
-                position: relative;
-                padding-left: 30px;
-                margin-right: -10px;
+                position: absolute;
+                right: 0;
                 font-size: 20px;
+                white-space: nowrap;
             }
         }
+
         .dropdown-menu {
-            right: 11px; //how to solve best??
+            right: 0;
             top: 44px;
             position: absolute;
             left: auto;
+            width: 200px;
             white-space: normal;
 
             li {
                 font-size: 14px;
+            }
+
+            .icon-font--angle-down {
+                display: none;
             }
         }
     }
@@ -67,11 +74,13 @@
         margin-bottom: 0;
 
         &__standard-menu {
-            opacity: 0;
+            &--opacity {
+                opacity: 0;
+            }
         }
 
         &__more-menu {
-            display: none;
+            // display: none;
         }
 
         &-collapse {
@@ -81,19 +90,23 @@
 
     .nav {
 
-        .dropdown { // don't fill class
+        .dropdown {
             .menu-item {
-                border-right: solid $gray-lightest 1px;
                 font-size: 15px;
                 padding: 10px 30px; 
                 font-weight: 600;
                 color: $gray;
 
+                @media(min-width: $sm) {
+                    border-right: solid $gray-lightest 1px;
+                }
+
                 &--first-level {
                     margin-right: 20px;
+
                 }
             }
-            &:first-child { // why doesn't this work??
+            &:first-child {
                 border-left: solid $gray-lightest 1px;
             }
 
@@ -108,21 +121,25 @@
                     padding: 5px;
                     margin: 0;
                 }
-                li:hover {
+                li a:hover {
                     background-color: $gray-lightest;
                 }
             }
 
-            .icon {
-                &__font {
-                    &--angle-right {
-                        font-size: 22px;
-                        height: 15px;
-                        padding: 0 10px 0 20px;
-                        line-height: 1;
-                        vertical-align: initial !important;
-                        display: initial;
-                    }
+            .icon-font {
+                &--angle-right {
+                    font-size: 22px;
+                    height: 15px;
+                    padding: 0 10px 0 20px;
+                    line-height: 1;
+                    vertical-align: initial !important;
+                    display: initial;
+                }
+                &--angle-down {
+                    font-size: 22px;
+                    height: 15px;
+                    line-height: .7;
+                    padding: 0 10px 0 20px;
                 }
             }
         }
@@ -142,12 +159,20 @@
                 right: 7px;
             }
         }
+        .dropdown-submenu.open {
+            .dropdown-menu {
+                padding-top: 10px;
+                padding-left: 20px;
+            }
+
+
+            > a {
+                background-color: #fff !important;
+            }
+        }
     }
 
 
-        .open>a {
-            background-color: $gray-lightest !important;
-        }
 
     //     a.dropdown-toggle.dropdown__first-level {
     //         background-color: $gray-lightest !important;

@@ -1,17 +1,17 @@
 // breakpoints
-$xs:                        480px;
+$xs:                        em(480px);
 $screen-xs:                 $xs;
 $screen-xs-min:             $screen-xs;
 
-$sm:                        768px;
+$sm:                        em(768px);
 $screen-sm:                 $sm;
 $screen-sm-min:             $screen-sm;
 
-$md:                        992px;
+$md:                        em(992px);
 $screen-md:                 $md;
 $screen-md-min:             $screen-md;
 
-$lg:                        1200px;
+$lg:                        em(1200px);
 $screen-lg:                 $lg;
 $screen-lg-min:             $screen-lg;
 
