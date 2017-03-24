@@ -23,7 +23,7 @@ module.exports = function() {
     gulp.add('assets:svg:icons', function(done) {
 
         // cleanup first
-        del.sync([dest + '**/*[.svg]']);
+        del.sync([dest + '**/*[.svg]'], { force: true });
 
         gulp.src(srcGlob, {
                 base: config.srcSvgIconPath

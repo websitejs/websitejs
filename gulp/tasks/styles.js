@@ -29,8 +29,8 @@ module.exports = function() {
 
     gulp.add('styles:build', function(done) {
 
-        // cleanup
-        del.sync([dest + '*[.css,.css.map', dest + '/themes/*[.css,.css.map']);
+        // cleanup styles and themes
+        del.sync([dest + '*[.css,.css.map]', dest + '/themes/*[.css,.css.map]'], { force: true });
 
         // build
         gulp.src(srcGlob)

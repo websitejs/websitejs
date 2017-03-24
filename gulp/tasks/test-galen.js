@@ -9,7 +9,7 @@ module.exports = function() {
 
     gulp.add('test:galen', function(done) {
 
-        del.sync([config.galenReport]);
+        del.sync([config.galenReport], { force: true });
 
         gulp.src(config.destStyleguidePath + '/**/*.test')
             .pipe(gulpGalen.test({

@@ -26,7 +26,7 @@ module.exports = function() {
         del.sync([
             config.destVendorJs + '/**/*.js',
             config.destVendorCss + '/**/*.css'
-        ]);
+        ], { force: true });
 
         for (var lib in vendorConfig.vendor) {
 
