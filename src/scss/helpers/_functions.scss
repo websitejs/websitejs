@@ -5,7 +5,7 @@
 /// @author Rocco Janse, rocco.janse@valtech.nl
 /// @returns {string} Pixel value in em's
 ///
-@function rem($px, $base: $font-size-root) {
+@function rem($px, $base: $font-size-base) {
     @return ($px / $base) * 1rem;
 }
 
@@ -16,7 +16,7 @@
 /// @author Rocco Janse, rocco.janse@valtech.nl
 /// @returns {string} Pixel value in em's
 ///
-@function em($px, $base: $font-size-root) {
+@function em($px, $base: $font-size-base) {
     @return ($px / $base) * 1em;
 }
 
