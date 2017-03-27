@@ -1,16 +1,16 @@
 .footer {
-    background-color: $brand-secondary;
+    background-color: $gray;
     color: #fff;
 
     &__text {
-        margin-top: 1.5em;
+        // margin-top: 1.5em;
         
         h4, a {
             color: #fff;
         }
 
         h4 {
-            margin-bottom: 1.5em;
+            margin: 1.5em 0;
             font-weight: 600;
             padding-left: 20px;
         }
@@ -29,6 +29,8 @@
         }
 
         &__social-icons {
+            margin-left: 15px;
+
             h4 {
                 padding-left: 0;
             }            
@@ -46,6 +48,14 @@
         &__lang-dropdown {
             color: #000;
             margin-top: 1em;
+        }
+
+        &--sm-height {
+            clear: both;
+
+            @media(min-width: $md) {
+                clear: none;
+            }
         }
     }
 
@@ -78,6 +88,11 @@
             @include align-vertical(absolute);
             font-size: 12px;
             margin-left: 20px;
+            max-width: 132px;
+
+            @media(min-width: $sm) {
+                max-width: none;
+            }
         }
 
         &__company-logo {
@@ -85,6 +100,7 @@
             right: 0;
             width: 75px;
             height: 75px/108*29;
+            margin-right: 40px;
         }
     }
 }
