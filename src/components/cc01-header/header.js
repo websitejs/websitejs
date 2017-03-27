@@ -43,12 +43,9 @@
             $('.navbar__standard-menu .menu-item').each(function(index, value) {
                 buttonWidth += parseInt($(this).outerWidth());
             });
-            console.log(viewport.current());
 
             if(viewport.is('>xs')) {
-                console.log('groot');
                 if(buttonWidth > $('.navbar__standard-menu').width() || viewport.is('<sm')) {
-                    console.log('ja hallo');
                     $('.navbar__standard-menu').addClass('hidden');
                     
                     $('.navbar__more-menu').addClass('show');
@@ -58,7 +55,6 @@
                     $('.navbar__more-menu').addClass('hidden');
 
                     $('.navbar__standard-menu').removeClass('hidden');
-                    console.log('poep');
                     $('.navbar__standard-menu').removeClass('navbar__standard-menu--opacity');
                 }
             } else { // current website: breakpoint mobile menu is at 600px wide, bootstrap uses 768px.
