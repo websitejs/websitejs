@@ -1,10 +1,164 @@
 {% if extends %}{% extends "styleguide/includes/layout.html" %}{% endif %}
 
-        {% block content %}
-        {% if name %}{% include "styleguide/includes/moduleinfo.html" %}{% endif %}
+    {% block content %}
+    {% if name %}{% include "styleguide/includes/moduleinfo.html" %}{% endif %}
 
-        <header class="header js-header">
-        header for testing!
-        </header>
+	<div class="container-fluid nogutters">
+		<div class="header-border">
+			<div class="container">
+				<div class="header-logobar">
+					<img class="header-logobar__logo" alt="DAF logo" src="/assets/img/logo.png"/>
+					
+					<div class="">
+						<ul class="nav">
+							<div class="dropdown">
+								<a href="#" class="lang-dropdown" data-toggle="dropdown" role="button">Nederlands<span class="icon-font icon-font--angle-down"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Nederlands<span class="icon-font icon-font--angle-down"></span></a></li>
+									<li><a href="#">Engels<span class="icon-font icon-font--angle-down"></span></a></li>
+								</ul>
+							</div>
+						</ul>
+					</div>
 
-        {% endblock %}
+				</div>
+			</div>
+		</div>
+		<div class="header-border-bottom">
+			<div class="container">
+				<header class="header js-header">
+					<nav class="navbar">
+
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-standard-menu" aria-expanded="false">
+								<span>Menu</span>
+							</button>
+						</div>
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse"  id="navbar-collapse-standard-menu">
+							<ul class="nav navbar-nav navbar__standard-menu navbar__standard-menu--opacity">
+								<li class="dropdown">
+									<a href="#" class="menu-item" data-toggle="dropdown" role="button">About DAF</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">DAF Trucks N.V.</a></li>
+										<li><a href="#">DAF Worldwide</a></li>
+										<li><a href="#">PACCAR Inc.</a></li>
+										<li><a href="#">DAF History</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products
+									</a>
+									<ul class="dropdown-menu">
+										<li class="dropdown-submenu">
+											<a href="#" class="menu-item--first-level">Euro 6 model range<span class="icon-font icon-font--angle-right"></span></a>
+											<ul class="dropdown-menu">
+												<li><a href="#">Euro 6 model range</a></li>
+												<li><a href="#">Euro 6 model range</a></li>
+												<li><a href="#">DAF components</a></li>
+												<li><a href="#">DAF Used Trucks</a></li>
+											</ul>
+										</li>
+										<li class="dropdown-submenu">
+											<a href="#" class="menu-item--first-level">Euro 5 model<span class="icon-font icon-font--angle-right"></span></a>
+											<ul class="dropdown-menu">
+												<li><a href="#">Euro 5 model range</a></li>
+												<li><a href="#">Euro 5 model range</a></li>
+												<li><a href="#">DAF components</a></li>
+												<li><a href="#">DAF Used Trucks</a></li>
+											</ul>
+										</li>
+										<li><a href="#">DAF components</a></li>
+										<li><a href="#">DAF Used Trucks</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">DAF Connect form</a></li>
+										<li><a href="#">Find your Manual</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News & Media</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">DAF Connect form</a></li>
+										<li><a href="#">Find your Manual</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Working at DAF</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">DAF Connect form</a></li>
+										<li><a href="#">Find your Manual</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+
+						<div class="collapse navbar-collapse">
+							<ul class="nav navbar-nav navbar__more-menu">
+								<li class="dropdown">
+									<a href="#" class="menu-item" data-toggle="dropdown" role="button">About DAF</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">DAF Trucks N.V.</a></li>
+										<li><a href="#">DAF Worldwide</a></li>
+										<li><a href="#">PACCAR Inc.</a></li>
+										<li><a href="#">DAF History</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products
+									</a>
+									<ul class="dropdown-menu">
+										<li class="dropdown-submenu">
+											<a href="#" class="menu-item--first-level">Euro 6 model range<span class="icon-font icon-font--angle-right"></span></a>
+											<ul class="dropdown-menu">
+												<li><a href="#">Euro 6 model range</a></li>
+												<li><a href="#">Euro 6 model range</a></li>
+												<li><a href="#">DAF components</a></li>
+												<li><a href="#">DAF Used Trucks</a></li>
+											</ul>
+										</li>
+										<li class="dropdown-submenu">
+											<a href="#" class="menu-item--first-level">Euro 5 model<span class="icon-font icon-font--angle-right"></span></a>
+											<ul class="dropdown-menu">
+												<li><a href="#">Euro 5 model range</a></li>
+												<li><a href="#">Euro 5 model range</a></li>
+												<li><a href="#">DAF components</a></li>
+												<li><a href="#">DAF Used Trucks</a></li>
+											</ul>
+										</li>
+										<li><a href="#">DAF components</a></li>
+										<li><a href="#">DAF Used Trucks</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">DAF Connect form</a></li>
+										<li><a href="#">Find your Manual</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="menu-item" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More<span class="icon-font icon-font--angle-down"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="#">DAF Connect form</a></li>
+										<li><a href="#">Find your Manual</a></li>
+										<li><a href="#">News &#38; Media</a></li>
+										<li><a href="#">Online Truck Configurator</a></li>
+										<li><a href="#">PACCAR Parts</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+
+					</nav>
+				</header>
+			</div>
+		</div>
+	</div>
+
+	{% endblock %}
