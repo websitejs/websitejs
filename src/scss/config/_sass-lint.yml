@@ -40,6 +40,10 @@ rules:
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-color-keywords.md
   no-color-keywords: 2
 
+  # enforce that only valid of hexadecimal values are written
+  # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-invalid-hex.md
+  no-invalid-hex: 2
+
   # enforce the use of Sass single-line comments and disallow CSS comments.
   # Bang comments (/*! */, will be printed even in minified mode) are still allowed
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-css-comments.md
@@ -56,10 +60,6 @@ rules:
   # enforce that important declarations are not allowed to be used
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-important.md
   no-important: 1
-
-  # enforce that only valid of hexadecimal values are written
-  # https://github.com/sasstools/sass-lint/blob/master/docs/rules/no-invalid-hex.md
-  no-invalid-hex: 2
 
   # enforce that selectors aren't repeated and that their properties are merged.
   # You may also pass a whitelist of selectors you wish to exclude from merging
