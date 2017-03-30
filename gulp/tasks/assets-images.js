@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config'),
+var config = require('../../.project/.config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -45,7 +45,7 @@ module.exports = function() {
             gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
 
             if (file.event === 'unlink') {
-                del.sync([path.join(dest, path.relative(file.base, file.path))]);
+                del.sync([path.join(dest, path.relative(file.base, file.path))], { force: true });
             } else {
                 gulp.start(['assets:images', 'server:reload']);
             }

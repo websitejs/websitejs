@@ -19,26 +19,14 @@ $(document).ready(function() {
         window.viewport = ResponsiveBootstrapToolkit;
     }
 
-    /**
-     * homepage demo; should be removed!
-     */
-    // var newQueryString = QueryStringHandler.updateParams('?type=matrassen&width=200&length=220&page=3&numresults=12&sortmethod=name-asc&color=blue,yellow,green&test=');
-    // QueryStringHandler.updateUrl(newQueryString);
-			$('.test a').on('click', function(e) {
-				e.preventDefault();
-                var newUrl = QueryStringHandler.updateParams($(this).attr('href'));
-				QueryStringHandler.updateUrl(newUrl);
-			});
-
     // upgrade DOM with registerd elements/components
     ComponentHandler.upgradeAllRegistered();
-
 
     // custom components inits
     var gmaps = $('.js-custom-maps');
     if (gmaps.length > 0) {
         $.each(gmaps, function(i, map) {
-            new window.MapsGoogle($(map), {
+            new window.GoogleMaps($(map), {
                 api: {
                     url: [
                         '//maps.googleapis.com/maps/api/js',
@@ -59,7 +47,7 @@ $(document).ready(function() {
     var hmaps = $('.js-custom-heremaps');
     if (hmaps.length > 0) {
         $.each(hmaps, function(i, map) {
-            new window.MapsHere($(map), {
+            new window.HereMaps($(map), {
                 api: {
                     url: ['//js.api.here.com/v3/3.0/mapsjs-core.js', '//js.api.here.com/v3/3.0/mapsjs-service.js'],
                     appId: 'PA5BWpI7imMUv5p6FKmT',

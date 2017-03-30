@@ -6,7 +6,7 @@
     }
 
     &--light {
-        background-color: $color-seashell;
+        background-color: $gray-lightest;
 
         h1,
         h2,
@@ -14,16 +14,16 @@
         h4,
         h5,
         h6 {
-            color: $color-bright-gray;
+            color: $gray-dark;
         }
 
         p {
-            color: $color-bright-gray;
+            color: $gray-dark;
         }
     }
 
     &--dark {
-        background-color: $color-bright-gray;
+        background-color: $gray-dark;
 
         h1,
         h2,
@@ -35,7 +35,7 @@
         }
 
         p {
-            color: $color-submarine;
+            color: $gray-lighter;
         }
     }
 }
@@ -52,7 +52,7 @@
             content: "";
             width: 62px;
             height: 3px;
-            background-color: $color-blaze-orange;
+            background-color: $brand-primary;
         }
 
         @media(min-width: $sm) {

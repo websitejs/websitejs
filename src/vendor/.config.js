@@ -1,20 +1,6 @@
 'use strict';
 
 module.exports =  {
-
-    name: 'DAF2.0',
-
-    gulpTaskPath: './gulp/tasks',
-
-    srcPath: 'src',
-    destPath: 'dist',
-    docsPath: 'docs',
-
-    tplCssPath: '/css',
-    tplJsPath: '/js',
-
-    jsFilename: 'scripts',
-
     vendor: {
         'jquery': [
             "node_modules/jquery/dist/jquery.min.js"
@@ -31,5 +17,4 @@ module.exports =  {
             "node_modules/markerclustererplus/dist/markerclusterer.min.js"
         ]
     }
-
 };

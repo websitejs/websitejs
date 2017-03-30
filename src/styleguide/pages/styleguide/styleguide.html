@@ -1,36 +1,7 @@
-<!DOCTYPE html>
-<html lang="nl">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#21252b">
-        <title>DAF2.0 - styleguide</title>
+{% extends "styleguide/includes/layout.html" %}
 
-        <link rel="stylesheet" title="current" href="/css/styles.min.css">
+        {% block content %}
 
-
-    
-<link rel="stylesheet alternate" title="styles" href="/css\styles.min.css">
-    
-<link rel="stylesheet alternate" title="theme-alternative" href="/css\themes\theme-alternative.min.css">
-    
-
-
-    </head>
-    <body>
-        
-        <div class="styleguide__css-switcher js-css-switcher">
-
-     <a href="/css\styles.min.css" class="css-switcher__item active">styles</a>
-
-    | <a href="/css\themes\theme-alternative.min.css" class="css-switcher__item ">theme-alternative</a>
-
-</div>
-
-        
-
-        
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -91,78 +62,78 @@
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--blaze-orange"></div>
+                            <div class="styleguide__color styleguide__color--brand-primary"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#fc5f01</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Blaze Orange</h6>
+                            <h6>Brand Primary</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--endeavor"></div>
+                            <div class="styleguide__color styleguide__color--brand-secondary"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#00529c</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Endeavor</h6>
+                            <h6>Brand Secondary</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--jelly-bean"></div>
+                            <div class="styleguide__color styleguide__color--brand-secondary-light"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#266cab</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Jelly Bean</h6>
+                            <h6>Brand Secondary Light</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--polo-blue"></div>
+                            <div class="styleguide__color styleguide__color--brand-secondary-lighter"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#80a9ce</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Polo Blue</h6>
+                            <h6>Brand Secondary Lighter</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--crimson"></div>
+                            <div class="styleguide__color styleguide__color--brand-danger"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#ed1b2e</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Crimson</h6>
+                            <h6>Brand Danger</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--jewel"></div>
+                            <div class="styleguide__color styleguide__color--brand-success"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#16883F</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Jewel</h6>
+                            <h6>Brand Success</h6>
                         </div>
                     </div>
                 </div>
@@ -171,78 +142,78 @@
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--seashell"></div>
+                            <div class="styleguide__color styleguide__color--gray-lightest"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#f1f1f1</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Seashell</h6>
+                            <h6>Gray Lightest</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--submarine"></div>
+                            <div class="styleguide__color styleguide__color--gray-lighter"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#b9c1c6</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Submarine</h6>
+                            <h6>Gray Lighter</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--oslo-gray"></div>
+                            <div class="styleguide__color styleguide__color--gray-light"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#8c9093</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Oslo Gray</h6>
+                            <h6>Gray Light</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--nevada"></div>
+                            <div class="styleguide__color styleguide__color--gray"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#656b6f</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Nevada</h6>
+                            <h6>Gray</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--bright-gray"></div>
+                            <div class="styleguide__color styleguide__color--gray-dark"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#353c45</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Bright Gray</h6>
+                            <h6>Gray Dark</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-4 col-md-2">
                     <div class="card">
                         <div class="card__image">
-                            <div class="styleguide__color styleguide__color--shark"></div>
+                            <div class="styleguide__color styleguide__color--gray-darker"></div>
                         </div>
                         <div class="card__title">
                             <h6 class="text text--uppercase">#21252b</h6>
                         </div>
                         <div class="card__description">
-                            <h6>Shark</h6>
+                            <h6>Gray Darker</h6>
                         </div>
                     </div>
                 </div>
@@ -366,27 +337,5 @@
         </div>
 
         <div class="container-fluid spacer spacer--large"></div>
-        
 
-        <script src="/js/vendor/jquery.min.js"></script>
-<script src="/js/vendor/bootstrap.min.js"></script>
-<script src="/js/vendor/libs.min.js"></script>
-<script src="/js/scripts.min.js"></script>
-
-
-<script>
-    // quick and dirty switch for stylesheets/themes
-    var themeLinks = $('.js-css-switcher a');
-    themeLinks.on('click', function(e) {
-        e.preventDefault();
-        var $currentStyleSheet = $('link[rel=stylesheet][title=current]'),
-            $newStyleSheet = $('<link>').attr('href', $(this).attr('href')).attr('rel', 'stylesheet').attr('title', 'current');
-        $currentStyleSheet.replaceWith($newStyleSheet);
-        themeLinks.removeClass('active');
-        $(this).addClass('active');
-    });
-</script>
-
-
-    </body>
-</html>
+        {% endblock %}

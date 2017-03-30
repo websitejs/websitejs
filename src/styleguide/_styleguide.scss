@@ -41,41 +41,41 @@
         width: 100%;
         @include ratio-box(16/9);
 
-        &--blaze-orange {
-            background-color: $color-blaze-orange;
+        &--brand-primary {
+            background-color: $brand-primary;
         }
-        &--endeavor {
-            background-color: $color-endeavour;
+        &--brand-secondary {
+            background-color: $brand-secondary;
         }
-        &--jelly-bean {
-            background-color: $color-jelly-bean;
+        &--brand-secondary-light {
+            background-color: $brand-secondary-light;
         }
-        &--polo-blue {
-            background-color: $color-polo-blue;
+        &--brand-secondary-lighter {
+            background-color: $brand-secondary-lighter;
         }
-        &--crimson {
-            background-color: $color-crimson;
+        &--brand-danger {
+            background-color: $brand-danger;
         }
-        &--jewel {
-            background-color: $color-jewel;
+        &--brand-success {
+            background-color: $brand-success;
         }
-        &--nevada {
-            background-color: $color-nevada;
+        &--gray {
+            background-color: $gray;
         }
-        &--seashell {
-            background-color: $color-seashell;
+        &--gray-lightest {
+            background-color: $gray-lightest;
         }
-        &--submarine {
-            background-color: $color-submarine;
+        &--gray-lighter {
+            background-color: $gray-lighter;
         }
-        &--oslo-gray {
-            background-color: $color-oslo-gray;
+        &--gray-light {
+            background-color: $gray-light;
         }
-        &--bright-gray {
-            background-color: $color-bright-gray;
+        &--gray-dark {
+            background-color: $gray-dark;
         }
-        &--shark {
-            background-color: $color-shark;
+        &--gray-darker {
+            background-color: $gray-darker;
         }
     }
 

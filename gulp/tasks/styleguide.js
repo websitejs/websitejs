@@ -1,9 +1,10 @@
 'use strict';
 
-var config = require('../config'),
-    pkg = require('../../package.json'),
-    bs = require('bootstrap-sass/package.json'),
-    jq = require('jquery/package.json'),
+var config = require('../../.project/.config'),
+    sgConfig = require('../../'+ config.srcPath + '/styleguide/.config'),
+    pkg = require('../../package'),
+    bs = require('bootstrap-sass/package'),
+    jq = require('jquery/package'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -17,9 +18,9 @@ var config = require('../config'),
     notify = require('gulp-notify'),
 
     dataPaths = {
-        css: config.tplCssPath,
-        js: config.tplJsPath,
-        jsFilename: config.jsFilename
+        css: sgConfig.cssPath,
+        js: sgConfig.jsPath,
+        jsFilename: config.scriptsFilename
     },
     dataProject = {
         name: config.name,
@@ -32,7 +33,7 @@ var config = require('../config'),
     srcSgComponents = [config.srcPath + '/components/**/*.html'],
     srcSgPages = [config.srcPath + '/styleguide/pages/**/*.html'],
     srcSgIndex = [config.srcPath + '/styleguide/index.html'],
-    dest = config.destPath + '/styleguide';
+    dest = config.destStyleguidePath;
 
 module.exports = function() {
 
@@ -139,7 +140,10 @@ module.exports = function() {
                             elements: elements,
                             components: components,
                             pages: pages,
-                            stylesheets: stylesheets
+                            stylesheets: stylesheets,
+                            docsjs: config.destDocsPathJs.replace(config.destPath, ''),
+                            docscss: config.destDocsPathCss.replace(config.destPath, ''),
+                            testlayout: config.destGalenReportLayout.replace(config.destPath, '')
                         };
                         cb(ret);
                     });
@@ -154,7 +158,7 @@ module.exports = function() {
     gulp.add('styleguide:elements', function(done) {
         getFiles(config.destPath, '/css', '.css', function(res) {
 
-            del.sync([dest + '/elements']);
+            del.sync([dest + '/elements'], { force: true });
 
             gulp.src(config.srcPath + '/elements/**/*.json')
                 .pipe(gulp.dest(dest + '/elements'));
@@ -182,7 +186,7 @@ module.exports = function() {
     gulp.add('styleguide:components', function(done) {
         getFiles(config.destPath, '/css', '.css', function(res) {
 
-            del.sync([dest + '/components']);
+            del.sync([dest + '/components'], { force: true });
 
             gulp.src(config.srcPath + '/components/**/*.json')
                 .pipe(gulp.dest(dest + '/components'));
@@ -210,7 +214,7 @@ module.exports = function() {
     gulp.add('styleguide:pages', function(done) {
         getFiles(config.destPath, '/css', '.css', function(res) {
 
-            del.sync([dest + '/pages']);
+            del.sync([dest + '/pages'], { force: true });
 
             gulp.src(config.srcPath + '/pages/**/*.json')
                 .pipe(gulp.dest(dest + '/pages'));
@@ -266,7 +270,7 @@ module.exports = function() {
      */
     gulp.add('styleguide:clean', function(done) {
         // cleanup
-        del.sync([dest]);
+        del.sync([dest], { force: true });
         done();
     });
 

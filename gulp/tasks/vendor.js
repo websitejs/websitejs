@@ -1,6 +1,7 @@
 'use strict';
 
-var config = require('../config'),
+var config = require('../../.project/.config'),
+    vendorConfig = require('../../' + config.srcPath + '/vendor/.config'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
     plumber = require('gulp-plumber'),
@@ -18,16 +19,16 @@ module.exports = function() {
 
     gulp.task('vendor:build', function(done) {
 
-    var srcPath = config.srcPath,
-        destPath = config.destPath;
+    var destPathJs = config.destVendorJs,
+        destPathCss = config.destVendorCss;
 
         // cleanup
         del.sync([
-            destPath + '/js/vendor/**/*.js',
-            destPath + '/css/vendor/**/*.css'
-        ]);
+            config.destVendorJs + '/**/*.js',
+            config.destVendorCss + '/**/*.css'
+        ], { force: true });
 
-        for (var lib in config.vendor) {
+        for (var lib in vendorConfig.vendor) {
 
             // filters
             var filterScripts = filter(['**/*.js', '**/*.min.js']),
@@ -36,7 +37,7 @@ module.exports = function() {
                 filterStylesMin = filter(['*.css', '!*.min.css'], { restore: true });
 
             // build
-            gulp.src(config.vendor[lib])
+            gulp.src(vendorConfig.vendor[lib])
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
                     notify().write(error.message);
@@ -51,9 +52,9 @@ module.exports = function() {
                 .pipe(rename({
                     suffix: '.min'
                 }))
-                .pipe(gulp.dest(destPath + '/js/vendor'));
+                .pipe(gulp.dest(destPathJs));
 
-            gulp.src(config.vendor[lib])
+            gulp.src(vendorConfig.vendor[lib])
                 .pipe(plumber(function(error) {
                     gutil.log(error.message);
                     notify().write(error.message);
@@ -66,7 +67,7 @@ module.exports = function() {
                 .pipe(concat(lib + '.css'))
                 .pipe(stripCss({ preserve: false }))
                 .pipe(rename({ suffix: '.min' }))
-                .pipe(gulp.dest(destPath + '/css/vendor'));
+                .pipe(gulp.dest(destPathCss));
         }
         done();
     });
