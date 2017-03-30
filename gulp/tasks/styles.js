@@ -7,6 +7,7 @@ var config = require('../../.project/.config'),
     path = require('path'),
     del = require('del'),
     rename = require('gulp-rename'),
+    cache = require('gulp-cached'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
@@ -15,6 +16,7 @@ var config = require('../../.project/.config'),
     //strip = require('gulp-strip-css-comments'),
     sassdoc = require('sassdoc'),
     watch = require('gulp-watch'),
+    sasslint = require('gulp-sass-lint'),
     notify = require('gulp-notify');
 
 module.exports = function() {
@@ -57,7 +59,10 @@ module.exports = function() {
                 this.emit('end');
             }))
             .pipe(autoprefixer({ browsers: ['> 5%', 'IE 11', 'last 3 version'], cascade: false }))
+            // create dist/css/styles.css for reference purposes
+            .pipe(gulp.dest(dest))
             .pipe(cssNano({ zindex: false }))
+            .pipe(cache('sasslint'))
             //.pipe(strip({ preserve: false }))
             .pipe(rename({ suffix: '.min' }))
             .pipe(sourcemaps.write('.'))
