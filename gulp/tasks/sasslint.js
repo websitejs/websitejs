@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config'),
+var config = require('../../.project/.config'),
     gulp = require('gulp'),
     sasslint = require('gulp-sass-lint'),
     cached = require('gulp-cached');
