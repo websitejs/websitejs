@@ -37,12 +37,14 @@
         }
     }
 
-    &-sm, &--sm {
+    &-sm,
+    &--sm {
         padding: 9px 20px 7px 20px;
         min-height: 34px;
     }
 
-    &-lg, &--lg {
+    &-lg,
+    &--lg {
         padding: 16px 20px;
         min-height: 50px;
     }
@@ -54,7 +56,8 @@
         @include line-height(32px, 20px);
         min-height: 54px;
 
-        &-sm, &--sm {
+        &-sm,
+        &--sm {
             padding: 12px 20px 11px 20px;
             font-size: 16px;
             @include line-height(20px, 16px);
@@ -66,17 +69,20 @@
             }
         }
 
-        &-lg, &--lg {
+        &-lg,
+        &--lg {
             padding: 15px 30px;
             min-height: 64px;
         }
     }
 
-    &.active, &:active {
+    &.active,
+    &:active {
         box-shadow: none;
     }
 
-    &.hover, &:hover {
+    &.hover,
+    &:hover {
         color: #ffffff;
     }
 
@@ -86,11 +92,15 @@
         background: transparent;
         color: $link-color;
 
-        &.hover, &:hover {
+        &.hover,
+        &:hover {
             color: $link-color;
         }
 
-        &.active, &:active, &.focus, &:focus {
+        &.active,
+        &:active,
+        &.focus,
+        &:focus {
             color: $link-color;
         }
 
@@ -103,7 +113,10 @@
         color: #ffffff;
         @include simple-gradient($color-jelly-bean, $color-endeavour);
 
-        &.active, &:active, &.focus, &:focus {
+        &.active,
+        &:active,
+        &.focus,
+        &:focus {
             color: #ffffff;
             @include simple-gradient($color-jelly-bean, $color-endeavour);
         }
@@ -118,12 +131,16 @@
         color: $color-bright-gray;
         background: transparent;
 
-        &.hover, &:hover {
+        &.hover,
+        &:hover {
             color: $color-bright-gray;
             background-color: rgba($color-bright-gray, .1);
         }
 
-        &.active, &:active, &.focus, &:focus {
+        &.active,
+        &:active,
+        &.focus,
+        &:focus {
             color: $color-bright-gray;
         }
 
@@ -135,11 +152,13 @@
             color: #ffffff;
             border-color: #ffffff;
 
-            &.hover, &:hover {
+            &.hover,
+            &:hover {
                 background-color: rgba(#ffffff, .1);
                 color: #ffffff;
 
-                &.focus, &:focus {
+                &.focus,
+                &:focus {
                     color: #ffffff;
 
                     .icon {
@@ -152,11 +171,13 @@
                 }
             }
 
-            &.active, &:active {
+            &.active,
+            &:active {
                 background-color: rgba(#ffffff, .1);
                 color: #ffffff;
 
-                &.focus, &:focus {
+                &.focus,
+                &:focus {
                     color: #ffffff;
 
                     .icon {
@@ -169,7 +190,8 @@
                 }
             }
 
-            &.focus, &:focus {
+            &.focus,
+            &:focus {
                 color: #ffffff;
             }
 
@@ -182,11 +204,13 @@
             border-color: $color-endeavour;
             color: $color-endeavour;
 
-            &.hover, &:hover {
+            &.hover,
+            &:hover {
                 color: #ffffff;
                 @include simple-gradient($color-jelly-bean, $color-endeavour);
 
-                &.focus, &:focus {
+                &.focus,
+                &:focus {
                     color: #ffffff;
 
                     .icon {
@@ -199,11 +223,13 @@
                 }
             }
 
-            &.active, &:active {
+            &.active,
+            &:active {
                 color: #ffffff;
                 @include simple-gradient($color-jelly-bean, $color-endeavour);
 
-                &.focus, &:focus {
+                &.focus,
+                &:focus {
                     color: #ffffff;
 
                     .icon {
@@ -216,7 +242,8 @@
                 }
             }
 
-            &.focus, &:focus {
+            &.focus,
+            &:focus {
                 color: $color-endeavour;
             }
 
@@ -237,11 +264,13 @@
                     fill: #ffffff;
                 }
             }
+
             &__ghost {
                 color: #ffffff;
                 border-color: #ffffff;
 
-                &.hover, &:hover {
+                &.hover,
+                &:hover {
                     background-color: rgba(#ffffff, .1);
                 }
 
@@ -250,7 +279,10 @@
                 }
 
                 &--blue {
-                    &.hover, &:hover, &.active, &:active {
+                    &.hover,
+                    &:hover,
+                    &.active,
+                    &:active {
                         border-color: $color-endeavour;
                     }
                 }

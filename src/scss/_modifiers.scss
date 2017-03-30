@@ -4,22 +4,36 @@
     &--white {
         background-color: #ffffff;
     }
+
     &--light {
         background-color: $color-seashell;
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             color: $color-bright-gray;
         }
+
         p {
             color: $color-bright-gray;
         }
     }
+
     &--dark {
         background-color: $color-bright-gray;
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             color: #ffffff;
         }
+
         p {
             color: $color-submarine;
         }
@@ -58,6 +72,7 @@
     &--medium {
         font-weight: 500;
     }
+
     &--bold {
         font-weight: 700;
 
@@ -65,6 +80,7 @@
             font-family: $font-family-condensed;
         }
     }
+
     &--larger {
         font-size: 16px;
         @include line-height(23px, 16px);
@@ -74,6 +90,7 @@
             @include line-height(28px, 18px);
         }
     }
+
     &--uppercase {
         text-transform: uppercase;
     }
