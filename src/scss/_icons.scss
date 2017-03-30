@@ -8,6 +8,7 @@
         height: 25px;
     }
 
+    // sass-lint:disable-all
     &__font {
         font-family: $icon-font-family;
         font-weight: normal;
@@ -758,5 +759,6 @@
             content: ""}
         }
     }
+    // sass-lint:enable-all
 
 

@@ -42,7 +42,7 @@ gulp.task('docs', ['styles:docs', 'scripts:docs']);
 gulp.task('vendor', ['vendor:build']);
 gulp.task('fonts', ['assets:fonts']);
 gulp.task('assets', ['assets:svg:icons', 'assets:images', 'assets:fonts']);
-gulp.task('styles', ['styles:build']);
+gulp.task('styles', ['styles:build', 'sasslint']);
 gulp.task('scripts', ['scripts:reset', 'scripts:build']);
 gulp.task('styleguide', ['styleguide:build']);
 
