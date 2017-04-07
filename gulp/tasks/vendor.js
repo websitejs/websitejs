@@ -33,8 +33,8 @@ module.exports = function() {
             // filters
             var filterScripts = filter(['**/*.js', '**/*.min.js']),
                 filterScriptsMin = filter(['**/*.js', '!**/*.min.js'], { restore: true }),
-                filterStyles = filter(['*.css', '*.min.css']),
-                filterStylesMin = filter(['*.css', '!*.min.css'], { restore: true });
+                filterStyles = filter(['**/*.css', '**/*.min.css']),
+                filterStylesMin = filter(['**/*.css', '!**/*.min.css'], { restore: true });
 
             // build
             gulp.src(vendorConfig.vendor[lib])
