@@ -51,7 +51,8 @@ module.exports = function() {
         if (fs.existsSync(fullPath)) {
             dir.readFiles(fullPath, {
                 match: regex,
-                sync: true
+                sync: true,
+                excludeDir: ['vendor']
             }, function(err, content, next) {
                 if (err) { gutil.log(err); }
                 next();
