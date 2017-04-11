@@ -2,6 +2,8 @@ $(document).ready(function() {
     'use strict';
 
     // SVG system inject
+    var svgUrlPrefix = '';
+    var svgUrl = '/assets/icons/svg-icons.svg';
     var scripts = document.getElementsByTagName('script');
     var script = scripts[scripts.length - 1];
     var xhr = new XMLHttpRequest();
@@ -11,7 +13,12 @@ $(document).ready(function() {
         div.style.display = 'none';
         script.parentNode.insertBefore(div, script);
     };
-    xhr.open('get', '/assets/icons/svg-icons.svg', true);
+    // xhr.open('get', '/assets/icons/svg-icons.svg', true);
+    if (window.location.hostname !== 'localhost') {
+        svgUrlPrefix = '/static/2.0';
+    }
+
+    xhr.open('get', svgUrlPrefix + svgUrl, true);
     xhr.send();
 
     // init global vieport var

@@ -23,10 +23,10 @@ $grid-gutter-width:         20px;
 $container-tablet:          (720px + $grid-gutter-width);
 $container-sm:              $container-tablet;
 
-$container-desktop:         (940px + $grid-gutter-width);
+$container-desktop:         980px;
 $container-md:              $container-desktop;
 
-$container-large-desktop:   (1140px + $grid-gutter-width);
+$container-large-desktop:   980px;
 $container-lg:              $container-large-desktop;
 
 // nav breakpoints
