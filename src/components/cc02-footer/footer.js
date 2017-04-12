@@ -42,4 +42,4 @@
         cssClass: 'js-footer'
     });
 
-})(jQuery, window.viewport);
+})(jQuery, ResponsiveBootstrapToolkit);

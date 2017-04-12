@@ -42,4 +42,4 @@
         cssClass: 'js-header'
     });
 
-})(jQuery, window.viewport);
+})(jQuery, ResponsiveBootstrapToolkit);
