@@ -6,7 +6,7 @@
 
         &.bg--half {
             background-color: transparent;
-            background: linear-gradient(to bottom, #ffffff 0%, #ffffff 50%, #ffffff 50%,transparent 50%, transparent 100%);
+            background: linear-gradient(to bottom, #ffffff 0%, #ffffff 50%, #ffffff 50%, transparent 50%, transparent 100%);
         }
     }
 
@@ -28,7 +28,7 @@
 
         &.bg--half {
             background-color: transparent;
-            background: linear-gradient(to bottom, $gray-lightest 0%, $gray-lightest 50%, $gray-lightest 50%,transparent 50%, transparent 100%);
+            background: linear-gradient(to bottom, $gray-lightest 0%, $gray-lightest 50%, $gray-lightest 50%, transparent 50%, transparent 100%);
         }
     }
 
@@ -50,7 +50,7 @@
 
         &.bg--half {
             background-color: transparent;
-            background: linear-gradient(to bottom, $gray-dark 0%, $gray-dark 50%, $gray-dark 50%,transparent 50%, transparent 100%);
+            background: linear-gradient(to bottom, $gray-dark 0%, $gray-dark 50%, $gray-dark 50%, transparent 50%, transparent 100%);
         }
     }
 }
@@ -120,26 +120,26 @@
     border: 1px solid $gray-lighter;
 
     &--bottom {
-        border-top: none;
-        border-left: none;
-        border-right: none;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
     }
 
     &--top {
-        border-bottom: none;
-        border-left: none;
-        border-right: none;
+        border-bottom: 0;
+        border-left: 0;
+        border-right: 0;
     }
 
     &--left {
-        border-top: none;
-        border-bottom: none;
-        border-right: none;
+        border-top: 0;
+        border-bottom: 0;
+        border-right: 0;
     }
 
     &--right {
-        border-top: none;
-        border-bottom: none;
-        border-left: none;
+        border-top: 0;
+        border-bottom: 0;
+        border-left: 0;
     }
 }
