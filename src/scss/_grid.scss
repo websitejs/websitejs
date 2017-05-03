@@ -9,15 +9,21 @@
 
     .row {
         &.nogutters {
+            // sass-lint:disable force-pseudo-nesting
             > [class^=col-]:not(:first-child):not(:last-child) {
                 padding-left: 0;
                 padding-right: 0;
             }
-            > [class^=col-]:first-child {
-                padding-right: 0;
-            }
-            > [class^=col-]:last-child {
-                padding-left: 0;
+            // sass-lint:disable force-pseudo-nesting
+
+            > [class^=col-] {
+                &:first-child {
+                    padding-right: 0;
+                }
+
+                &:last-child {
+                    padding-left: 0;
+                }
             }
         }
     }

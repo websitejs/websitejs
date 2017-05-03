@@ -1,3 +1,5 @@
+// sass-lint:disable-all
+
 ///
 /// unitless line height based font-size
 /// @param {string} $height Height in pixels
@@ -5,7 +7,7 @@
 /// @author Rocco Janse, rocco.janse@valtech.nl
 ///
 @mixin line-height($height, $font-size) {
-    line-height: (strip-units($height)/strip-units($font-size));
+    line-height: (strip-units($height) / strip-units($font-size));
 }
 
 ///
@@ -49,9 +51,9 @@
 /// @author Rocco Janse, rocco.janse@valtech.nl
 ///
 @mixin simple-gradient($top: $brand-secondary-light, $bottom: $brand-secondary) {
-	background: rgba($bottom, 1);
-	background: linear-gradient(to bottom, rgba($top, 1) 0%,rgba($bottom, 1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 );
+    background: rgba($bottom, 1);
+    background: linear-gradient(to bottom, rgba($top, 1) 0%,rgba($bottom, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 );
 }
 
 ///
@@ -60,15 +62,25 @@
 /// @author Rocco Janse, rocco.janse@valtech.nl
 ///
 @mixin content-margins($selector: '> *') {
-	@if $selector {
-		#{unquote($selector)} {
-			&:first-child { margin-top: 0; }
-			&:last-child { margin-bottom: 0; }
-		}
-	} @else {
-		&:first-child { margin-top: 0; }
-		&:last-child { margin-bottom: 0; }
-	}
+    @if $selector {
+        #{unquote($selector)} {
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    } @else {
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 ///
@@ -270,3 +282,5 @@
 		margin-left: -$size;
 	}
 }
+// sass-lint:enable-all
+
