@@ -1,50 +1,48 @@
 'use strict';
 
-var srcPath = 'src',
-    destPath = 'dist';
-
-module.exports =  {
+var Config = module.exports =  {
 
     name: 'DAF2.0',
 
     gulpTaskPath: './gulp/tasks',
 
     // source
-    srcPath: srcPath,
-    destPath: destPath,
+    srcPath: 'src',
+    destPath: 'dist',
 
     // styles
-    srcCssPath: srcPath + '/scss',
-    destCssPath: destPath + '/css',
+    srcCssPath: Config.srcPath + '/scss',
+    destCssPath: Config.destPath + '/css',
 
     // scripts
     scriptsFilename: 'scripts',
-    srcJsPath: srcPath + '/js',
-    destJsPath: destPath + '/js',
+    srcJsPath: Config.srcPath + '/js',
+    destJsPath: Config.destPath + '/js',
 
     // vendor
-    destVendorCss: destPath + '/css/vendor',
-    destVendorJs: destPath + '/js/vendor',
+    destVendorCss: Config.destPath + '/css/vendor',
+    destVendorJs: Config.destPath + '/js/vendor',
 
     // assets
-    srcSvgIconPath: srcPath + '/assets/icons/svg-icons',
-    destSvgIconPath: destPath + '/assets/icons',
+    svgIconPath: '/assets/icons/svg-icons',
+    srcSvgIconPath: Config.srcPath + Config.svgIconPath,
+    destSvgIconPath: Config.destPath + '/assets/icons',
 
     // elements
-    srcElementsPath: srcPath + '/elements',
-    destElementsPath: destPath + '/elements',
+    srcElementsPath: Config.srcPath + '/elements',
+    destElementsPath: Config.destPath + '/elements',
 
     // components
-    srcComponentsPath: srcPath + '/components',
-    destComponentsPath: destPath + '/components',
+    srcComponentsPath: Config.srcPath + '/components',
+    destComponentsPath: Config.destPath + '/components',
 
     // styleguide
-    destStyleguidePath: destPath + '/styleguide',
+    destStyleguidePath: Config.destPath + '/styleguide',
 
     // docs
-    destDocsPathJs: destPath + '/docs/scripts',
-    destDocsPathCss: destPath + '/docs/styles',
+    destDocsPathJs: Config.destPath + '/docs/scripts',
+    destDocsPathCss: Config.destPath + '/docs/styles',
 
     // galen
-    destGalenReportLayout: destPath + '/test/layout'
+    destGalenReportLayout: Config.destPath + '/test/layout'
 };
