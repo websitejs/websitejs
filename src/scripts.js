@@ -1,18 +1,26 @@
 $(document).ready(function() {
     'use strict';
 
-    // SVG system inject
-    var scripts = document.getElementsByTagName('script');
-    var script = scripts[scripts.length - 1];
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        var div = document.createElement('div');
-        div.innerHTML = this.responseText;
-        div.style.display = 'none';
-        script.parentNode.insertBefore(div, script);
-    };
-    xhr.open('get', '/assets/icons/svg-icons.svg', true);
-    xhr.send();
+    // // SVG system inject
+    // var svgUrlPrefix = '/',
+    //     svgUrl = '/assets/icons/svg-icons.svg',
+    //     scripts = document.getElementsByTagName('script'),
+    //     script = scripts[scripts.length - 1],
+    //     xhr = new XMLHttpRequest();
+
+    // xhr.onload = function () {
+    //     var div = document.createElement('div');
+    //     div.innerHTML = this.responseText;
+    //     div.style.display = 'none';
+    //     script.parentNode.insertBefore(div, script);
+    // };
+
+    // if (window.location.hostname !== 'localhost') {
+    //     svgUrlPrefix = '/static/2.0';
+    // }
+
+    // xhr.open('get', svgUrlPrefix + svgUrl, true);
+    // xhr.send();
 
     // init global vieport var
     if (typeof window.viewport === 'undefined') {

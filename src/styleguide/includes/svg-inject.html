@@ -1,0 +1,22 @@
+<script>
+    // SVG system inject
+    var svgUrlPrefix = '',
+        svgUrl = '{{ paths.assets.svgIcons | safe }}',
+        scripts = document.getElementsByTagName('script'),
+        script = scripts[scripts.length - 1],
+        xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        var div = document.createElement('div');
+        div.innerHTML = this.responseText;
+        div.style.display = 'none';
+        script.parentNode.insertBefore(div, script);
+    };
+
+    if (window.location.hostname !== 'localhost') {
+        svgUrlPrefix = '{{ paths.root | safe }}';
+    }
+
+    xhr.open('get', svgUrlPrefix + svgUrl, true);
+    xhr.send();
+</script>
