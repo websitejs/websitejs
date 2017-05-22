@@ -1,50 +1,115 @@
 'use strict';
 
-var srcPath = 'src',
-    destPath = 'dist';
+var path = require('path'),
 
-module.exports =  {
+    // project name
+    projectName = 'WebsiteJS',
 
-    name: 'DAF2.0',
+    // current working dir
+    cwd = '.',
 
-    gulpTaskPath: './gulp/tasks',
+    // gulp
+    gulpFolder = 'gulp',
+    gulpTaskFolder = 'tasks',
 
-    // source
-    srcPath: srcPath,
-    destPath: destPath,
+    // roots
+    srcFolder = 'src',
+    destFolder = 'dist',
 
     // styles
-    srcCssPath: srcPath + '/scss',
-    destCssPath: destPath + '/css',
+    srcCssFolder = 'scss',
+    destCssFolder = 'css',
 
     // scripts
-    scriptsFilename: 'scripts',
-    srcJsPath: srcPath + '/js',
-    destJsPath: destPath + '/js',
+    scriptsFilename = 'scripts',
+    srcJsFolder = 'js',
+    destJsFolder = srcJsFolder,
 
     // vendor
-    destVendorCss: destPath + '/css/vendor',
-    destVendorJs: destPath + '/js/vendor',
+    vendorFolder = 'vendor',
 
     // assets
-    srcSvgIconPath: srcPath + '/assets/icons/svg-icons',
-    destSvgIconPath: destPath + '/assets/icons',
+    srcAssetsFolder = 'assets',
+    srcFontsFolder = 'fonts',
+    srcIconsFolder = 'icons',
+    srcSvgIconsFilename = 'svg-icons',
+    srcImgFolder = 'img',
+    destAssetsFolder = srcAssetsFolder,
+    destFontsFolder = srcFontsFolder,
+    destIconsFolder = srcIconsFolder,
+    destImgFolder = srcImgFolder,
 
     // elements
-    srcElementsPath: srcPath + '/elements',
-    destElementsPath: destPath + '/elements',
+    srcElementsFolder = 'elements',
+    destElementsFolder = srcElementsFolder,
 
     // components
-    srcComponentsPath: srcPath + '/components',
-    destComponentsPath: destPath + '/components',
+    srcComponentsFolder = 'components',
+    destComponentsFolder = srcComponentsFolder,
 
     // styleguide
-    destStyleguidePath: destPath + '/styleguide',
+    styleGuideFolder = 'styleguide',
+
+    // documentation
+    docsFolder = 'docs',
+
+    // test output
+    testFolder = 'test',
+    galenFolder = 'layout';
+
+
+
+var Config = module.exports =  {
+
+    name: projectName,
+
+    // gulp
+    gulpTaskPath: path.join(cwd, gulpFolder, gulpTaskFolder),
+
+    // roots
+    srcPath: srcFolder,
+    destPath: destFolder,
+
+    // styles
+    srcCssPath: path.join(srcFolder, srcCssFolder),
+    destCssPath: path.join(destFolder, destCssFolder),
+
+    // scripts
+    scriptsFilename: scriptsFilename,
+    srcJsPath: path.join(srcFolder, srcJsFolder),
+    destJsPath: path.join(destFolder, destJsFolder),
+
+    // vendor
+    destVendorCss: path.join(destFolder, destCssFolder, vendorFolder),
+    destVendorJs: path.join(destFolder, destJsFolder, vendorFolder),
+
+    // assets
+    srcAssetsPath: path.join(srcFolder, srcAssetsFolder),
+    destAssetsPath: path.join(destFolder, srcAssetsFolder),
+    srcFontsPath: path.join(srcFolder, srcAssetsFolder, srcFontsFolder),
+    destFontsPath: path.join(destFolder, destAssetsFolder, destFontsFolder),
+    srcIconsPath: path.join(srcFolder, srcAssetsFolder, srcIconsFolder),
+    destIconsPath: path.join(destFolder, destAssetsFolder, destIconsFolder),
+    srcSvgIconPath: path.join(srcFolder, srcAssetsFolder, srcIconsFolder, srcSvgIconsFilename),
+    destSvgIconPath: path.join(destFolder, destAssetsFolder, destIconsFolder),
+    srcImgPath: path.join(srcFolder, srcAssetsFolder, srcImgFolder),
+    destImgPath: path.join(destFolder, destAssetsFolder, destImgFolder),
+
+    // elements
+    srcElementsPath: path.join(srcFolder, srcElementsFolder),
+    destElementsPath: path.join(destFolder, destElementsFolder),
+
+    // components
+    srcComponentsPath: path.join(srcFolder, srcComponentsFolder),
+    destComponentsPath: path.join(destFolder, destComponentsFolder),
+
+    // styleguide
+    destStyleguidePath: path.join(destFolder, styleGuideFolder),
 
     // docs
-    destDocsPathJs: destPath + '/docs/scripts',
-    destDocsPathCss: destPath + '/docs/styles',
+    destDocsPathJs: path.join(destFolder, docsFolder, destJsFolder),
+    destDocsPathCss: path.join(destFolder, docsFolder, destCssFolder),
 
     // galen
-    destGalenReportLayout: destPath + '/test/layout'
+    destGalenReportLayout: path.join(destFolder, testFolder, galenFolder)
 };

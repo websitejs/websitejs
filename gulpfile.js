@@ -2,6 +2,7 @@
 
 var config = require('./.project/.config'),
     fs = require('fs'),
+    path = require('path'),
     gulp = require('gulp');
 
 
@@ -10,10 +11,10 @@ var config = require('./.project/.config'),
  * @private
  */
 var getAllTasks = function() {
-    var path = config.gulpTaskPath;
-    var files = fs.readdirSync(path);
+    var taskPath = config.gulpTaskPath;
+    var files = fs.readdirSync(taskPath);
     files.forEach(function(file, i) {
-        require(path + '/' + file)();
+        require('./' + path.join(taskPath, file))();
     });
 };
 

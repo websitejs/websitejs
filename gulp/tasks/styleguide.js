@@ -1,7 +1,6 @@
 'use strict';
 
 var config = require('../../.project/.config'),
-    sgConfig = require('../../'+ config.srcPath + '/styleguide/.config'),
     pkg = require('../../package'),
     bs = require('bootstrap-sass/package'),
     jq = require('jquery/package'),
@@ -18,9 +17,13 @@ var config = require('../../.project/.config'),
     notify = require('gulp-notify'),
 
     dataPaths = {
-        css: sgConfig.cssPath,
-        js: sgConfig.jsPath,
-        jsFilename: config.scriptsFilename
+        root: (config.destPath).replace(/\\/g, '/'),
+        css: (config.destCssPath.replace(config.destPath, '')).replace(/\\/g, '/'),
+        js: (config.destJsPath.replace(config.destPath, '')).replace(/\\/g, '/'),
+        jsFilename: config.scriptsFilename,
+        assets: {
+            svgIcons: (config.srcSvgIconPath.replace(config.srcPath, '') + '.svg').replace(/\\/g, '/')
+        }
     },
     dataProject = {
         name: config.name,

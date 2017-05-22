@@ -20,7 +20,7 @@ module.exports = function() {
 
         .pipe(cached('sasslint'))
         .pipe(sasslint({
-            configFile: config.srcPath + '/scss/config/_sass-lint.yml'
+            configFile: config.srcPath + '/scss/.config/_sass-lint.yml'
         }))
         .pipe(sasslint.format())
         .pipe(sasslint.failOnError())

@@ -1,19 +1,6 @@
 $(document).ready(function() {
     'use strict';
 
-    // SVG system inject
-    var scripts = document.getElementsByTagName('script');
-    var script = scripts[scripts.length - 1];
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        var div = document.createElement('div');
-        div.innerHTML = this.responseText;
-        div.style.display = 'none';
-        script.parentNode.insertBefore(div, script);
-    };
-    xhr.open('get', '/assets/icons/svg-icons.svg', true);
-    xhr.send();
-
     // init global vieport var
     if (typeof window.viewport === 'undefined') {
         window.viewport = ResponsiveBootstrapToolkit;
