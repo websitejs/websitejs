@@ -168,7 +168,7 @@ rules:
 
   # enforce whether or not decimal numbers should include a leading zero
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/leading-zero.md
-  leading-zero: 1
+  leading-zero: 0
 
   # enforce how deeply a selector can be nested (defaults to 2)
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/nesting-depth.md
