@@ -13,10 +13,8 @@ var config = require('../../.project/.config'),
     autoprefixer = require('gulp-autoprefixer'),
     cssGlob = require('gulp-css-globbing'),
     cssNano = require('gulp-cssnano'),
-    //strip = require('gulp-strip-css-comments'),
     sassdoc = require('sassdoc'),
     watch = require('gulp-watch'),
-    sasslint = require('gulp-sass-lint'),
     notify = require('gulp-notify');
 
 module.exports = function() {
@@ -60,10 +58,7 @@ module.exports = function() {
             }))
             .pipe(autoprefixer({ browsers: ['> 5%', 'IE 11', 'last 3 version'], cascade: false }))
             .pipe(cssNano({ zindex: false }))
-
             .pipe(cache('sasslint'))
-
-            //.pipe(strip({ preserve: false }))
             .pipe(rename({ suffix: '.min' }))
             .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(dest));
@@ -76,7 +71,7 @@ module.exports = function() {
             read: false
         }, function(file) {
             gutil.log('>>> ' + path.relative(file.base, file.path) + ' (' + file.event + ').');
-            gulp.start(['styles:build', 'server:reload']);
+            gulp.start(['sasslint', 'styles:build', 'server:reload']);
         });
     });
 
