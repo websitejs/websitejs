@@ -7,17 +7,17 @@
         <meta name="theme-color" content="#21252b">
         <title>{{ meta.title }}</title>
 
-        {% include "styleguide/includes/headerscripts.html" %}
+        {% include "styleguide/includes/partials/headerscripts.html" %}
     </head>
     <body>
         {% if stylesheets | length > 1 %}
-        {% include "styleguide/includes/stylesheet-switcher.html" %}
+        {% include "styleguide/includes/partials/stylesheet-switcher.html" %}
         {% endif %}
 
         {% block content %} {% endblock %}
 
-        {% include "styleguide/includes/svg-inject.html" %}
+        {% include "styleguide/includes/partials/svg-inject.html" %}
 
-        {% include "styleguide/includes/footerscripts.html" %}
+        {% include "styleguide/includes/partials/footerscripts.html" %}
     </body>
 </html>
