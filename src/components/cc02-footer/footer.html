@@ -1,7 +1,7 @@
-{% if extends %}{% extends "styleguide/includes/layout.html" %}{% endif %}
+{% if extends %}{% extends "styleguide/includes/base/masterpage.html" %}{% endif %}
 
         {% block content %}
-        {% if name %}{% include "styleguide/includes/moduleinfo.html" %}{% endif %}
+        {% if name %}{% include "styleguide/includes/partials/moduleinfo.html" %}{% endif %}
 
         <footer class="footer js-footer">
         footer

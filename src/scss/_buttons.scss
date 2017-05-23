@@ -7,7 +7,6 @@
     @include line-height(16px, 14px);
     min-height: 40px;
     white-space: normal;
-    outline: none !important;
 
     .icon {
         width: 16px;
@@ -79,11 +78,19 @@
     &.active,
     &:active {
         box-shadow: none;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     &.hover,
     &:hover {
         color: #ffffff;
+    }
+
+    &:focus {
+        outline: none;
     }
 
     &__link {
