@@ -2,6 +2,22 @@
 // In alfabetical order.
 
 ///
+/// Absolute positioning. Especially handy for breakpoint changes since resetting of values is done automatically. Creates better readable code
+/// @param {string} $top Top property value
+/// @param {string} $right Right property value
+/// @param {string} $bottom Bottom property value
+/// @param {string} $left Left property value
+/// @author Peter Bust, peter.bust@valtech.nl
+///
+@mixin absolute-position($top: auto, $right: auto, $bottom: auto, $left: auto) {
+	position: absolute !important;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}
+
+///
 /// alignes elements vertically and horizontally
 /// @param {string} $position Optional relative [default] or absolute
 /// @author Rocco Janse, rocco.janse@valtech.nl
