@@ -2,7 +2,7 @@
 /// px to rem based on base font size
 /// @param {string} $px Size in pixels
 /// @param {string} $base Optional base font size
-/// @author Rocco Janse, rocco.janse@valtech.nl
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
 /// @returns {string} Pixel value in em's
 ///
 @function rem($px, $base: $font-size-base) {
@@ -13,7 +13,7 @@
 /// px to em based on base font size
 /// @param {string} $px Size in pixels
 /// @param {string} $base Optional base font size
-/// @author Rocco Janse, rocco.janse@valtech.nl
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
 /// @returns {string} Pixel value in em's
 ///
 @function em($px, $base: $font-size-base) {
@@ -23,7 +23,7 @@
 ///
 /// Remove the unit of a length
 /// @param {Number} $number - Number to remove unit from
-/// @author Rocco Janse, rocco.janse@valtech.nl
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
 /// @return {Number} - Unitless number
 ///
 @function strip-units($number) {
