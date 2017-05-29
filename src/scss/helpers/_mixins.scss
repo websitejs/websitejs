@@ -179,22 +179,25 @@
 }
 
 ///
-/// set elements ratio
+/// Set elements ratio.
+/// This technique makes the option for relative children possible without changing the aspect ratio height.
+/// When children no longer fit inside the ratio space the height is stretched.
 /// @param {string} $ratio Ie. 4/3 or 16/9
-/// @author Rocco Janse, rocco.janse@valtech.nl
+/// @author Peter Bust, peter.bust@valtech.nl
 ///
 @mixin ratio-box($ratio: 1/1) {
-    position: relative;
-    overflow: hidden;
+	height: auto !important;
 
-    // The container's height, as a percentage of the
-    // container's width, is set by assigning
-    // padding-top to a pseudo-element.
-    &:before {
-        content: "";
-        display: block;
-        height: 0;
-        padding-top: (1 / $ratio) * 100%;
+	&:before {
+        content: '';
+        float: left;
+        padding-bottom: 100%/($ratio);
+    }
+
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
     }
 }
 
