@@ -195,26 +195,37 @@
 }
 
 ///
-/// Set elements ratio.
-/// This technique makes the option for relative children possible without changing the aspect ratio height.
-/// When children no longer fit inside the ratio space the height is stretched.
-/// @param {string} $ratio Ie. 4/3 or 16/9
+/// Set elements aspect ratio.
+/// @param {string} $element_w [100%] Width of element.
+/// @param {string} $ratio_w [1] Aspect ratio width.
+/// @param {string} $ratio_h [1] Aspect ratio height.
+/// @param {string} $restrain [true] If true, element is kept in ratio, overflowing content is hidden. If false, height is relative to content with a minimum ratio height.
 /// @author Peter Bust, peter.bust@valtech.nl
 ///
-@mixin ratio-box($ratio: 1/1) {
-	height: auto !important;
+@mixin ratio-box($element_w: 100%, $ratio_w: 1, $ratio_h: 1, $restrain: true) {
 
-	&:before {
-        content: '';
-        float: left;
-        padding-bottom: 100%/($ratio);
-    }
+	@if $restrain {
+		height: 0 !important;
+		padding-bottom: $element_w / $ratio_w * $ratio_h;
+		overflow: hidden !important;
+	}
 
-    &:after {
-        content: '';
-        display: table;
-        clear: both;
-    }
+	@else {
+		height: auto !important;
+
+		&:before {
+			content: '';
+			float: left;
+			padding-bottom: 100% / $ratio_w * $ratio_h;
+		}
+
+		&:after {
+			content: '';
+			display: table;
+			clear: both;
+		}
+	}
+
 }
 
 /// ratio-box @extend
