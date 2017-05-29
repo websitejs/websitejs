@@ -129,6 +129,15 @@
 }
 
 ///
+/// Hide from both screenreaders and browsers
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin hidden {
+	display: none;
+	visibility: hidden;
+}
+
+///
 /// style <input/> placeholder
 /// @author Rocco Janse, rocco.janse@valtech.nl
 ///
@@ -138,15 +147,6 @@
 	&::-moz-placeholder { @content; }
 	&:-ms-input-placeholder { @content; }
 	&::-webkit-input-placeholder { @content; }
-}
-
-///
-/// Hide from both screenreaders and browsers
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin hidden {
-	display: none;
-	visibility: hidden;
 }
 
 ///
@@ -204,38 +204,6 @@
 }
 
 ///
-/// simple vertical gradient
-/// @param {string} $top Top color (hex)
-/// @param {string} $bottom Bottom color (hex)
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin simple-gradient($top: $brand-secondary-light, $bottom: $brand-secondary) {
-    background: rgba($bottom, 1);
-    background: linear-gradient(to bottom, rgba($top, 1) 0%,rgba($bottom, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 );
-}
-
-///
-/// disable browser selection of elements
-/// usefull for menu's, navigations etc
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin unselectable {
-    -webkit-touch-callout: none;
-    user-select: none;
-}
-
-///
-/// Set element visible
-/// @param {string} $state Display state. Defaults to 'block'
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin visible($state: 'block') {
-	display: unquote($state);
-	visibility: visible;
-}
-
-///
 /// Hide only visually, but have it available for screenreaders
 /// @param {boolean} $focusable Should the element be focusable
 /// @author Rocco Janse, rocco.janse@valtech.nl
@@ -282,6 +250,38 @@
 	overflow: visible;
 	position: static;
 	width: auto;
+}
+
+///
+/// simple vertical gradient
+/// @param {string} $top Top color (hex)
+/// @param {string} $bottom Bottom color (hex)
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin simple-gradient($top: $brand-secondary-light, $bottom: $brand-secondary) {
+    background: rgba($bottom, 1);
+    background: linear-gradient(to bottom, rgba($top, 1) 0%,rgba($bottom, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 );
+}
+
+///
+/// disable browser selection of elements
+/// usefull for menu's, navigations etc
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin unselectable {
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+///
+/// Set element visible
+/// @param {string} $state Display state. Defaults to 'block'
+/// @author Rocco Janse, rocco.janse@valtech.nl
+///
+@mixin visible($state: 'block') {
+	display: unquote($state);
+	visibility: visible;
 }
 
 // sass-lint:enable-all
