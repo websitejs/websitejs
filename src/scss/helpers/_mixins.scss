@@ -184,6 +184,21 @@
 }
 
 ///
+/// Easy hover mixin.
+/// @author Peter Bust, peter.bust@valtech.nl
+///
+@mixin on-hover() {
+	&.active,
+    &:active,
+    &.focus,
+    &:focus,
+    &.hover,
+    &:hover {
+		@content;
+	}
+}
+
+///
 /// cross browser opacity
 /// @param {float} $opacity Opacity float (ie. 0.5)
 /// @author Rocco Janse, rocco.janse@valtech.nl
