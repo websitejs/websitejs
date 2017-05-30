@@ -292,17 +292,6 @@
 }
 
 ///
-/// Respond to breakpoint. Easy maintainable media query, better readable code.
-/// @param {string} $breakpoint Sass variable or custom px size
-/// @author Peter Bust, <peter.bust@valtech.nl>
-///
-@mixin respond-to($breakpoint) {
-	@media (min-width: $breakpoint) {
-		@content;
-	}
-}
-
-///
 /// Hide only visually, but have it available for screenreaders.
 /// @param {boolean} $focusable [false] Should the element be focusable
 /// @author Rocco Janse, <rocco.janse@valtech.nl>
