@@ -56,6 +56,7 @@
     "gulp-strip-css-comments": "^1.2.0",
     "gulp-svgmin": "^1.2.3",
     "gulp-svgstore": "^6.1.0",
+    "gulp-task-listing": "^1.0.1",
     "gulp-uglify": "^2.0.0",
     "gulp-watch": "^4.3.11",
     "iedriver": "^3.0.0",
