@@ -201,17 +201,33 @@
 }
 
 ///
-/// Easy hover mixin.
+/// On touch mixin for quick setting `:hover`, `:focus` `:active`.
+/// @param {boolean} $hover [true] Set `:hover` and `.hover`
+/// @param {boolean} $focus [true] Set `:focus` and `.focus`
+/// @param {boolean} $active [true] Set `:active` and `.active`
 /// @author Peter Bust, <peter.bust@valtech.nl>
 ///
-@mixin on-hover() {
-	&.active,
-    &:active,
-    &.focus,
-    &:focus,
-    &.hover,
-    &:hover {
-		@content;
+@mixin on-touch($hover: true, $focus: true, $active: true) {
+
+	@if ($hover) {
+		&.hover,
+		&:hover {
+			@content;
+		}
+	}
+
+	@if ($focus) {
+		&.focus,
+		&:focus {
+			@content;
+		}
+	}
+
+	@if ($active) {
+		&.active,
+		&:active {
+			@content;
+		}
 	}
 }
 
