@@ -2,40 +2,6 @@
 // In alfabetical order.
 
 ///
-/// Absolute position the element. Especially handy for breakpoint changes since resetting of values is done automatically. Results in better readable code.
-/// @param {string} $top [auto] Top property value
-/// @param {string} $right [auto] Right property value
-/// @param {string} $bottom [auto] Bottom property value
-/// @param {string} $left [auto] Left property value
-/// @example scss - Without mixin:
-/// 	div {
-///			top: 50px;
-/// 		left: 50px;
-///
-/// 		@include respond-to($sm) {
-///				top: auto;
-///				left: 25px;
-///			}
-/// 	}
-/// @example scss - Including mixin:
-/// 	div {
-///			@include absolute-position($top: 50px, $left: 50px);
-///
-/// 		@include respond-to($sm) {
-///				@include absolute-position($left: 25px);
-///			}
-/// 	}
-/// @author Peter Bust, <peter.bust@valtech.nl>
-///
-@mixin absolute-position($top: auto, $right: auto, $bottom: auto, $left: auto) {
-	position: absolute !important;
-	top: $top;
-	right: $right;
-	bottom: $bottom;
-	left: $left;
-}
-
-///
 /// Alignes elements vertically and horizontally.
 /// @param {string} $position [relative] Optional relative (default) or absolute
 /// @author Rocco Janse, <rocco.janse@valtech.nl>
