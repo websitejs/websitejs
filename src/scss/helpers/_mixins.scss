@@ -337,25 +337,4 @@
 	visibility: visible;
 }
 
-///
-/// Quick set width, height and position value.
-/// @param {string} $width Width value
-/// @param {string} $height Height value
-/// @param {string} $position Position value
-/// @author Peter Bust, <peter.bust@valtech.nl>
-///
-@mixin width-height-position($width, $height, $position) {
-    @if $width {
-		width: $width;
-	}
-
-	@if $height {
-		height: $height;
-	}
-
-	@if $position {
-		position: $position;
-	}
-}
-
 // sass-lint:enable-all
