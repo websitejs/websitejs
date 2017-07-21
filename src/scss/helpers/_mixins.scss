@@ -1,41 +1,10 @@
 // sass-lint:disable-all
+// In alfabetical order.
 
 ///
-/// unitless line height based font-size
-/// @param {string} $height Height in pixels
-/// @param {string} $font-size Font size in pixels
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin line-height($height, $font-size) {
-    line-height: (strip-units($height) / strip-units($font-size));
-}
-
-///
-/// vertically alignes elements
-/// @param {string} $position Optional relative [default] or absolute
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin align-vertical($position: relative) {
-    position: $position;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-///
-/// horizontally alignes elements
-/// @param {string} $position Optional relative [default] or absolute
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin align-horizontal($position: relative) {
-    position: $position;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-///
-/// alignes elements vertically and horizontally
-/// @param {string} $position Optional relative [default] or absolute
-/// @author Rocco Janse, rocco.janse@valtech.nl
+/// Alignes elements vertically and horizontally.
+/// @param {string} $position [relative] Optional relative (default) or absolute
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
 ///
 @mixin align-center($position: relative) {
     position: $position;
@@ -45,21 +14,31 @@
 }
 
 ///
-/// simple vertical gradient
-/// @param {string} $top Top color (hex)
-/// @param {string} $bottom Bottom color (hex)
-/// @author Rocco Janse, rocco.janse@valtech.nl
+/// Horizontally alignes elements.
+/// @param {string} $position [relative] Optional relative (default) or absolute
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
 ///
-@mixin simple-gradient($top: $brand-secondary-light, $bottom: $brand-secondary) {
-    background: rgba($bottom, 1);
-    background: linear-gradient(to bottom, rgba($top, 1) 0%,rgba($bottom, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 );
+@mixin align-horizontal($position: relative) {
+    position: $position;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 ///
-/// removes top/bottom margin of elements in a container
-/// @param {string} $selector Optional element selector to remove margins from
-/// @author Rocco Janse, rocco.janse@valtech.nl
+/// Vertically alignes elements.
+/// @param {string} $position [relative] Optional relative (default) or absolute
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin align-vertical($position: relative) {
+    position: $position;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+///
+/// Removes top/bottom margin of elements in a container.
+/// @param {string} $selector ['> *'] Optional element selector to remove margins from
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
 ///
 @mixin content-margins($selector: '> *') {
     @if $selector {
@@ -84,164 +63,13 @@
 }
 
 ///
-/// set elements ratio
-/// @param {string} $ratio Ie. 4/3 or 16/9
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin ratio-box($ratio: 1/1) {
-    position: relative;
-    overflow: hidden;
-
-    // The container's height, as a percentage of the
-    // container's width, is set by assigning
-    // padding-top to a pseudo-element.
-    &:before {
-        content: "";
-        display: block;
-        height: 0;
-        padding-top: (1 / $ratio) * 100%;
-    }
-}
-
-/// ratio-box @extend
-%ratio-box {
-    @include ratio-box;
-}
-
-///
-/// style <input/> placeholder
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin input-placeholder {
-	&.placeholder { @content; }
-	&:-moz-placeholder { @content; }
-	&::-moz-placeholder { @content; }
-	&:-ms-input-placeholder { @content; }
-	&::-webkit-input-placeholder { @content; }
-}
-
-///
-/// disable browser selection of elements
-/// usefull for menu's, navigations etc
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin unselectable {
-    -webkit-touch-callout: none;
-    user-select: none;
-}
-
-///
-/// cross browser opacity
-/// @param {float} $opacity Opacity float (ie. 0.5)
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin opacity($opacity) {
-    $opacity-ie: $opacity * 100;
-    filter: alpha(opacity=$opacity-ie); //IE8
-    opacity: $opacity;
-}
-
-///
-/// Hide from both screenreaders and browsers
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin hidden {
-	display: none;
-	visibility: hidden;
-}
-
-///
-/// Set element visible
-/// @param {string} $state Display state. Defaults to 'block'
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin visible($state: 'block') {
-	display: unquote($state);
-	visibility: visible;
-}
-
-///
-/// Hide visually and from screenreaders, but maintain layout
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin invisible {
-	visibility: hidden;
-}
-
-///
-/// anti alias fonts
-/// @param {string} $value none, antialiased (default), subpixel-antialiased
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin font-smoothing($value: antialiased) {
-  @if $value == antialiased {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  @else {
-    -webkit-font-smoothing: subpixel-antialiased;
-    -moz-osx-font-smoothing: auto;
-  }
-}
-
-///
-/// Hide only visually, but have it available for screenreaders
-/// @param {boolean} $focusable Should the element be focusable
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin screenreader($focusable: false) {
-	border: 0;
-	clip: rect(0 0 0 0);
-	height: 1px;
-	margin: -1px;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	width: 1px;
-
-	@if $focusable {
-		@include screenreader-focusable;
-	}
-}
-
-///
-/// Resets component after hidden for screenreaders
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin screenreader-reset {
-	clip: auto;
-	height: auto;
-	margin: 0;
-	overflow: visible;
-	position: static;
-	width: auto;
-}
-
-///
-/// Allow the element to be focusable when navigated to via the keyboard
-/// @author Rocco Janse, rocco.janse@valtech.nl
-///
-@mixin screenreader-focusable {
-	&:active,
-	&:focus {
-		clip: auto;
-		height: auto;
-		margin: 0;
-		overflow: visible;
-		position: static;
-		width: auto;
-	}
-}
-
-///
-///	CSS Triangle
-///	used for creating CSS only triangles
-/// @author Rocco Janse, rocco.janse@valtech.nl
+///	Creates a 'CSS only' triangle.
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
 /// @param {string} $color Color hexvalue, string
 /// @param {string} $direction Up, down, left or right
-/// @param {string} $size Default: 6px
-/// @param {string} $position Default: absolute
-/// @param {boolean} $round True or false (default)
+/// @param {string} $size [6px] Default: 6px
+/// @param {string} $position [absolute] Default: absolute
+/// @param {boolean} $round [false] True or false (default)
 ///	@example
 ///	.element {
 ///		&:before {
@@ -282,5 +110,231 @@
 		margin-left: -$size;
 	}
 }
-// sass-lint:enable-all
 
+///
+/// Anti alias fonts.
+/// @param {string} $value [antialiased] None, antialiased (default), subpixel-antialiased
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin font-smoothing($value: antialiased) {
+  @if $value == antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+///
+/// Hide from both screenreaders and browsers.
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin hidden {
+	display: none;
+	visibility: hidden;
+}
+
+///
+/// Style `<input/>` placeholder.
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin input-placeholder {
+	&.placeholder { @content; }
+	&:-moz-placeholder { @content; }
+	&::-moz-placeholder { @content; }
+	&:-ms-input-placeholder { @content; }
+	&::-webkit-input-placeholder { @content; }
+}
+
+///
+/// Hide visually and from screenreaders, but maintain layout.
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin invisible {
+	visibility: hidden;
+}
+
+///
+/// Unitless line height based font-size.
+/// @param {string} $height Height in pixels
+/// @param {string} $font-size Font size in pixels
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin line-height($height, $font-size) {
+    line-height: (strip-units($height) / strip-units($font-size));
+}
+
+///
+/// On touch mixin for quick setting `:hover`, `:focus` `:active`.
+/// @param {boolean} $hover [true] Set `:hover` and `.hover`
+/// @param {boolean} $focus [true] Set `:focus` and `.focus`
+/// @param {boolean} $active [true] Set `:active` and `.active`
+/// @author Peter Bust, <peter.bust@valtech.nl>
+///
+@mixin on-touch($hover: true, $focus: true, $active: true) {
+
+	@if ($hover) {
+		&.hover,
+		&:hover {
+			@content;
+		}
+	}
+
+	@if ($focus) {
+		&.focus,
+		&:focus {
+			@content;
+		}
+	}
+
+	@if ($active) {
+		&.active,
+		&:active {
+			@content;
+		}
+	}
+}
+
+///
+/// Cross browser opacity.
+/// @param {float} $opacity Opacity float (ie. 0.5)
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin opacity($opacity) {
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+    opacity: $opacity;
+}
+
+///
+/// Set elements aspect ratio.
+/// @param {string} $element_w [100%] Width of element
+/// @param {string} $ratio_w [1] Aspect ratio width
+/// @param {string} $ratio_h [1] Aspect ratio height
+/// @param {boolean} $restrain [true] If true, element is kept in ratio, overflowing content is hidden. If false, height is relative to content with a minimum ratio height.
+/// @example scss - Retrain ratio:
+/// 	.example {
+///			@include ratio-box(500px, 16, 9);
+///			width: 500px;
+/// 	}
+/// @example scss - Height is relative to content with a minimum ratio height:
+/// 	.example {
+///			@include ratio-box(500px, 16, 9, false);
+///			width: 500px;
+/// 	}
+/// @author Peter Bust, <peter.bust@valtech.nl>
+///
+@mixin ratio-box($element_w: 100%, $ratio_w: 1, $ratio_h: 1, $restrain: true) {
+
+	@if $restrain {
+		height: 0 !important;
+		padding-bottom: $element_w / $ratio_w * $ratio_h;
+		overflow: hidden !important;
+	}
+
+	@else {
+		height: auto !important;
+
+		&:before {
+			content: '';
+			float: left;
+			padding-bottom: 100% / $ratio_w * $ratio_h;
+		}
+
+		&:after {
+			content: '';
+			display: table;
+			clear: both;
+		}
+	}
+
+}
+
+/// ratio-box @extend
+%ratio-box {
+    @include ratio-box;
+}
+
+///
+/// Hide only visually, but have it available for screenreaders.
+/// @param {boolean} $focusable [false] Should the element be focusable
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin screenreader($focusable: false) {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+
+	@if $focusable {
+		@include screenreader-focusable;
+	}
+}
+
+///
+/// Allow the element to be focusable when navigated to via the keyboard.
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin screenreader-focusable {
+	&:active,
+	&:focus {
+		clip: auto;
+		height: auto;
+		margin: 0;
+		overflow: visible;
+		position: static;
+		width: auto;
+	}
+}
+
+///
+/// Resets component after hidden for screenreaders.
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin screenreader-reset {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	width: auto;
+}
+
+///
+/// Simple vertical gradient.
+/// @param {string} $top [$brand-secondary-light] Top color (hex)
+/// @param {string} $bottom [$brand-secondary] Bottom color (hex)
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin simple-gradient($top: $brand-secondary-light, $bottom: $brand-secondary) {
+    background: rgba($bottom, 1);
+    background: linear-gradient(to bottom, rgba($top, 1) 0%,rgba($bottom, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$top, endColorstr=$bottom,GradientType=0 );
+}
+
+///
+/// Disable browser selection of elements. Usefull for menu's, navigations etc.
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin unselectable {
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+///
+/// Set element visible.
+/// @param {string} $state ['block'] Display state.
+/// @author Rocco Janse, <rocco.janse@valtech.nl>
+///
+@mixin visible($state: 'block') {
+	display: unquote($state);
+	visibility: visible;
+}
+
+// sass-lint:enable-all
